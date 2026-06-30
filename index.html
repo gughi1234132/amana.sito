@@ -1,152 +1,376 @@
 <!DOCTYPE html>
 <html lang="it" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio Olistico | Trattamenti Cranio-Sacrali</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Nome] | Trattamenti Cranio-Sacrali · Studio Olistico</title>
+<meta name="description" content="Sedute di Trattamento Cranio-Sacrale e riequilibrio psicofisico con [Nome]. Un approccio delicato per sciogliere stress, tensioni e ritrovare il proprio ritmo naturale.">
+
+<!-- Font: Fraunces (display, dal carattere caldo e morbido) + Work Sans (testo, pulito e leggibile) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // Estensione Tailwind con la palette "Minimal Luxury / Spa" dedicata a questo studio
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream:  { DEFAULT: '#FBF8F3', alt: '#F2ECE2' },
+          ink:    { DEFAULT: '#3A362F', soft: '#6E6759', faint: '#A39A89', deep: '#2A2722' },
+          sage:   { DEFAULT: '#4F6B57', deep: '#36493D', soft: '#E7EDE6' },
+          line:   '#E3DBCC',
+        },
+        fontFamily: {
+          display: ['"Fraunces"', 'serif'],
+          sans: ['"Work Sans"', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-padding-top: 5.5rem; }
+  body { font-family: 'Work Sans', sans-serif; }
+
+  /* Focus visibile per navigazione da tastiera (accessibilità) */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #4F6B57;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* --- Elemento "firma": il respiro craniosacrale ---
+     Un'onda morbida che pulsa lentamente, a richiamare il ritmo
+     fluido che il trattamento accompagna. Usata in hero e come
+     anello pulsante del pulsante WhatsApp flottante. */
+  @keyframes breathe {
+    0%, 100% { transform: scaleY(1); opacity: .5; }
+    50%      { transform: scaleY(1.18); opacity: .85; }
+  }
+  .breathe-line path { transform-origin: center; animation: breathe 6.5s ease-in-out infinite; }
+
+  @keyframes pulse-ring {
+    0%   { transform: scale(0.9); opacity: .55; }
+    80%  { transform: scale(1.7); opacity: 0; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+  .pulse-ring { animation: pulse-ring 2.6s ease-out infinite; }
+
+  /* Reveal "fade-up" progressivo: senza JS o con motion ridotto,
+     il contenuto resta semplicemente visibile fin da subito. */
+  .js-anim .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .75s ease, transform .75s ease;
+  }
+  .js-anim .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .breathe-line path, .pulse-ring { animation: none !important; }
+  }
+</style>
 </head>
-<body class="bg-[#FAF8F5] text-gray-800 antialiased">
 
-    <nav class="fixed top-0 left-0 right-0 bg-[#FAF8F5]/80 backdrop-blur-md z-40 border-b border-stone-200">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-semibold tracking-wide text-stone-700">[Nome di tua madre]</a>
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
-                <a href="#chi-sono" class="hover:text-stone-900 transition">Chi Sono</a>
-                <a href="#cranio-sacrale" class="hover:text-stone-900 transition">Trattamento Cranio-Sacrale</a>
-                <a href="#info" class="hover:text-stone-900 transition">Informazioni</a>
-            </div>
-            <a href="https://wa.me/3389967134?text=Ciao%20vorrei%20richiedere%20un%20appuntamento" target="_blank" class="bg-stone-800 text-white text-xs uppercase tracking-wider px-4 py-2 rounded-full hover:bg-stone-700 transition">
-                Scrivimi
-            </a>
-        </div>
-    </nav>
+<body class="bg-cream text-ink antialiased">
 
-    <header class="pt-32 pb-20 md:pt-48 md:pb-32 max-w-4xl mx-auto px-4 text-center">
-        <span class="text-xs uppercase tracking-widest text-stone-500 font-semibold bg-stone-100 px-3 py-1 rounded-full">Benessere e Armonia</span>
-        <h1 class="text-4xl md:text-6xl font-normal text-stone-900 mt-6 leading-tight">
-            Ritrova il tuo equilibrio naturale e sciogli le tensioni
-        </h1>
-        <p class="text-lg md:text-xl text-stone-600 mt-6 max-w-2xl mx-auto font-light">
-            Trattamenti personalizzati e sessioni Cranio-Sacrali per il benessere profondo del corpo e della mente.
-        </p>
-        <div class="mt-10">
-            <a href="https://wa.me/3389967134?text=Ciao%20vorrei%20maggiori%20informazioni%20sui%20trattamenti" target="_blank" class="inline-flex items-center justify-center bg-emerald-700 text-white font-medium px-8 py-4 rounded-xl shadow-lg shadow-emerald-700/10 hover:bg-emerald-800 transition transform hover:-translate-y-0.5">
-                <svg class="w-5 h-5 mr-3 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.528 2.028 14.061 1.01 11.493 1.01c-5.437 0-9.863 4.371-9.867 9.802-.001 1.73.46 3.422 1.336 4.928l-.975 3.565 3.66-.95z"/></svg>
-                Prenota un appuntamento su WhatsApp
-            </a>
-        </div>
-    </header>
+<!-- Skip link per utenti da tastiera/screen reader -->
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 bg-sage text-white text-sm px-4 py-2 rounded-full">Vai al contenuto</a>
 
-    <section id="chi-sono" class="py-20 bg-stone-100">
-        <div class="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-            <div class="bg-stone-200 aspect-[3/4] rounded-2xl overflow-hidden shadow-sm border border-stone-300 flex items-center justify-center text-stone-400">
-                <span>[Foto Professionale di tua madre]</span>
-                </div>
-            <div>
-                <h2 class="text-3xl md:text-4xl font-normal text-stone-900 mb-6">Chi Sono</h2>
-                <p class="text-stone-600 leading-relaxed mb-4 font-light">
-                    Sono [Nome di tua madre], operatrice olistica specializzata in trattamenti per il riequilibrio psicofisico. La mia passione nasce dal desiderio di aiutare le persone a ritrovare l'ascolto profondo del proprio corpo.
-                </p>
-                <p class="text-stone-600 leading-relaxed mb-6 font-light">
-                    Nel corso degli anni ho approfondito diverse tecniche manuali, concentrandomi in particolare sulla disciplina Cranio-Sacrale, un approccio delicato ma straordinariamente profondo per rilasciare le tensioni accumulate.
-                </p>
-                <div class="border-l-2 border-stone-400 pl-4 italic text-stone-500 text-sm">
-                    "Il corpo ha una sua innata capacità di autoguarigione, il mio compito è semplicemente favorire questo processo."
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="cranio-sacrale" class="py-20">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-normal text-stone-900">Il Trattamento Cranio-Sacrale</h2>
-                <div class="w-12 h-[1px] bg-stone-400 mx-auto mt-4"></div>
-            </div>
-            
-            <div class="space-y-8 text-stone-600 leading-relaxed font-light">
-                <p>
-                    La <strong>tecnica Cranio-Sacrale</strong> è un approccio olistico manuale molto delicato. Si basa sul contatto leggero dell'operatore sulle ossa craniche e sulla colonna vertebrale, per assecondare e regolarizzare il ritmo del liquido cefalorachidiano.
-                </p>
-                <p>
-                    Non si tratta di un massaggio muscolare vigoroso, ma di digitopressioni impercettibili che agiscono sul sistema nervoso centrale, inducendo uno stato di rilassamento profondo e attivando le risorse vitali dell'organismo.
-                </p>
-
-                <div class="pt-8">
-                    <h3 class="text-xl font-normal text-stone-900 mb-6 text-center">A chi è indicato e quali benefici porta?</h3>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <div class="bg-white p-6 rounded-xl border border-stone-200/60 flex items-start">
-                            <span class="text-emerald-700 mr-3 font-semibold">✓</span>
-                            <p class="text-sm"><strong class="text-stone-800 font-medium">Riduzione dello stress:</strong> Allevia stati d'ansia, stanchezza cronica e favorisce il sonno.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl border border-stone-200/60 flex items-start">
-                            <span class="text-emerald-700 mr-3 font-semibold">✓</span>
-                            <p class="text-sm"><strong class="text-stone-800 font-medium">Tensioni fisiche:</strong> Ottimo per emicranie, cefalee, dolori cervicali e mal di schiena.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl border border-stone-200/60 flex items-start">
-                            <span class="text-emerald-700 mr-3 font-semibold">✓</span>
-                            <p class="text-sm"><strong class="text-stone-800 font-medium">Equilibrio emotivo:</strong> Aiuta a rilasciare i blocchi emotivi somatizzati nel corpo.</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl border border-stone-200/60 flex items-start">
-                            <span class="text-emerald-700 mr-3 font-semibold">✓</span>
-                            <p class="text-sm"><strong class="text-stone-800 font-medium">Approccio dolce:</strong> Adatto a tutte le età, dai bambini agli anziani, per la sua delicatezza.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="info" class="py-20 bg-stone-50 border-t border-stone-200/60">
-        <div class="max-w-5xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-center md:text-left">
-            <div>
-                <h3 class="text-lg font-medium text-stone-900 mb-3">Lo Studio</h3>
-                <p class="text-sm text-stone-600 font-light leading-relaxed">
-                    Via Roma, 123<br>
-                    20100 Milano (MI)<br>
-                    <span class="block mt-2 text-stone-400">Si riceve esclusivamente su appuntamento.</span>
-                </p>
-            </div>
-            <div>
-                <h3 class="text-lg font-medium text-stone-900 mb-3">Orari</h3>
-                <p class="text-sm text-stone-600 font-light leading-relaxed">
-                    Lunedì - Venerdì: 09:00 - 19:30<br>
-                    Sabato: 09:00 - 13:00<br>
-                    Domenica: Chiuso
-                </p>
-            </div>
-            <div>
-                <h3 class="text-lg font-medium text-stone-900 mb-3">Prima Seduta</h3>
-                <p class="text-sm text-stone-600 font-light leading-relaxed">
-                    Il primo incontro prevede un breve colloquio conoscitivo per comprendere le tue esigenze. Si consiglia un abbigliamento comodo.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-stone-900 text-stone-400 text-xs py-8 border-t border-stone-800">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <p>© 2026 Studio Olistico di [Nome di tua madre]. Tutti i diritti riservati.</p>
-                <p class="mt-1 text-stone-500">P.IVA: 01234567890</p> </div>
-            <div class="flex space-x-6 text-stone-500">
-                <span>Sito Web conforme al GDPR</span>
-            </div>
-        </div>
-    </footer>
-
-    <a href="https://wa.me/3389967134?text=Ciao%20vorrei%20chiedere%20un%20appuntamento" target="_blank" class="fixed bottom-6 right-6 bg-emerald-600 text-white p-4 rounded-full shadow-xl hover:bg-emerald-700 transition z-50 flex items-center justify-center group" aria-label="Contattami su WhatsApp">
-        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.528 2.028 14.061 1.01 11.493 1.01c-5.437 0-9.863 4.371-9.867 9.802-.001 1.73.46 3.422 1.336 4.928l-.975 3.565 3.66-.95z"/></svg>
-        <span class="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 ease-out text-sm font-medium whitespace-nowrap">
-            Prenota Ora
-        </span>
+<!-- ============ NAVIGAZIONE ============ -->
+<nav class="fixed top-0 left-0 right-0 bg-cream/85 backdrop-blur-md z-40 border-b border-line">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 py-4 flex justify-between items-center">
+    <a href="#" class="flex flex-col leading-none">
+      <span class="font-display text-xl text-ink tracking-wide">[Nome]</span>
+      <span class="text-[10px] uppercase tracking-[0.2em] text-sage mt-0.5">Studio Olistico</span>
     </a>
+    <div class="hidden md:flex items-center space-x-8 text-sm text-ink-soft">
+      <a href="#chi-sono" class="hover:text-sage transition-colors">Chi Sono</a>
+      <a href="#cranio-sacrale" class="hover:text-sage transition-colors">Trattamento</a>
+      <a href="#info" class="hover:text-sage transition-colors">Informazioni</a>
+    </div>
+    <a href="https://wa.me/393389967134?text=Ciao%20vorrei%20avere%20informazioni%20e%20richiedere%20un%20appuntamento" target="_blank" rel="noopener"
+       class="bg-sage text-white text-xs uppercase tracking-wider px-5 py-2.5 rounded-full hover:bg-sage-deep transition-colors shadow-sm shadow-sage/20">
+      Scrivimi
+    </a>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <header class="relative pt-36 pb-24 md:pt-48 md:pb-32 max-w-3xl mx-auto px-5 text-center overflow-hidden">
+    <span class="inline-block text-[11px] uppercase tracking-[0.25em] text-sage font-medium bg-sage-soft px-4 py-1.5 rounded-full">
+      Benessere Olistico · Trattamenti Cranio-Sacrali
+    </span>
+
+    <h1 class="font-display font-normal text-ink mt-7 leading-[1.1] text-[clamp(2.25rem,6vw,3.75rem)]">
+      Lascia che il corpo<br class="hidden sm:block"> ritrovi il proprio respiro
+    </h1>
+
+    <p class="text-ink-soft mt-6 max-w-xl mx-auto font-light text-base md:text-lg leading-relaxed">
+      Sedute di Trattamento Cranio-Sacrale dedicate a chi cerca un riequilibrio profondo, lontano dalla frenesia quotidiana &mdash; per la mente, per la schiena, per il sistema nervoso.
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="https://wa.me/393389967134?text=Ciao%20vorrei%20avere%20informazioni%20e%20richiedere%20un%20appuntamento" target="_blank" rel="noopener"
+         class="inline-flex items-center justify-center w-full sm:w-auto bg-sage text-white font-medium px-8 py-4 rounded-xl shadow-lg shadow-sage/20 hover:bg-sage-deep transition transform hover:-translate-y-0.5">
+        <svg class="w-5 h-5 mr-3 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.528 2.028 14.061 1.01 11.493 1.01c-5.437 0-9.863 4.371-9.867 9.802-.001 1.73.46 3.422 1.336 4.928l-.975 3.565 3.66-.95z"/></svg>
+        Prenota su WhatsApp
+      </a>
+      <a href="#cranio-sacrale" class="inline-flex items-center justify-center w-full sm:w-auto text-ink-soft font-medium px-8 py-4 rounded-xl border border-line hover:border-sage hover:text-sage transition">
+        Scopri il trattamento
+      </a>
+    </div>
+
+    <!-- Onda del respiro craniosacrale: elemento decorativo distintivo -->
+    <div class="mt-16 max-w-md mx-auto opacity-80" aria-hidden="true">
+      <svg viewBox="0 0 400 60" class="w-full h-auto breathe-line">
+        <path d="M0 30 C 40 5, 60 5, 100 30 S 160 55, 200 30 S 260 5, 300 30 S 360 55, 400 30"
+              fill="none" stroke="#4F6B57" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ============ CHI SONO ============ -->
+  <section id="chi-sono" class="py-24 md:py-32 bg-cream-alt">
+    <div class="max-w-5xl mx-auto px-5 md:px-8 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+      <div class="reveal order-2 md:order-1">
+        <span class="text-[11px] uppercase tracking-[0.25em] text-sage font-medium">Chi Sono</span>
+        <h2 class="font-display font-normal text-ink text-3xl md:text-4xl mt-3 mb-7 leading-tight">
+          La persona dietro le mani
+        </h2>
+
+        <div class="space-y-4 text-ink-soft leading-relaxed font-light">
+          <p>
+            Sono <strong class="text-ink font-medium">[Nome]</strong>, operatrice olistica specializzata nel riequilibrio psicofisico. Il mio lavoro nasce da un desiderio semplice: aiutare le persone a rallentare e a riascoltare un corpo che, nella vita quotidiana, troppo spesso smettiamo di ascoltare.
+          </p>
+          <p>
+            Nel corso del mio percorso ho approfondito diverse tecniche manuali, dedicandomi in particolare alla disciplina Cranio-Sacrale &mdash; un approccio delicato ma sorprendentemente profondo, capace di raggiungere tensioni che altri trattamenti non riescono a sciogliere.
+          </p>
+          <p>
+            Ogni seduta è costruita su misura: prima di tutto ascolto, poi le mani trovano la loro strada. Non esiste un protocollo uguale per tutti, perché non esistono due corpi uguali.
+          </p>
+        </div>
+
+        <blockquote class="border-l-2 border-sage pl-5 mt-8">
+          <p class="font-display italic text-ink text-lg leading-snug">
+            &ldquo;Il corpo possiede una sua innata capacità di riequilibrarsi: il mio compito è semplicemente creare lo spazio perché questo accada.&rdquo;
+          </p>
+        </blockquote>
+
+        <!-- Personalizza queste tre etichette se vuoi inserire qualifiche specifiche -->
+        <div class="flex flex-wrap gap-2.5 mt-8">
+          <span class="text-xs text-sage-deep bg-sage-soft px-3.5 py-1.5 rounded-full">Ascolto profondo</span>
+          <span class="text-xs text-sage-deep bg-sage-soft px-3.5 py-1.5 rounded-full">Approccio personalizzato</span>
+          <span class="text-xs text-sage-deep bg-sage-soft px-3.5 py-1.5 rounded-full">Ambiente accogliente</span>
+        </div>
+      </div>
+
+      <!-- Sostituisci con una foto professionale reale -->
+      <div class="order-1 md:order-2 reveal">
+        <div class="aspect-[3/4] rounded-2xl bg-gradient-to-br from-stone-200 to-stone-100 border border-line flex items-center justify-center text-ink-faint text-sm text-center px-6">
+          [Foto professionale di [Nome]]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRATTAMENTO CRANIO-SACRALE ============ -->
+  <section id="cranio-sacrale" class="py-24 md:py-32">
+    <div class="max-w-3xl mx-auto px-5 md:px-8 text-center mb-16 reveal">
+      <span class="text-[11px] uppercase tracking-[0.25em] text-sage font-medium">Il Trattamento</span>
+      <h2 class="font-display font-normal text-ink text-3xl md:text-4xl mt-3">
+        Cranio-Sacrale: l'arte del tocco impercettibile
+      </h2>
+      <div class="w-12 h-px bg-sage mx-auto mt-6"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-5 md:px-8 space-y-5 text-ink-soft leading-relaxed font-light reveal">
+      <p>
+        La <strong class="text-ink font-medium">tecnica Cranio-Sacrale</strong> è un approccio manuale estremamente delicato. Le mani si appoggiano, quasi senza peso, sulle ossa craniche e lungo la colonna vertebrale, per accompagnare e regolarizzare il ritmo sottile del liquido cefalorachidiano &mdash; lo stesso fluido che avvolge e protegge il sistema nervoso centrale.
+      </p>
+      <p>
+        Non è un massaggio muscolare, né una manipolazione vigorosa: si tratta di pressioni impercettibili, sostenute nel tempo, che dialogano direttamente con il sistema nervoso. Il corpo, sentendosi ascoltato, può lasciar andare tensioni accumulate anche da anni e tornare gradualmente verso il proprio stato di equilibrio.
+      </p>
+    </div>
+
+    <!-- BENEFICI -->
+    <div class="max-w-5xl mx-auto px-5 md:px-8 pt-16">
+      <h3 class="font-display text-xl md:text-2xl text-ink text-center mb-10 reveal">A chi è rivolto, e cosa puoi sperimentare</h3>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <div class="reveal bg-white p-7 rounded-2xl border border-line/70">
+          <div class="w-10 h-10 rounded-full bg-sage-soft flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sage-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 12c3-4 6-4 9 0s6 4 9 0"/></svg>
+          </div>
+          <p class="font-medium text-ink mb-1.5">Riduzione di stress e ansia</p>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">Favorisce uno stato di calma profonda e aiuta a placare i pensieri ricorrenti legati alla stanchezza accumulata.</p>
+        </div>
+
+        <div class="reveal bg-white p-7 rounded-2xl border border-line/70">
+          <div class="w-10 h-10 rounded-full bg-sage-soft flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sage-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M19 13a7 7 0 1 1-7-7 5.5 5.5 0 0 0 7 7Z"/></svg>
+          </div>
+          <p class="font-medium text-ink mb-1.5">Miglior qualità del sonno</p>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">Un sistema nervoso più disteso favorisce un riposo notturno più profondo e continuativo.</p>
+        </div>
+
+        <div class="reveal bg-white p-7 rounded-2xl border border-line/70">
+          <div class="w-10 h-10 rounded-full bg-sage-soft flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sage-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2.5"/></svg>
+          </div>
+          <p class="font-medium text-ink mb-1.5">Emicranie e cefalee</p>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">Un valido supporto per chi soffre di mal di testa ricorrenti legati a tensione e affaticamento.</p>
+        </div>
+
+        <div class="reveal bg-white p-7 rounded-2xl border border-line/70">
+          <div class="w-10 h-10 rounded-full bg-sage-soft flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sage-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M8 7c0 3 8 3 8 6s-8 3-8 6"/></svg>
+          </div>
+          <p class="font-medium text-ink mb-1.5">Dolori cervicali e lombari</p>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">Allevia le tensioni muscolo-scheletriche più persistenti, restituendo libertà di movimento.</p>
+        </div>
+
+        <div class="reveal bg-white p-7 rounded-2xl border border-line/70">
+          <div class="w-10 h-10 rounded-full bg-sage-soft flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sage-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 21s-7-4.5-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 9-9 9Z"/></svg>
+          </div>
+          <p class="font-medium text-ink mb-1.5">Riequilibrio emotivo</p>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">Accompagna il rilascio di tensioni emotive che spesso restano trattenute nel corpo.</p>
+        </div>
+
+        <div class="reveal bg-white p-7 rounded-2xl border border-line/70">
+          <div class="w-10 h-10 rounded-full bg-sage-soft flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-sage-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="6" r="2.4"/><circle cx="6" cy="17" r="2.4"/><circle cx="18" cy="17" r="2.4"/></svg>
+          </div>
+          <p class="font-medium text-ink mb-1.5">Adatto a tutte le età</p>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">La delicatezza del tocco lo rende indicato per bambini, adulti e persone anziane.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COME SI SVOLGE UNA SEDUTA: vera sequenza temporale, quindi l'ordine ha senso -->
+    <div class="max-w-4xl mx-auto px-5 md:px-8 pt-24">
+      <h3 class="font-display text-xl md:text-2xl text-ink text-center mb-12 reveal">Come si svolge una seduta</h3>
+      <div class="grid md:grid-cols-3 gap-10 md:gap-6 relative">
+
+        <div class="reveal text-center">
+          <span class="font-display text-sage text-2xl block mb-3">Accoglienza</span>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">Un breve colloquio conoscitivo per comprendere le tue esigenze e personalizzare il percorso.</p>
+        </div>
+        <div class="reveal text-center">
+          <span class="font-display text-sage text-2xl block mb-3">Trattamento</span>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">Sdraiat* e completamente vestit*, lasci che il tocco leggero accompagni il tuo ritmo naturale.</p>
+        </div>
+        <div class="reveal text-center">
+          <span class="font-display text-sage text-2xl block mb-3">Integrazione</span>
+          <p class="text-sm text-ink-soft font-light leading-relaxed">Qualche minuto per "atterrare" dolcemente, prima di tornare alla quotidianità.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BANNER CTA: secondo invito alla conversione, pausa visiva con colori invertiti ============ -->
+  <section class="bg-sage-deep py-20">
+    <div class="max-w-2xl mx-auto px-5 text-center reveal">
+      <h2 class="font-display font-normal text-cream text-3xl md:text-4xl leading-tight">
+        Pronta a concederti questo momento?
+      </h2>
+      <p class="text-cream/75 font-light mt-4 mb-9">
+        Scrivimi su WhatsApp: troviamo insieme il giorno e l'orario più adatti a te.
+      </p>
+      <a href="https://wa.me/393389967134?text=Ciao%20vorrei%20avere%20informazioni%20e%20richiedere%20un%20appuntamento" target="_blank" rel="noopener"
+         class="inline-flex items-center justify-center bg-cream text-sage-deep font-medium px-8 py-4 rounded-xl hover:bg-white transition transform hover:-translate-y-0.5">
+        <svg class="w-5 h-5 mr-3 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.528 2.028 14.061 1.01 11.493 1.01c-5.437 0-9.863 4.371-9.867 9.802-.001 1.73.46 3.422 1.336 4.928l-.975 3.565 3.66-.95z"/></svg>
+        Scrivimi su WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ INFORMAZIONI ============ -->
+  <section id="info" class="py-24 md:py-32 bg-cream-alt">
+    <div class="max-w-5xl mx-auto px-5 md:px-8 grid sm:grid-cols-3 gap-10 text-center sm:text-left">
+
+      <div class="reveal">
+        <h3 class="font-display text-lg text-ink mb-3">Lo Studio</h3>
+        <p class="text-sm text-ink-soft font-light leading-relaxed">
+          <!-- Sostituisci con l'indirizzo reale dello studio -->
+          [Indirizzo dello studio]<br>
+          [CAP] [Città]<br>
+          <span class="block mt-2 text-ink-faint">Si riceve esclusivamente su appuntamento.</span>
+        </p>
+      </div>
+
+      <div class="reveal">
+        <h3 class="font-display text-lg text-ink mb-3">Orari</h3>
+        <p class="text-sm text-ink-soft font-light leading-relaxed">
+          Lunedì &ndash; Venerdì: 09:00 &ndash; 19:30<br>
+          Sabato: 09:00 &ndash; 13:00<br>
+          Domenica: Chiuso
+        </p>
+      </div>
+
+      <div class="reveal">
+        <h3 class="font-display text-lg text-ink mb-3">Prima Seduta</h3>
+        <p class="text-sm text-ink-soft font-light leading-relaxed">
+          Il primo incontro prevede un breve colloquio conoscitivo per comprendere a fondo le tue esigenze. Ti consiglio un abbigliamento comodo: il trattamento si svolge completamente vestit*.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-ink-deep text-stone-400 text-xs py-9 border-t border-stone-800">
+  <div class="max-w-6xl mx-auto px-5 md:px-8 flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
+    <div>
+      <p>&copy; 2026 Studio Olistico di [Nome]. Tutti i diritti riservati.</p>
+      <!-- Sostituisci con la Partita IVA reale -->
+      <p class="mt-1 text-stone-500">P.IVA: [P.IVA]</p>
+    </div>
+    <div class="text-stone-500">
+      <span>Sito conforme alla normativa GDPR</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ PULSANTE FLOTTANTE WHATSAPP ============ -->
+<a href="https://wa.me/393389967134?text=Ciao%20vorrei%20avere%20informazioni%20e%20richiedere%20un%20appuntamento" target="_blank" rel="noopener"
+   class="fixed bottom-6 right-6 z-50 group flex items-center" aria-label="Scrivimi su WhatsApp per prenotare">
+  <span class="absolute inset-0 rounded-full bg-sage pulse-ring" aria-hidden="true"></span>
+  <span class="relative bg-sage text-white p-4 rounded-full shadow-xl hover:bg-sage-deep transition flex items-center">
+    <svg class="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.528 2.028 14.061 1.01 11.493 1.01c-5.437 0-9.863 4.371-9.867 9.802-.001 1.73.46 3.422 1.336 4.928l-.975 3.565 3.66-.95z"/></svg>
+    <span class="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 ease-out text-sm font-medium whitespace-nowrap">
+      Prenota Ora
+    </span>
+  </span>
+</a>
+
+<script>
+  // Rivelazione progressiva delle sezioni allo scroll.
+  // Disattivata automaticamente se l'utente preferisce animazioni ridotte.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('js-anim');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  }
+</script>
 
 </body>
 </html>
