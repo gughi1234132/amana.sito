@@ -35,11 +35,11 @@
   .page-view { display: none; }
   .page-view.active { display: block; }
   
-  /* Animazioni di Scorrimento Confortevoli ed Eleganti */
+  /* Animazioni di Scorrimento Confortevoli (Attive sia in entrata che in uscita) */
   .reveal { 
     opacity: 0; 
-    transform: translateY(30px); 
-    transition: opacity 1.2s cubic-bezier(0.21, 0.6, 0.35, 1), transform 1.2s cubic-bezier(0.21, 0.6, 0.35, 1); 
+    transform: translateY(35px); 
+    transition: opacity 1s cubic-bezier(0.21, 0.6, 0.35, 1), transform 1s cubic-bezier(0.21, 0.6, 0.35, 1); 
   }
   .reveal.visible { 
     opacity: 1; 
@@ -80,7 +80,7 @@
     </a>
   </div>
 
-  <div id="mobile-menu" class="hidden lg:hidden bg-cream border-b border-line absolute top-full left-0 right-0 shadow-lg">
+  <div id="mobile-menu" class="lg:hidden bg-cream border-b border-line absolute top-full left-0 right-0 shadow-lg max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
     <div class="px-4 py-4 space-y-3 flex flex-col text-base font-medium">
       <button onclick="navigateTo('home')" class="mobile-nav-link text-left py-2 border-b border-line/40 text-sage">Home</button>
       <button onclick="navigateTo('chi-sono')" class="mobile-nav-link text-left py-2 border-b border-line/40 text-ink-soft">Chi Sono</button>
@@ -98,9 +98,11 @@
 
   <section id="page-home" class="page-view active">
     <div class="relative min-h-[82vh] flex items-center justify-center bg-stone-900 text-white overflow-hidden px-4">
+      
       <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80" 
            alt="Sfondo Studio Olistico Amana" 
            class="absolute inset-0 w-full h-full object-cover opacity-35 mix-blend-luminosity">
+      
       <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-black/20"></div>
       
       <div class="relative max-w-3xl mx-auto text-center z-10 py-12">
@@ -145,8 +147,11 @@
         </button>
       </div>
       <div class="grid grid-cols-2 gap-3 sm:gap-4">
+        
         <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Oli essenziali e relax" class="rounded-xl w-full h-44 sm:h-60 object-cover shadow-sm">
+        
         <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=80" alt="Trattamento sul lettino" class="rounded-xl w-full h-44 sm:h-60 object-cover shadow-sm mt-6 sm:mt-8">
+      
       </div>
     </div>
 
@@ -208,7 +213,7 @@
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="p-6 bg-cream rounded-xl border border-line text-xs sm:text-sm font-light text-ink-soft leading-relaxed italic">
-            "I trattamenti Cranio-Sacrali di Francesca mi hanno aiutata a risolvere un problema di emicrania muscolo-tensiva che mi trascinavo da mesi. Lo studio a Casate è una vera oasi di pace."
+            "I trattamenti Cranio-Sacrali di Francesca mi hanno aiutata a resolver un problema di emicrania muscolo-tensiva che mi trascinavo da mesi. Lo studio a Casate è una vera oasi di pace."
             <span class="block not-italic font-medium text-ink text-[11px] uppercase tracking-wider mt-4">— Elena R.</span>
           </div>
           <div class="p-6 bg-cream rounded-xl border border-line text-xs sm:text-sm font-light text-ink-soft leading-relaxed italic">
@@ -227,14 +232,16 @@
 
   <section id="page-chi-sono" class="page-view">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 grid md:grid-cols-12 gap-10 items-center">
-      <div class="md:col-span-5">
+      <div class="md:col-span-5 reveal">
         <div class="rounded-2xl overflow-hidden shadow-sm bg-cream-alt p-2">
+          
           <img src="https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&w=700&q=80" 
                alt="Francesca Schiralli" 
                class="w-full h-[360px] sm:h-[460px] object-cover rounded-xl shadow-inner">
+        
         </div>
       </div>
-      <div class="md:col-span-7 space-y-5">
+      <div class="md:col-span-7 space-y-5 reveal">
         <span class="text-xs uppercase tracking-widest text-sage font-semibold block">La Titolare</span>
         <h1 class="font-display text-3xl sm:text-5xl text-ink font-normal">Francesca Schiralli</h1>
         <p class="text-base sm:text-lg font-light text-ink-soft leading-relaxed italic border-l-2 border-sage pl-4">
@@ -270,7 +277,9 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-16 grid sm:grid-cols-2 gap-8">
       
       <div class="bg-white rounded-2xl overflow-hidden border border-line shadow-sm flex flex-col reveal">
+        
         <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=600&q=80" alt="Trattamento Craniosacrale" class="w-full h-48 object-cover">
+        
         <div class="p-6 flex-grow flex flex-col justify-between">
           <div>
             <h3 class="font-display text-xl text-ink mb-2">Trattamento Cranio-Sacrale</h3>
@@ -283,7 +292,9 @@
       </div>
 
       <div class="bg-white rounded-2xl overflow-hidden border border-line shadow-sm flex flex-col reveal">
+        
         <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80" alt="Massaggio Energetico" class="w-full h-48 object-cover">
+        
         <div class="p-6 flex-grow flex flex-col justify-between">
           <div>
             <h3 class="font-display text-xl text-ink mb-2">Massaggio Energetico</h3>
@@ -296,7 +307,9 @@
       </div>
 
       <div class="bg-white rounded-2xl overflow-hidden border border-line shadow-sm flex flex-col reveal">
+        
         <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Trattamenti Quantici" class="w-full h-48 object-cover">
+        
         <div class="p-6 flex-grow flex flex-col justify-between">
           <div>
             <h3 class="font-display text-xl text-ink mb-2">Trattamenti Quantici</h3>
@@ -309,7 +322,9 @@
       </div>
 
       <div class="bg-white rounded-2xl overflow-hidden border border-line shadow-sm flex flex-col reveal">
+        
         <img src="https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&w=600&q=80" alt="Trattamenti a Distanza" class="w-full h-48 object-cover">
+        
         <div class="p-6 flex-grow flex flex-col justify-between">
           <div>
             <h3 class="font-display text-xl text-ink mb-2">Trattamenti a Distanza</h3>
@@ -330,7 +345,7 @@
       <span class="text-xs uppercase tracking-widest text-sage font-semibold block mb-2">Crescita e Condivisione</span>
       <h1 class="font-display text-3xl sm:text-5xl text-ink font-normal mb-4">Corsi e Formazione</h1>
       <p class="text-ink-soft max-w-xl mx-auto font-light text-sm sm:text-base leading-relaxed">
-        [Spazio Modello] Di seguito sono riportati i corsi e i laboratori attivi presso lo studio. Potrai modificare e personalizzare questi testi in qualsiasi momento.
+        [Spazio Modello] Di seguito sono riportati i corsi e i laboratori attivi presso lo studio. Potrai modificare e personalizzare questi testi in qualsiasi momento con i tuoi reali eventi futuri.
       </p>
     </div>
 
@@ -458,14 +473,15 @@
       <div class="mt-12 reveal">
         <div class="mb-4 text-center sm:text-left">
           <h3 class="font-display text-xl sm:text-2xl text-ink">Dove si trova il centro</h3>
-          <p class="text-xs sm:text-sm text-ink-soft font-light">Studio Amana, Via Trieste 11, Casate (45.492785611198755, 8.826748188174333)</p>
+          <p class="text-xs sm:text-sm text-ink-soft font-light">Studio Amana, Via Trieste 11, Casate (MI)</p>
         </div>
         <div class="rounded-2xl overflow-hidden shadow-sm border border-line h-72 sm:h-96 bg-stone-100">
           <iframe 
-            src="http://googleusercontent.com/maps.google.com/6" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2797.436324220353!2d8.824559512395646!3d45.49278943187198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478696bc28905cd7%3A0x6b6fcbf695842880!2sVia%20Trieste%2C%2011%2C%2020010%20Casate%20MI!5e0!3m2!1sit!2sit!4v1710000000000!5m2!1sit!2sit" 
             class="w-full h-full border-none filter grayscale opacity-90 contrast-115" 
             allowfullscreen="" 
             loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
             title="Mappa Stradale dello Studio Amana a Casate">
           </iframe>
         </div>
@@ -494,40 +510,42 @@
 </a>
 
 <script>
-  // Setup dell'IntersectionObserver per le animazioni di comparsa morbide (On-Scroll)
   let scrollObserver;
+  
+  // Setup dell'IntersectionObserver continuo (si attiva ogni volta che si scorre in su/giù)
   function initScrollAnimations() {
     if (scrollObserver) scrollObserver.disconnect();
     
-    // Configura un'apparizione progressiva molto rilassante e confortevole
     scrollObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.classList.add('visible'); // Mostra l'elemento
+        } else {
+          entry.target.classList.remove('visible'); // Resetta l'elemento quando esce dallo schermo (Animazione Infinita)
         }
       });
-    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 
-    // Seleziona solo gli elementi visibili nella pagina corrente
+    // Osserva solo gli elementi reveal all'interno della porzione di pagina attualmente attiva
     document.querySelectorAll('.page-view.active .reveal').forEach(el => {
       scrollObserver.observe(el);
     });
   }
 
-  // Funzione Principale di Navigazione (SPA)
+  // Router interno SPA (simula il cambio pagina)
   function navigateTo(pageId) {
-    // 1. Spegni tutte le sezioni
+    // 1. Disattiva tutte le viste
     document.querySelectorAll('.page-view').forEach(view => {
       view.classList.remove('active');
     });
     
-    // 2. Attiva solo la sezione richiesta
+    // 2. Attiva la vista scelta
     const targetPage = document.getElementById('page-' + pageId);
     if(targetPage) {
       targetPage.classList.add('active');
     }
 
-    // 3. Ripristina lo stato grafico dei menu Desktop
+    // 3. Sincronizza lo stile grafico dei menu Desktop
     document.querySelectorAll('.nav-link').forEach(link => {
       link.classList.remove('text-sage');
       link.classList.add('text-ink-soft');
@@ -538,27 +556,38 @@
       activeNavLink.classList.add('text-sage');
     }
 
-    // 4. Chiudi il menu a tendina su smartphone
-    document.getElementById('mobile-menu').classList.add('hidden');
+    // 4. Chiudi il menu mobile in modo fluido resettando le proprietà animate
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.add('max-h-0', 'opacity-0');
+    mobileMenu.classList.remove('max-h-[500px]', 'opacity-100');
 
-    // 5. Riporta l'utente istantaneamente in cima per evitare scorrimenti disallineati
+    // 5. Porta l'utente in cima alla pagina all'istante
     window.scrollTo({ top: 0, behavior: 'instant' });
     
-    // 6. Sincronizza l'indirizzo URL del browser (gestisce correttamente il tasto "indietro" del telefono)
+    // 6. Aggiorna l'hash dell'URL nel browser (ottimo per la navigazione mobile hardware)
     history.pushState(null, null, '#' + pageId);
 
-    // 7. Riavvia il tracciamento delle animazioni sulla nuova porzione visiva
-    setTimeout(initScrollAnimations, 50);
+    // 7. Rigenera l'observer sulle animazioni per la nuova "pagina" visualizzata
+    setTimeout(initScrollAnimations, 60);
   }
 
-  // Gestione dell'interruttore del Menu Mobile (Hamburger)
+  // Gestione dell'interruttore del Menu Mobile (Hamburger Animato)
   const menuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
+  
   menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
+    if (mobileMenu.classList.contains('max-h-0')) {
+      // Apri scorrendo
+      mobileMenu.classList.remove('max-h-0', 'opacity-0');
+      mobileMenu.classList.add('max-h-[500px]', 'opacity-100');
+    } else {
+      // Chiudi scorrendo
+      mobileMenu.classList.remove('max-h-[500px]', 'opacity-100');
+      mobileMenu.classList.add('max-h-0', 'opacity-0');
+    }
   });
 
-  // Controllo dei link diretti all'avvio del sito
+  // Aggancio del router per link diretti o ricariche di pagina accidentali
   window.addEventListener('DOMContentLoaded', () => {
     const currentHash = window.location.hash.replace('#', '');
     if(['home', 'chi-sono', 'trattamento', 'corsi', 'contatti'].includes(currentHash)) {
