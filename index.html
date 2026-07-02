@@ -27,7 +27,7 @@
   }
 </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen">
 
 <nav class="bg-white shadow-sm fixed w-full z-50 top-0">
   <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -35,24 +35,24 @@
       <svg class="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
       <span class="font-bold text-xl tracking-tight text-gray-900">Dordoni<span class="text-brand">Cleaning</span></span>
     </div>
-    <div class="hidden sm:flex space-x-6 text-sm font-medium text-gray-600">
+    <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
       <a href="#chi-siamo" class="hover:text-brand transition">Chi Siamo</a>
       <a href="#team" class="hover:text-brand transition">Il Nostro Team</a>
-      <a href="#proposta" class="bg-brand text-white px-4 py-2 rounded-lg hover:bg-brand-dark transition">Assumici Ora</a>
+      <a href="#proposta" class="bg-brand text-white px-5 py-2.5 rounded-lg hover:bg-brand-dark transition shadow-sm">Assumici Ora</a>
     </div>
   </div>
 </nav>
 
-<header class="bg-hero min-h-[80vh] flex items-center pt-20">
+<header class="bg-hero min-h-[85vh] flex items-center pt-20">
   <div class="max-w-4xl mx-auto px-4 text-center text-white">
-    <span class="uppercase tracking-widest text-sm font-semibold bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">Soluzioni Domestiche a Km Zero</span>
-    <h1 class="text-4xl sm:text-6xl font-extrabold mt-6 mb-6 leading-tight">
-      L'Impresa di Pulizie che non ti aspetti.<br> <span class="text-brand-light font-medium italic">(Soprattutto da noi)</span>
+    <span class="uppercase tracking-widest text-xs font-bold bg-white/20 px-4 py-1.5 rounded-full backdrop-blur-md border border-white/30">Soluzioni Domestiche a Km Zero</span>
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mt-8 mb-6 leading-tight">
+      L'Impresa di Pulizie che non ti aspetti.<br> <span class="text-brand-light font-medium italic text-3xl sm:text-4xl">(Soprattutto da noi)</span>
     </h1>
-    <p class="text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-      Abbiamo intercettato la sua intenzione di rivolgersi a un'agenzia esterna. Gentile Cliente (Mamma), le chiediamo di fermare tutto. Abbiamo la soluzione perfetta in casa.
+    <p class="text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+      Abbiamo intercettato la sua intenzione di rivolgersi a un'agenzia esterna. Gentile Cliente (Mamma), le chiediamo di fermare tutto. Abbiamo la soluzione perfetta già in casa.
     </p>
-    <a href="#proposta" class="inline-block bg-white text-brand font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition transform">
+    <a href="#proposta" class="inline-block bg-white text-brand font-bold px-8 py-4 rounded-full shadow-xl hover:bg-gray-50 transition transform hover:-translate-y-1">
       Valuta la Nostra Offerta
     </a>
   </div>
@@ -61,95 +61,117 @@
 <section id="chi-siamo" class="py-20 bg-white">
   <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
     <div>
-      <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" alt="Pulizie" class="rounded-2xl shadow-xl">
+      <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" alt="Pulizie" class="rounded-2xl shadow-xl border border-gray-100">
     </div>
     <div>
-      <h2 class="text-3xl font-bold text-gray-900 mb-6">Il Nostro Impegno Aziendale</h2>
-      <p class="text-gray-600 mb-4 leading-relaxed">
-        Siamo la **Dordoni Cleaning Services**, una startup innovativa nata esattamente 10 minuti fa in risposta a una chiara (e giustificata) minaccia contrattuale da parte dell'Amministratore Delegato della casa (Tu).
+      <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6 tracking-tight">Il Nostro Impegno Aziendale</h2>
+      <p class="text-gray-600 mb-4 leading-relaxed text-lg">
+        Siamo la <strong>Dordoni Cleaning Services</strong>, una startup innovativa nata esattamente 10 minuti fa in risposta a una chiara (e giustificata) minaccia contrattuale da parte dell'Amministratore Delegato della casa (Tu).
       </p>
-      <p class="text-gray-600 mb-6 leading-relaxed">
+      <p class="text-gray-600 mb-8 leading-relaxed">
         Sappiamo che il livello di disordine ha raggiunto standard inaccettabili. Ma prima di far entrare sconosciuti in casa pagandoli a ore, le chiediamo di visionare il nostro team. Abbiamo deciso di cambiare approccio aziendale: basta vestiti sulle sedie, basta letti sfatti. 
       </p>
-      <ul class="space-y-3 font-medium text-gray-800">
-        <li class="flex items-center"><svg class="w-5 h-5 text-brand mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Zero costi di agenzia</li>
-        <li class="flex items-center"><svg class="w-5 h-5 text-brand mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> 100% Legame di sangue biologico garantito</li>
-        <li class="flex items-center"><svg class="w-5 h-5 text-brand mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Reale pentimento per il caos generato in passato</li>
+      <ul class="space-y-4 font-semibold text-gray-800">
+        <li class="flex items-center"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-light text-brand flex items-center justify-center mr-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></span> Zero costi di agenzia</li>
+        <li class="flex items-center"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-light text-brand flex items-center justify-center mr-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></span> 100% Legame di sangue biologico garantito</li>
+        <li class="flex items-center"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-light text-brand flex items-center justify-center mr-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></span> Reale pentimento per il caos generato in passato</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section id="team" class="py-20 bg-gray-50">
+<section id="team" class="py-24 bg-gray-50 border-t border-gray-200">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-gray-900">Il Nostro Personale Qualificato</h2>
-      <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Un organico compatto, formato da 3 individui che da oggi hanno miracolosamente capito come funziona un cesto dei panni sporchi.</p>
+      <span class="text-brand font-bold tracking-widest uppercase text-sm">I Nostri Professionisti</span>
+      <h2 class="text-4xl font-extrabold text-gray-900 mt-2">Il Team Operativo</h2>
+      <p class="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">Un organico compatto, formato da 3 individui che da oggi hanno miracolosamente capito come funziona un cesto dei panni sporchi.</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center hover:shadow-lg transition">
-        <div class="w-24 h-24 bg-brand-light text-brand rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+    <div class="space-y-12">
+      
+      <div class="flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+        <div class="md:w-2/5 relative h-72 md:h-auto bg-gray-200">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" alt="Luca Dordoni" class="absolute inset-0 w-full h-full object-cover">
         </div>
-        <h3 class="text-xl font-bold text-gray-900">Luca Dordoni</h3>
-        <p class="text-brand text-sm font-semibold mb-4 uppercase tracking-wider">Capo Cantiere / CEO</p>
-        <p class="text-gray-600 text-sm leading-relaxed">
-          Supervisiona le operazioni strategiche della casa. Tende a delegare, ma assicura che da oggi gestirà il suo perimetro con un rigore militare. Promette di svuotare la lavastoviglie senza che gli venga chiesto 14 volte.
-        </p>
+        <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
+          <h3 class="text-3xl font-bold text-gray-900 mb-2">Luca Dordoni</h3>
+          <p class="text-brand font-bold mb-6 uppercase tracking-widest text-sm">Capo Cantiere / CEO</p>
+          <p class="text-gray-600 text-lg leading-relaxed mb-6">
+            Supervisiona le operazioni strategiche della casa. Tende a delegare, ma assicura che da oggi gestirà il suo perimetro con un rigore militare. Promette di svuotare la lavastoviglie senza che gli venga chiesto per la quattordicesima volta nella stessa mattinata.
+          </p>
+          <div class="inline-flex items-center self-start text-sm font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded-lg">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500 mr-2.5"></span> Competenze: Gestione Rifiuti & Lavastoviglie
+          </div>
+        </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center hover:shadow-lg transition">
-        <div class="w-24 h-24 bg-brand-light text-brand rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+      <div class="flex flex-col-reverse md:flex-row bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+        <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
+          <h3 class="text-3xl font-bold text-gray-900 mb-2">Gaia Dordoni</h3>
+          <p class="text-brand font-bold mb-6 uppercase tracking-widest text-sm">Senior Decluttering Specialist</p>
+          <p class="text-gray-600 text-lg leading-relaxed mb-6">
+            Ha appena concluso un master accelerato su come le sedie della camera non siano un prolungamento dell'armadio. È ora specializzata nella rimozione rapida di oggetti fuori posto e nel ripristino istantaneo di un pavimento calpestabile e visibile ad occhio nudo.
+          </p>
+          <div class="inline-flex items-center self-start text-sm font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded-lg">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500 mr-2.5"></span> Competenze: Recupero Sedie & Piegatura Rapida
+          </div>
         </div>
-        <h3 class="text-xl font-bold text-gray-900">Gaia Dordoni</h3>
-        <p class="text-brand text-sm font-semibold mb-4 uppercase tracking-wider">Senior Decluttering Specialist</p>
-        <p class="text-gray-600 text-sm leading-relaxed">
-          Ha frequentato un corso accelerato su come le sedie non siano un prolungamento dell'armadio. Specializzata nella rimozione rapida di oggetti fuori posto e nel ripristino del pavimento visibile.
-        </p>
+        <div class="md:w-2/5 relative h-72 md:h-auto bg-gray-200">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Gaia Dordoni" class="absolute inset-0 w-full h-full object-cover">
+        </div>
       </div>
 
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center hover:shadow-lg transition">
-        <div class="w-24 h-24 bg-brand-light text-brand rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+      <div class="flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+        <div class="md:w-2/5 relative h-72 md:h-auto bg-gray-200">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80" alt="Lisa Dordoni" class="absolute inset-0 w-full h-full object-cover">
         </div>
-        <h3 class="text-xl font-bold text-gray-900">Lisa Dordoni</h3>
-        <p class="text-brand text-sm font-semibold mb-4 uppercase tracking-wider">Executive Surface Manager</p>
-        <p class="text-gray-600 text-sm leading-relaxed">
-          Armata di piumino e improvviso senso di colpa, la sua mission aziendale è combattere la polvere e le briciole. Garantisce letti rifatti al mattino (e non solo tirando su il piumone alla rinfusa).
-        </p>
+        <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
+          <h3 class="text-3xl font-bold text-gray-900 mb-2">Lisa Dordoni</h3>
+          <p class="text-brand font-bold mb-6 uppercase tracking-widest text-sm">Executive Surface Manager</p>
+          <p class="text-gray-600 text-lg leading-relaxed mb-6">
+            Armata di aspirapolvere e da un improvviso ma fortissimo senso di colpa, la sua mission aziendale è combattere le briciole in ogni ecosistema della casa. Garantisce letti rifatti al mattino presto (e non solo tirando su il piumone alla rinfusa nascondendo i cuscini).
+          </p>
+          <div class="inline-flex items-center self-start text-sm font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded-lg">
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500 mr-2.5"></span> Competenze: Aspirazione Tattica & Letti a Piombo
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<section id="proposta" class="py-20 bg-brand text-white text-center">
-  <div class="max-w-3xl mx-auto px-4">
-    <h2 class="text-3xl sm:text-4xl font-bold mb-6">La Nostra Proposta di Contratto</h2>
-    <p class="text-lg text-blue-100 mb-10">
-      Mamma, non chiamare nessuna agenzia. Ti chiediamo ufficialmente di assumerci per un <strong>Periodo di Prova di 14 Giorni</strong>. 
+<section id="proposta" class="py-24 bg-brand text-white text-center">
+  <div class="max-w-4xl mx-auto px-4">
+    <span class="uppercase tracking-widest text-sm font-bold bg-white/20 px-4 py-1.5 rounded-full backdrop-blur-md mb-6 inline-block">Offerta a Tempo Limitato</span>
+    <h2 class="text-4xl sm:text-5xl font-extrabold mb-6">La Nostra Proposta di Contratto</h2>
+    <p class="text-xl text-blue-100 mb-12 font-light leading-relaxed">
+      Mamma, non chiamare nessuna agenzia vera. Ti chiediamo ufficialmente di assumerci per un <strong>Periodo di Prova di 14 Giorni</strong>. 
       Se al termine di queste due settimane la casa non sarà all'altezza dei tuoi standard, sarai libera di chiamare chi vuoi senza che noi fiataremo.
     </p>
-    <div class="bg-white/10 rounded-2xl p-6 sm:p-10 backdrop-blur-md border border-white/20 mb-8 text-left max-w-xl mx-auto">
-      <h4 class="text-xl font-bold mb-4 border-b border-white/20 pb-2">Termini dell'Accordo:</h4>
-      <ul class="space-y-2 text-blue-50">
-        <li>✔ Ordine costante nelle camere da letto.</li>
-        <li>✔ Zero scarpe lasciate in mezzo all'ingresso.</li>
-        <li>✔ Collaborazione attiva nelle aree comuni.</li>
-        <li><strong>Costo dell'abbonamento:</strong> Pazienza, amore e qualche cena calda.</li>
+    
+    <div class="bg-white text-gray-900 rounded-3xl p-8 sm:p-12 shadow-2xl mb-10 text-left max-w-2xl mx-auto transform hover:scale-[1.02] transition-transform">
+      <h4 class="text-2xl font-extrabold mb-6 border-b border-gray-200 pb-4 text-center text-brand">I Termini dell'Accordo</h4>
+      <ul class="space-y-4 text-lg font-medium text-gray-700">
+        <li class="flex items-center"><svg class="w-6 h-6 text-green-500 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Ordine costante e rigoroso nelle camere da letto.</li>
+        <li class="flex items-center"><svg class="w-6 h-6 text-green-500 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Zero scarpe lasciate ad ostacolo nell'ingresso.</li>
+        <li class="flex items-center"><svg class="w-6 h-6 text-green-500 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Collaborazione spontanea e non forzata.</li>
+        <li class="flex items-center mt-6 p-4 bg-blue-50 rounded-xl text-brand-dark"><svg class="w-6 h-6 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <strong>Costo del servizio:</strong> Amore materno e qualche cena calda.</li>
       </ul>
     </div>
-    <button onclick="alert('Contratto Firmato! Da questo momento l\'Agenzia Dordoni è operativa. Preparati a vedere l\'ordine!')" class="bg-white text-brand font-extrabold px-10 py-4 rounded-full text-lg shadow-xl hover:bg-gray-100 transition transform hover:-translate-y-1">
-      Accetta il Periodo di Prova
+    
+    <button onclick="alert('Contratto Firmato! Da questo momento l\'Agenzia Dordoni è operativa. Se trovi un calzino fuori posto puoi licenziarci in tronco.')" class="bg-gray-900 text-white font-extrabold px-12 py-5 rounded-full text-xl shadow-2xl hover:bg-black transition transform hover:-translate-y-1">
+      Firma e Accetta il Periodo di Prova
     </button>
   </div>
 </section>
 
-<footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+<footer class="bg-gray-900 text-gray-400 py-10 text-center text-sm">
   <div class="max-w-6xl mx-auto px-4">
+    <div class="font-bold text-xl text-white mb-4 tracking-tight">Dordoni<span class="text-brand">Cleaning</span></div>
     <p>© 2026 Dordoni Cleaning Services. Tutti i diritti riservati.</p>
-    <p class="mt-2 text-gray-600 italic">"Siamo figli disordinati, ma stiamo cercando di migliorare. Ti vogliamo bene mamma."</p>
+    <p class="mt-4 text-gray-500 italic max-w-md mx-auto">"Siamo figli disordinati, ma stiamo cercando di migliorare davvero. Dacci fiducia mamma!"</p>
   </div>
 </footer>
 
