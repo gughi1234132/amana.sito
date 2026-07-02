@@ -3,599 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amana | Studio Olistico di Francesca Schiralli</title>
-<meta name="description" content="Studio Olistico Amana a Casate di Francesca Schiralli. Trattamenti Cranio-Sacrali, massaggi energetici, percorsi quantici e corsi per il tuo equilibrio biologico.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<title>Dordoni Cleaning Services | Esperti del Pulito</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <script>
   tailwind.config = {
     theme: {
       extend: {
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
         colors: {
-          cream:  { DEFAULT: '#FBF8F3', alt: '#F2ECE2' },
-          ink:    { DEFAULT: '#3A362F', soft: '#6E6759', deep: '#2A2722' },
-          sage:   { DEFAULT: '#4F6B57', deep: '#36493D', soft: '#E7EDE6' },
-          line:   '#E3DBCC',
-        },
-        fontFamily: {
-          display: ['"Fraunces"', 'serif'],
-          sans: ['"Work Sans"', 'sans-serif'],
-        },
+          brand: { light: '#E0F2FE', DEFAULT: '#0284C7', dark: '#0369A1' }
+        }
       }
     }
   }
 </script>
 <style>
-  body { font-family: 'Work Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-  
-  /* Sistema di Gestione Pagine (SPA) */
-  .page-view { display: none; }
-  .page-view.active { display: block; }
-  
-  /* Animazioni di Scorrimento Confortevoli (Attive sia in entrata che in uscita) */
-  .reveal { 
-    opacity: 0; 
-    transform: translateY(35px); 
-    transition: opacity 1s cubic-bezier(0.21, 0.6, 0.35, 1), transform 1s cubic-bezier(0.21, 0.6, 0.35, 1); 
+  body { font-family: 'Inter', sans-serif; }
+  .bg-hero {
+    background-image: linear-gradient(rgba(2, 132, 199, 0.85), rgba(3, 105, 161, 0.9)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
   }
-  .reveal.visible { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-
-  @keyframes breathe { 0%, 100% { transform: scaleY(1); opacity: .4; } 50% { transform: scaleY(1.1); opacity: .7; } }
-  .breathe-line path { transform-origin: center; animation: breathe 7s ease-in-out infinite; }
-  .pulse-ring { animation: pulse-ring 2.8s ease-out infinite; }
-  @keyframes pulse-ring { 0% { transform: scale(0.85); opacity: .6; } 80%, 100% { transform: scale(1.6); opacity: 0; } }
 </style>
 </head>
-<body class="bg-cream text-ink antialiased flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 antialiased">
 
-<nav class="fixed top-0 left-0 right-0 bg-cream/90 backdrop-blur-md z-50 border-b border-line">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
-    <a href="#home" onclick="navigateTo('home')" class="flex flex-col leading-none focus:outline-none">
-      <span class="font-display text-2xl text-ink tracking-wide">Amana</span>
-      <span class="text-[9px] uppercase tracking-[0.25em] text-sage mt-0.5 font-semibold">Studio Olistico</span>
-    </a>
-    
-    <div class="hidden lg:flex items-center space-x-7 text-sm font-medium">
-      <button onclick="navigateTo('home')" id="nav-home" class="nav-link text-sage transition-colors focus:outline-none">Home</button>
-      <button onclick="navigateTo('chi-sono')" id="nav-chi-sono" class="nav-link text-ink-soft hover:text-sage transition-colors focus:outline-none">Chi Sono</button>
-      <button onclick="navigateTo('trattamento')" id="nav-trattamento" class="nav-link text-ink-soft hover:text-sage transition-colors focus:outline-none">Trattamenti</button>
-      <button onclick="navigateTo('corsi')" id="nav-corsi" class="nav-link text-ink-soft hover:text-sage transition-colors focus:outline-none">Corsi</button>
-      <button onclick="navigateTo('contatti')" id="nav-contatti" class="nav-link text-ink-soft hover:text-sage transition-colors focus:outline-none">Contatti & Eventi</button>
+<nav class="bg-white shadow-sm fixed w-full z-50 top-0">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <svg class="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+      <span class="font-bold text-xl tracking-tight text-gray-900">Dordoni<span class="text-brand">Cleaning</span></span>
     </div>
-
-    <button id="mobile-menu-btn" class="block lg:hidden text-ink p-1 focus:outline-none" aria-label="Apri Menu">
-      <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
-
-    <a href="https://wa.me/393389967134" target="_blank" rel="noopener" class="hidden sm:inline-block bg-sage text-white text-xs uppercase tracking-wider px-5 py-2.5 rounded-full hover:bg-sage-deep transition-colors shadow-sm">
-      Contatta Francesca
-    </a>
-  </div>
-
-  <div id="mobile-menu" class="lg:hidden bg-cream border-b border-line absolute top-full left-0 right-0 shadow-lg max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
-    <div class="px-4 py-4 space-y-3 flex flex-col text-base font-medium">
-      <button onclick="navigateTo('home')" class="mobile-nav-link text-left py-2 border-b border-line/40 text-sage">Home</button>
-      <button onclick="navigateTo('chi-sono')" class="mobile-nav-link text-left py-2 border-b border-line/40 text-ink-soft">Chi Sono</button>
-      <button onclick="navigateTo('trattamento')" class="mobile-nav-link text-left py-2 border-b border-line/40 text-ink-soft">Trattamenti dello Studio</button>
-      <button onclick="navigateTo('corsi')" class="mobile-nav-link text-left py-2 border-b border-line/40 text-ink-soft">Corsi & Formazione</button>
-      <button onclick="navigateTo('contatti')" class="mobile-nav-link text-left py-2 text-ink-soft">Contatti, Sede ed Eventi</button>
-      <a href="https://wa.me/393389967134" target="_blank" class="w-full text-center bg-sage text-white py-3 rounded-xl text-sm font-medium mt-2">
-        Parla su WhatsApp
-      </a>
+    <div class="hidden sm:flex space-x-6 text-sm font-medium text-gray-600">
+      <a href="#chi-siamo" class="hover:text-brand transition">Chi Siamo</a>
+      <a href="#team" class="hover:text-brand transition">Il Nostro Team</a>
+      <a href="#proposta" class="bg-brand text-white px-4 py-2 rounded-lg hover:bg-brand-dark transition">Assumici Ora</a>
     </div>
   </div>
 </nav>
 
-<main id="main-content" class="flex-grow pt-[60px]">
+<header class="bg-hero min-h-[80vh] flex items-center pt-20">
+  <div class="max-w-4xl mx-auto px-4 text-center text-white">
+    <span class="uppercase tracking-widest text-sm font-semibold bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm">Soluzioni Domestiche a Km Zero</span>
+    <h1 class="text-4xl sm:text-6xl font-extrabold mt-6 mb-6 leading-tight">
+      L'Impresa di Pulizie che non ti aspetti.<br> <span class="text-brand-light font-medium italic">(Soprattutto da noi)</span>
+    </h1>
+    <p class="text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+      Abbiamo intercettato la sua intenzione di rivolgersi a un'agenzia esterna. Gentile Cliente (Mamma), le chiediamo di fermare tutto. Abbiamo la soluzione perfetta in casa.
+    </p>
+    <a href="#proposta" class="inline-block bg-white text-brand font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition transform">
+      Valuta la Nostra Offerta
+    </a>
+  </div>
+</header>
 
-<section id="page-home" class="page-view active">
-    <div class="relative min-h-[82vh] flex items-center justify-center bg-stone-900 text-white overflow-hidden px-4">
-      
-     <img src="francesca.jpg"
-     alt="Sfondo Studio Olistico Amana"
-     class="absolute inset-0 w-full h-full object-cover opacity-40 blur-[5px] brightness-150 saturate-75">
-      
-      <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-black/20"></div>
-      
-      <div class="relative max-w-3xl mx-auto text-center z-10 py-12">
-        <span class="inline-block text-[10px] sm:text-xs uppercase tracking-[0.25em] text-cream bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full mb-5 font-medium">
-          Spazio Olistico Amana · Casate
-        </span>
-        <h1 class="font-display font-normal text-cream leading-[1.2] text-3xl sm:text-5xl md:text-6xl">
-          Consenti al tuo corpo di ritrovare la sua quiete
-        </h1>
-        <p class="text-cream/80 mt-5 max-w-xl mx-auto font-light text-base sm:text-lg leading-relaxed">
-          Trattamenti specialistici dedicati al riequilibrio profondo del sistema nervoso guidati dalla cura professionale di Francesca Schiralli.
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center px-4 w-full sm:w-auto">
-          <button onclick="navigateTo('trattamento')" class="w-full sm:w-auto bg-sage text-white font-medium px-7 py-3.5 rounded-xl shadow-md hover:bg-sage-deep transition-all text-xs uppercase tracking-wider">
-            Esplora i Trattamenti
-          </button>
-          <button onclick="navigateTo('corsi')" class="w-full sm:w-auto text-cream font-medium px-7 py-3.5 rounded-xl border border-white/30 bg-white/5 backdrop-blur-sm hover:border-white transition-all text-xs uppercase tracking-wider">
-            I Nostri Corsi
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="py-8 bg-cream text-center">
-      <div class="max-w-[180px] mx-auto opacity-40" aria-hidden="true">
-        <svg viewBox="0 0 400 60" class="w-full h-auto breathe-line">
-          <path d="M0 30 C 40 5, 60 5, 100 30 S 160 55, 200 30 S 260 5, 300 30 S 360 55, 400 30" fill="none" stroke="#4F6B57" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid md:grid-cols-2 gap-10 items-center reveal">
-      <div class="space-y-4">
-        <span class="text-xs uppercase tracking-widest text-sage font-semibold block">Benvenuti in studio</span>
-        <h2 class="font-display text-2xl sm:text-4xl text-ink font-normal leading-tight">Un'oasi di benessere strutturata attorno a te</h2>
-        <p class="text-ink-soft text-sm sm:text-base leading-relaxed font-light">
-          Nel cuore di Casate, lo **Studio Olistico Amana** è un ambiente protetto concepito per aiutarti a disattivare i ritmi frenetici della quotidianità. Attraverso tocchi leggeri e sintonizzazioni energetiche mirate, lavoriamo insieme per rilasciare le memorie di stress accumulate nei tessuti corporei.
-        </p>
-        <button onclick="navigateTo('chi-sono')" class="inline-flex items-center text-sage font-medium text-sm hover:text-sage-deep transition group pt-2">
-          Conosci Francesca Schiralli
-          <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-        </button>
-      </div>
-      <div class="grid grid-cols-2 gap-3 sm:gap-4">
-        
-        <img src="logo.jpg" alt="Oli essenziali e relax" class="rounded-xl w-full h-44 sm:h-60 object-cover shadow-sm">
-        
-        <img src="francesca.jpg" alt="Trattamento sul lettino" class="rounded-xl w-full h-44 sm:h-60 object-cover shadow-sm mt-6 sm:mt-8">
-      
-      </div>
-    </div>
-
-    <div class="bg-cream-alt/60 py-16 border-y border-line">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 reveal">
-        <div class="text-center max-w-xl mx-auto mb-12">
-          <span class="text-xs uppercase tracking-widest text-sage font-semibold block mb-1">La Nostra Filosofia</span>
-          <h2 class="font-display text-2xl sm:text-3xl text-ink">I Tre Cardini del Riequilibrio</h2>
-        </div>
-        <div class="grid sm:grid-cols-3 gap-6 text-center sm:text-left">
-          <div class="bg-white p-6 rounded-xl border border-line shadow-sm">
-            <div class="text-sage text-2xl font-display mb-3">01</div>
-            <h4 class="font-medium text-ink text-base mb-1">Ascolto Profondo</h4>
-            <p class="text-xs text-ink-soft font-light leading-relaxed">Nessun protocollo rigido o standardizzato. Ogni corpo possiede un linguaggio unico che merita attenzione e rispetto dedicato.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl border border-line shadow-sm">
-            <div class="text-sage text-2xl font-display mb-3">02</div>
-            <h4 class="font-medium text-ink text-base mb-1">Tempo e Decelerazione</h4>
-            <p class="text-xs text-ink-soft font-light leading-relaxed">Le sessioni in studio sono distanziate per garantire la massima tranquillità, privacy e assenza di fretta o scadenze.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl border border-line shadow-sm">
-            <div class="text-sage text-2xl font-display mb-3">03</div>
-            <h4 class="font-medium text-ink text-base mb-1">Integrazione Bioenergetica</h4>
-            <p class="text-xs text-ink-soft font-light leading-relaxed">Uniamo la precisione anatomica del tocco fisico a una profonda consapevolezza dei flussi energetici e quantici dell'organismo.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-16 reveal">
-      <div class="text-center max-w-xl mx-auto mb-12">
-        <span class="text-xs uppercase tracking-widest text-sage font-semibold block mb-1">L'Esperienza</span>
-        <h2 class="font-display text-2xl sm:text-3xl text-ink">Il Tuo Percorso In Studio</h2>
-      </div>
-      <div class="space-y-8 max-w-3xl mx-auto relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-0.5 before:bg-line">
-        <div class="relative pl-10">
-          <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-sage ring-4 ring-cream"></div>
-          <h4 class="font-medium text-ink text-sm sm:text-base">1. Colloquio Preliminare Informale</h4>
-          <p class="text-xs sm:text-sm text-ink-soft font-light mt-1">Un momento per dialogare e comprendere il tuo stato di benessere generale, i tuoi obiettivi fisici o le tensioni emotive che desideri affrontare.</p>
-        </div>
-        <div class="relative pl-10">
-          <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-sage ring-4 ring-cream"></div>
-          <h4 class="font-medium text-ink text-sm sm:text-base">2. Sessione Olistica Dedicata</h4>
-          <p class="text-xs sm:text-sm text-ink-soft font-light mt-1">L'applicazione del trattamento sul lettino (completamente vestiti, in abiti comodi) alternando tecniche manuali e sintonizzazioni energetiche.</p>
-        </div>
-        <div class="relative pl-10">
-          <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-sage ring-4 ring-cream"></div>
-          <h4 class="font-medium text-ink text-sm sm:text-base">3. Integrazione e Consigli Pratici</h4>
-          <p class="text-xs sm:text-sm text-ink-soft font-light mt-1">Al termine del trattamento analizzeremo insieme le risposte fornite dal corpo, offrendoti piccoli spunti per mantenere la stabilità a casa.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-white border-t border-line py-16">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 reveal">
-        <div class="text-center max-w-xl mx-auto mb-10">
-          <span class="text-xs uppercase tracking-widest text-sage font-semibold block mb-1">Recensioni</span>
-          <h2 class="font-display text-2xl sm:text-3xl text-ink">Le parole di chi frequenta lo Studio</h2>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="p-6 bg-cream rounded-xl border border-line text-xs sm:text-sm font-light text-ink-soft leading-relaxed italic">
-            "I trattamenti Cranio-Sacrali di Francesca mi hanno aiutata a resolver un problema di emicrania muscolo-tensiva che mi trascinavo da mesi. Lo studio a Casate è una vera oasi di pace."
-            <span class="block not-italic font-medium text-ink text-[11px] uppercase tracking-wider mt-4">— Elena R.</span>
-          </div>
-          <div class="p-6 bg-cream rounded-xl border border-line text-xs sm:text-sm font-light text-ink-soft leading-relaxed italic">
-            "Francesca ha una sensibilità fuori dal comune nelle mani. Il massaggio energetico mi fa staccare completamente la mente, dandomi una sensazione di leggerezza pazzesca."
-            <span class="block not-italic font-medium text-ink text-[11px] uppercase tracking-wider mt-4">— Marco T.</span>
-          </div>
-          <div class="p-6 bg-cream rounded-xl border border-line text-xs sm:text-sm font-light text-ink-soft leading-relaxed italic">
-            "Inizialmente ero scettica sui trattamenti a distanza, ma mi sono dovuta ricredere. Francesca riesce a trasmettere una centratura e una calma incredibili anche da lontano."
-            <span class="block not-italic font-medium text-ink text-[11px] uppercase tracking-wider mt-4">— Valeria B.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section id="page-chi-sono" class="page-view">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 grid md:grid-cols-12 gap-10 items-center">
-      <div class="md:col-span-5 reveal">
-        <div class="rounded-2xl overflow-hidden shadow-sm bg-cream-alt p-2">
-          
-          <img src="chisono.jpg" 
-               alt="Francesca Schiralli" 
-               class="w-full h-[360px] sm:h-[460px] object-cover rounded-xl shadow-inner">
-        
-        </div>
-      </div>
-      <div class="md:col-span-7 space-y-5 reveal">
-        <span class="text-xs uppercase tracking-widest text-sage font-semibold block">La Titolare</span>
-        <h1 class="font-display text-3xl sm:text-5xl text-ink font-normal">Francesca Schiralli</h1>
-        <p class="text-base sm:text-lg font-light text-ink-soft leading-relaxed italic border-l-2 border-sage pl-4">
-          "Il corpo non mente mai. Ascoltare i suoi segnali con gentilezza ed empatia è il primo passo indispensabile verso una guarigione solida e naturale."
-        </p>
-        <div class="space-y-4 text-ink-soft font-light text-sm sm:text-base leading-relaxed">
-          <p>
-            Sono Francesca Schiralli, operatrice olistica specializzata nel riequilibrio del sistema nervoso e delle energie sottili. Ho fondato lo studio **Amana** a Casate per dare forma a un luogo in cui le persone potessero reimparare ad ascoltarsi.
-          </p>
-          <p>
-            Grazie alla mia formazione specialistica, unisco l'approccio strutturale e fluido della terapia Cranio-Sacrale con le più moderne chiavi di lettura dei trattamenti energetici e quantici. Il mio obiettivo è sostenere l'organismo nel rilascio delle tensioni fisiche ed emotive accumulate nel tempo.
-          </p>
-        </div>
-        <div class="pt-2">
-          <button onclick="navigateTo('contatti')" class="bg-ink text-white text-xs uppercase tracking-widest font-semibold px-6 py-3.5 rounded-xl hover:bg-sage transition-colors shadow-sm">
-            Prenota un appuntamento
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section id="page-trattamento" class="page-view">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 text-center">
-      <span class="text-xs uppercase tracking-widest text-sage font-semibold block mb-2">I Nostri Servizi</span>
-      <h1 class="font-display text-3xl sm:text-5xl text-ink font-normal mb-4">I Trattamenti dello Studio</h1>
-      <p class="text-ink-soft max-w-xl mx-auto font-light text-sm sm:text-base leading-relaxed">
-        Percorsi manuali ed energetici personalizzati sulle tue specifiche esigenze, praticati con la massima cura e delicatezza.
-      </p>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 pb-16 grid sm:grid-cols-2 gap-8">
-      
-      <div class="bg-white rounded-2xl overflow-hidden border border-line shadow-sm flex flex-col reveal">
-        
-        <img src="craniosacrale.jpg" alt="Trattamento Craniosacrale" class="w-full h-48 object-cover">
-        
-        <div class="p-6 flex-grow flex flex-col justify-between">
-          <div>
-            <h3 class="font-display text-xl text-ink mb-2">Trattamento Cranio-Sacrale</h3>
-            <p class="text-xs sm:text-sm text-ink-soft font-light leading-relaxed">
-              Un contatto manuale impercettibile e profondo applicato sulle strutture ossee del cranio e lungo tutta la colonna fino al sacro. Questa tecnica stimola l'armonizzazione del liquido cefalorachidiano, disattivando gli stati di allerta e stress indotti dal sistema nervoso ortosimpatico. Ideale per emicranie, insonnia e tensioni posturali.
-            </p>
-          </div>
-          <button onclick="navigateTo('contatti')" class="text-sage font-medium text-xs uppercase tracking-wider mt-5 text-left hover:text-sage-deep transition">Richiedi Informazioni →</button>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl overflow-hidden border border-line shadow-sm flex flex-col reveal">
-        
-        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80" alt="Massaggio Energetico" class="w-full h-48 object-cover">
-        
-        <div class="p-6 flex-grow flex flex-col justify-between">
-          <div>
-            <h3 class="font-display text-xl text-ink mb-2">Massaggio Energetico</h3>
-            <p class="text-xs sm:text-sm text-ink-soft font-light leading-relaxed">
-              Un trattamento fluido che lavora lungo i meridiani energetici del corpo per ripristinare il corretto scorrimento della linfa vitale e sciogliere le contratture muscolari psicosomatiche. Questa manualità profonda rilassa la muscolatura, elimina la stanchezza cronica e ricarica i centri bioenergetici principali.
-            </p>
-          </div>
-          <button onclick="navigateTo('contatti')" class="text-sage font-medium text-xs uppercase tracking-wider mt-5 text-left hover:text-sage-deep transition">Richiedi Informazioni →</button>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl overflow-hidden border border-line shadow-sm flex flex-col reveal">
-        
-        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Trattamenti Quantici" class="w-full h-48 object-cover">
-        
-        <div class="p-6 flex-grow flex flex-col justify-between">
-          <div>
-            <h3 class="font-display text-xl text-ink mb-2">Trattamenti Quantici</h3>
-            <p class="text-xs sm:text-sm text-ink-soft font-light leading-relaxed">
-              Lavorando sui campi informazionali che circondano il corpo fisico, i percorsi quantici mirano a riprogrammare le credenze limitanti e i blocchi sottili immagazzinati a livello subconscio. Attraverso frequenze di risonanza armonica, stimolano l'autoguarigione e l'allineamento vibrazionale profondo della persona.
-            </p>
-          </div>
-          <button onclick="navigateTo('contatti')" class="text-sage font-medium text-xs uppercase tracking-wider mt-5 text-left hover:text-sage-deep transition">Richiedi Informazioni →</button>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl overflow-hidden border border-line shadow-sm flex flex-col reveal">
-        
-        <img src="https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&w=600&q=80" alt="Trattamenti a Distanza" class="w-full h-48 object-cover">
-        
-        <div class="p-6 flex-grow flex flex-col justify-between">
-          <div>
-            <h3 class="font-display text-xl text-ink mb-2">Trattamenti a Distanza</h3>
-            <p class="text-xs sm:text-sm text-ink-soft font-light leading-relaxed">
-              Il benessere olistico non conosce confini fisici. Pensato appositamente per chi non ha la possibilità di muoversi o raggiungere la sede di Casate, questo trattamento permette di ricevere un bilanciamento energetico a distanza, concordando un orario di ascolto e focalizzazione profonda in modalità protetta.
-            </p>
-          </div>
-          <button onclick="navigateTo('contatti')" class="text-sage font-medium text-xs uppercase tracking-wider mt-5 text-left hover:text-sage-deep transition">Richiedi Informazioni →</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <section id="page-corsi" class="page-view">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 text-center">
-      <span class="text-xs uppercase tracking-widest text-sage font-semibold block mb-2">Crescita e Condivisione</span>
-      <h1 class="font-display text-3xl sm:text-5xl text-ink font-normal mb-4">Corsi e Formazione</h1>
-      <p class="text-ink-soft max-w-xl mx-auto font-light text-sm sm:text-base leading-relaxed">
-        [Spazio Modello] Di seguito sono riportati i corsi e i laboratori attivi presso lo studio. Potrai modificare e personalizzare questi testi in qualsiasi momento con i tuoi reali eventi futuri.
-      </p>
-    </div>
-
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 pb-20 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      
-      <div class="bg-white border border-line p-6 rounded-2xl shadow-sm flex flex-col justify-between reveal">
-        <div>
-          <span class="inline-block bg-sage-soft text-sage text-[10px] font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-4">Weekend Intensivo</span>
-          <h3 class="font-display text-xl text-ink mb-2">Introduzione all'Autotrattamento</h3>
-          <p class="text-xs sm:text-sm text-ink-soft font-light leading-relaxed mb-4">
-            Un percorso pratico di due giorni per imparare ad ascoltare i messaggi sottili del proprio corpo, localizzare le tensioni e rilasciarle in autonomia attraverso micro-contatti consapevoli.
-          </p>
-          <ul class="text-xs text-ink-soft space-y-1.5 border-t border-line pt-3 font-light">
-            <li><strong>Durata:</strong> 12 ore totali</li>
-            <li><strong>Sede:</strong> In presenza a Casate</li>
-          </ul>
-        </div>
-        <button onclick="navigateTo('contatti')" class="mt-6 w-full bg-cream hover:bg-sage hover:text-white text-ink text-xs uppercase tracking-wider py-2.5 rounded-lg transition font-medium">Richiedi Date</button>
-      </div>
-
-      <div class="bg-white border border-line p-6 rounded-2xl shadow-sm flex flex-col justify-between reveal">
-        <div>
-          <span class="inline-block bg-sage-soft text-sage text-[10px] font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-4">Percorso Serale</span>
-          <h3 class="font-display text-xl text-ink mb-2">Percezione delle Energie Sottili</h3>
-          <p class="text-xs sm:text-sm text-ink-soft font-light leading-relaxed mb-4">
-            4 incontri settimanali aperti a tutti, dedicati allo studio teorico-pratico del sistema energetico umano, dei meridiani e dei campi aurici per migliorare la vitalità quotidiana.
-          </p>
-          <ul class="text-xs text-ink-soft space-y-1.5 border-t border-line pt-3 font-light">
-            <li><strong>Durata:</strong> 4 lezioni da 2 ore</li>
-            <li><strong>Requisiti:</strong> Nessuno</li>
-          </ul>
-        </div>
-        <button onclick="navigateTo('contatti')" class="mt-6 w-full bg-cream hover:bg-sage hover:text-white text-ink text-xs uppercase tracking-wider py-2.5 rounded-lg transition font-medium">Richiedi Date</button>
-      </div>
-
-      <div class="bg-white border border-line p-6 rounded-2xl shadow-sm flex flex-col justify-between reveal">
-        <div>
-          <span class="inline-block bg-sage-soft text-sage text-[10px] font-medium uppercase tracking-widest px-3 py-1 rounded-full mb-4">Incontro Mensile</span>
-          <h3 class="font-display text-xl text-ink mb-2">Meditazione e Quiete Dinamica</h3>
-          <p class="text-xs sm:text-sm text-ink-soft font-light leading-relaxed mb-4">
-            Sessioni collettive a numero chiuso per sperimentare il vuoto mentale e il rilassamento fasciale profondo indotto, ideali per azzerare lo stress accumulato nel lavoro.
-          </p>
-          <ul class="text-xs text-ink-soft space-y-1.5 border-t border-line pt-3 font-light">
-            <li><strong>Orario:</strong> Sabato mattina</li>
-            <li><strong>Posti:</strong> Max 8 partecipanti</li>
-          </ul>
-        </div>
-        <button onclick="navigateTo('contatti')" class="mt-6 w-full bg-cream hover:bg-sage hover:text-white text-ink text-xs uppercase tracking-wider py-2.5 rounded-lg transition font-medium">Richiedi Date</button>
-      </div>
-
-    </div>
-  </section>
-
-
-  <section id="page-contatti" class="page-view">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-      
-      <div class="text-center max-w-xl mx-auto mb-10">
-        <span class="text-xs uppercase tracking-widest text-sage font-semibold block mb-2">Inizia il tuo percorso</span>
-        <h1 class="font-display text-3xl sm:text-4xl text-ink font-normal">Contatti e Appuntamenti</h1>
-        <p class="text-ink-soft font-light text-xs sm:text-sm mt-2">
-          Contatta la proprietaria **Francesca Schiralli** per riservare il tuo appuntamento o richiedere dettagli sui prossimi eventi o corsi in partenza.
-        </p>
-      </div>
-
-      <div class="grid lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-line shadow-sm space-y-6">
-          <div>
-            <h3 class="font-display text-xl text-ink mb-2">Sede di Amana</h3>
-            <p class="text-sm text-ink-soft font-light leading-relaxed">
-              Via Trieste 11<br>
-              **Casate (MI)**
-            </p>
-          </div>
-          <hr class="border-line">
-          <div>
-            <h3 class="font-display text-xl text-ink mb-2">Orari di Ricevimento</h3>
-            <p class="text-sm text-ink-soft font-light leading-relaxed">
-              Lunedì – Venerdì: 09:00 – 19:30<br>
-              Sabato: 09:00 – 13:00<br>
-              <span class="block mt-2 font-medium text-sage text-xs uppercase tracking-wider">Si riceve esclusivamente su appuntamento.</span>
-            </p>
-          </div>
-          <hr class="border-line">
-          <div>
-            <h4 class="text-xs uppercase tracking-widest text-ink-soft font-semibold mb-2">Canale Preferenziale Rapido</h4>
-            <a href="https://wa.me/393389967134" target="_blank" class="inline-flex w-full justify-center items-center text-sm font-medium text-white bg-sage px-4 py-3 rounded-xl hover:bg-sage-deep transition shadow-sm">
-              Invia un messaggio WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-line shadow-sm">
-          <h2 class="font-display text-xl text-ink mb-4">Scrivi una Mail</h2>
-          <form action="#" method="POST" class="space-y-4" onsubmit="alert('Messaggio registrato con successo. Francesca ti risponderà nel più breve tempo possibile.'); return false;">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label for="name" class="block text-xs font-medium text-ink-soft uppercase tracking-wider mb-1">Nome e Cognome *</label>
-                <input type="text" id="name" required class="w-full bg-cream border border-line rounded-lg px-3 py-2.5 text-base text-ink focus:outline-none focus:border-sage transition">
-              </div>
-              <div>
-                <label for="email" class="block text-xs font-medium text-ink-soft uppercase tracking-wider mb-1">Email *</label>
-                <input type="email" id="email" required class="w-full bg-cream border border-line rounded-lg px-3 py-2.5 text-base text-ink focus:outline-none focus:border-sage transition">
-              </div>
-            </div>
-            <div>
-              <label for="type" class="block text-xs font-medium text-ink-soft uppercase tracking-wider mb-1">Richiesta Relativa a:</label>
-              <select id="type" class="w-full bg-cream border border-line rounded-lg px-3 py-2.5 text-sm text-ink focus:outline-none focus:border-sage transition">
-                <option value="trattamento">Trattamento Individuale (Cranio-Sacrale / Altro)</option>
-                <option value="corsi">Iscrizione / Informazioni sui Corsi modello</option>
-                <option value="eventi">Richiesta Informazioni Generali o Eventi</option>
-              </select>
-            </div>
-            <div>
-              <label for="msg" class="block text-xs font-medium text-ink-soft uppercase tracking-wider mb-1">Messaggio *</label>
-              <textarea id="msg" rows="4" required class="w-full bg-cream border border-line rounded-lg px-3 py-2.5 text-base text-ink focus:outline-none focus:border-sage transition" placeholder="Scrivi qui la tua richiesta dettagliata..."></textarea>
-            </div>
-            <button type="submit" class="w-full bg-ink text-white py-3.5 rounded-xl text-xs uppercase tracking-widest font-semibold hover:bg-sage transition shadow-sm">
-              Invia Messaggio
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div class="mt-12 reveal">
-        <div class="mb-4 text-center sm:text-left">
-          <h3 class="font-display text-xl sm:text-2xl text-ink">Dove si trova il centro</h3>
-          <p class="text-xs sm:text-sm text-ink-soft font-light">Studio Amana, Via Trieste 11, Casate (MI)</p>
-        </div>
-        <div class="rounded-2xl overflow-hidden shadow-sm border border-line h-72 sm:h-96 bg-stone-100">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2797.436324220353!2d8.824559512395646!3d45.49278943187198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478696bc28905cd7%3A0x6b6fcbf695842880!2sVia%20Trieste%2C%2011%2C%2020010%20Casate%20MI!5e0!3m2!1sit!2sit!4v1710000000000!5m2!1sit!2sit" 
-            class="w-full h-full border-none filter grayscale opacity-90 contrast-115" 
-            allowfullscreen="" 
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Mappa Stradale dello Studio Amana a Casate">
-          </iframe>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-</main>
-
-<footer class="bg-ink text-stone-400 text-[11px] py-8 border-t border-stone-800">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+<section id="chi-siamo" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
     <div>
-      <p class="text-xs text-stone-200 font-display font-medium">Amana — Studio Olistico</p>
-      <p class="mt-1">© 2026 Francesca Schiralli. Via Trieste 11, Casate. Tutti i diritti riservati.</p>
+      <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" alt="Pulizie" class="rounded-2xl shadow-xl">
     </div>
-    <div class="text-stone-500">Professionista disciplinato ai sensi della L. 4/2013 · Conformità Privacy & GDPR</div>
+    <div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Il Nostro Impegno Aziendale</h2>
+      <p class="text-gray-600 mb-4 leading-relaxed">
+        Siamo la **Dordoni Cleaning Services**, una startup innovativa nata esattamente 10 minuti fa in risposta a una chiara (e giustificata) minaccia contrattuale da parte dell'Amministratore Delegato della casa (Tu).
+      </p>
+      <p class="text-gray-600 mb-6 leading-relaxed">
+        Sappiamo che il livello di disordine ha raggiunto standard inaccettabili. Ma prima di far entrare sconosciuti in casa pagandoli a ore, le chiediamo di visionare il nostro team. Abbiamo deciso di cambiare approccio aziendale: basta vestiti sulle sedie, basta letti sfatti. 
+      </p>
+      <ul class="space-y-3 font-medium text-gray-800">
+        <li class="flex items-center"><svg class="w-5 h-5 text-brand mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Zero costi di agenzia</li>
+        <li class="flex items-center"><svg class="w-5 h-5 text-brand mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> 100% Legame di sangue biologico garantito</li>
+        <li class="flex items-center"><svg class="w-5 h-5 text-brand mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Reale pentimento per il caos generato in passato</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="py-20 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-gray-900">Il Nostro Personale Qualificato</h2>
+      <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Un organico compatto, formato da 3 individui che da oggi hanno miracolosamente capito come funziona un cesto dei panni sporchi.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center hover:shadow-lg transition">
+        <div class="w-24 h-24 bg-brand-light text-brand rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900">Luca Dordoni</h3>
+        <p class="text-brand text-sm font-semibold mb-4 uppercase tracking-wider">Capo Cantiere / CEO</p>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Supervisiona le operazioni strategiche della casa. Tende a delegare, ma assicura che da oggi gestirà il suo perimetro con un rigore militare. Promette di svuotare la lavastoviglie senza che gli venga chiesto 14 volte.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center hover:shadow-lg transition">
+        <div class="w-24 h-24 bg-brand-light text-brand rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900">Gaia Dordoni</h3>
+        <p class="text-brand text-sm font-semibold mb-4 uppercase tracking-wider">Senior Decluttering Specialist</p>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Ha frequentato un corso accelerato su come le sedie non siano un prolungamento dell'armadio. Specializzata nella rimozione rapida di oggetti fuori posto e nel ripristino del pavimento visibile.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center hover:shadow-lg transition">
+        <div class="w-24 h-24 bg-brand-light text-brand rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900">Lisa Dordoni</h3>
+        <p class="text-brand text-sm font-semibold mb-4 uppercase tracking-wider">Executive Surface Manager</p>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Armata di piumino e improvviso senso di colpa, la sua mission aziendale è combattere la polvere e le briciole. Garantisce letti rifatti al mattino (e non solo tirando su il piumone alla rinfusa).
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proposta" class="py-20 bg-brand text-white text-center">
+  <div class="max-w-3xl mx-auto px-4">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-6">La Nostra Proposta di Contratto</h2>
+    <p class="text-lg text-blue-100 mb-10">
+      Mamma, non chiamare nessuna agenzia. Ti chiediamo ufficialmente di assumerci per un <strong>Periodo di Prova di 14 Giorni</strong>. 
+      Se al termine di queste due settimane la casa non sarà all'altezza dei tuoi standard, sarai libera di chiamare chi vuoi senza che noi fiataremo.
+    </p>
+    <div class="bg-white/10 rounded-2xl p-6 sm:p-10 backdrop-blur-md border border-white/20 mb-8 text-left max-w-xl mx-auto">
+      <h4 class="text-xl font-bold mb-4 border-b border-white/20 pb-2">Termini dell'Accordo:</h4>
+      <ul class="space-y-2 text-blue-50">
+        <li>✔ Ordine costante nelle camere da letto.</li>
+        <li>✔ Zero scarpe lasciate in mezzo all'ingresso.</li>
+        <li>✔ Collaborazione attiva nelle aree comuni.</li>
+        <li><strong>Costo dell'abbonamento:</strong> Pazienza, amore e qualche cena calda.</li>
+      </ul>
+    </div>
+    <button onclick="alert('Contratto Firmato! Da questo momento l\'Agenzia Dordoni è operativa. Preparati a vedere l\'ordine!')" class="bg-white text-brand font-extrabold px-10 py-4 rounded-full text-lg shadow-xl hover:bg-gray-100 transition transform hover:-translate-y-1">
+      Accetta il Periodo di Prova
+    </button>
+  </div>
+</section>
+
+<footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+  <div class="max-w-6xl mx-auto px-4">
+    <p>© 2026 Dordoni Cleaning Services. Tutti i diritti riservati.</p>
+    <p class="mt-2 text-gray-600 italic">"Siamo figli disordinati, ma stiamo cercando di migliorare. Ti vogliamo bene mamma."</p>
   </div>
 </footer>
 
-<a href="https://wa.me/393389967134" target="_blank" rel="noopener" class="fixed bottom-5 right-5 z-50 group flex items-center" aria-label="Contatta via WhatsApp">
-  <span class="absolute inset-0 rounded-full bg-sage pulse-ring" aria-hidden="true"></span>
-  <span class="relative bg-sage text-white p-3.5 rounded-full shadow-2xl hover:bg-sage-deep transition flex items-center">
-    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.528 2.028 14.061 1.01 11.493 1.01c-5.437 0-9.863 4.371-9.867 9.802-.001 1.73.46 3.422 1.336 4.928l-.975 3.565 3.66-.95z"/></svg>
-  </span>
-</a>
-
-<script>
-  let scrollObserver;
-  
-  // Setup dell'IntersectionObserver continuo (si attiva ogni volta che si scorre in su/giù)
-  function initScrollAnimations() {
-    if (scrollObserver) scrollObserver.disconnect();
-    
-    scrollObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible'); // Mostra l'elemento
-        } else {
-          entry.target.classList.remove('visible'); // Resetta l'elemento quando esce dallo schermo (Animazione Infinita)
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
-
-    // Osserva solo gli elementi reveal all'interno della porzione di pagina attualmente attiva
-    document.querySelectorAll('.page-view.active .reveal').forEach(el => {
-      scrollObserver.observe(el);
-    });
-  }
-
-  // Router interno SPA (simula il cambio pagina)
-  function navigateTo(pageId) {
-    // 1. Disattiva tutte le viste
-    document.querySelectorAll('.page-view').forEach(view => {
-      view.classList.remove('active');
-    });
-    
-    // 2. Attiva la vista scelta
-    const targetPage = document.getElementById('page-' + pageId);
-    if(targetPage) {
-      targetPage.classList.add('active');
-    }
-
-    // 3. Sincronizza lo stile grafico dei menu Desktop
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('text-sage');
-      link.classList.add('text-ink-soft');
-    });
-    const activeNavLink = document.getElementById('nav-' + pageId);
-    if(activeNavLink) {
-      activeNavLink.classList.remove('text-ink-soft');
-      activeNavLink.classList.add('text-sage');
-    }
-
-    // 4. Chiudi il menu mobile in modo fluido resettando le proprietà animate
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenu.classList.add('max-h-0', 'opacity-0');
-    mobileMenu.classList.remove('max-h-[500px]', 'opacity-100');
-
-    // 5. Porta l'utente in cima alla pagina all'istante
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    
-    // 6. Aggiorna l'hash dell'URL nel browser (ottimo per la navigazione mobile hardware)
-    history.pushState(null, null, '#' + pageId);
-
-    // 7. Rigenera l'observer sulle animazioni per la nuova "pagina" visualizzata
-    setTimeout(initScrollAnimations, 60);
-  }
-
-  // Gestione dell'interruttore del Menu Mobile (Hamburger Animato)
-  const menuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
-  menuBtn.addEventListener('click', () => {
-    if (mobileMenu.classList.contains('max-h-0')) {
-      // Apri scorrendo
-      mobileMenu.classList.remove('max-h-0', 'opacity-0');
-      mobileMenu.classList.add('max-h-[500px]', 'opacity-100');
-    } else {
-      // Chiudi scorrendo
-      mobileMenu.classList.remove('max-h-[500px]', 'opacity-100');
-      mobileMenu.classList.add('max-h-0', 'opacity-0');
-    }
-  });
-
-  // Aggancio del router per link diretti o ricariche di pagina accidentali
-  window.addEventListener('DOMContentLoaded', () => {
-    const currentHash = window.location.hash.replace('#', '');
-    if(['home', 'chi-sono', 'trattamento', 'corsi', 'contatti'].includes(currentHash)) {
-      navigateTo(currentHash);
-    } else {
-      initScrollAnimations();
-    }
-  });
-</script>
 </body>
 </html>
