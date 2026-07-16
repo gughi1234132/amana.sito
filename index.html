@@ -1,179 +1,609 @@
 <!DOCTYPE html>
-<html lang="it" class="scroll-smooth">
+<html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dordoni Cleaning Services | Esperti del Pulito</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: { sans: ['Inter', 'sans-serif'] },
-        colors: {
-          brand: { light: '#E0F2FE', DEFAULT: '#0284C7', dark: '#0369A1' }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studiocodice | Sviluppo Web Sartoriale</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           1. VARIABILI & COLORI
+        ========================================= */
+        :root {
+            --color-white: #FFFFFF;
+            --color-stone: #F5F4F0;   
+            --color-dark: #111111;    
+            --color-accent: #E5E0D8;
+            
+            /* Temi dinamici per lo slider */
+            --theme-1: #1C2A21; /* Verde Foresta */
+            --theme-2: #2C211F; /* Moka Profondo */
+            --theme-3: #1A1D24; /* Ardesia Notturno */
+            
+            --font-serif: 'Instrument Serif', serif;
+            --font-sans: 'Manrope', sans-serif;
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
         }
-      }
-    }
-  }
-</script>
-<style>
-  body { font-family: 'Inter', sans-serif; }
-  .bg-hero {
-    background-image: linear-gradient(rgba(2, 132, 199, 0.85), rgba(3, 105, 161, 0.9)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=80');
-    background-size: cover;
-    background-position: center;
-  }
-</style>
+
+        /* =========================================
+           2. BASE E RESET
+        ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            background-color: var(--color-white);
+            color: var(--color-dark);
+            font-family: var(--font-sans);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.3s ease; }
+        a:hover { opacity: 0.6; }
+        img { max-width: 100%; display: block; object-fit: cover; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 3rem; }
+        .section { padding: 8rem 0; }
+        .bg-stone { background-color: var(--color-stone); }
+        .text-white { color: var(--color-white) !important; }
+
+        h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; line-height: 1.05; }
+        h2 { font-size: clamp(3rem, 6vw, 5rem); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+        em { font-style: italic; color: inherit; }
+        p { font-size: 1.15rem; color: #4A4A4A; }
+        .text-white p { color: rgba(255,255,255,0.7); }
+        .text-center { text-align: center; }
+
+        /* Bottoni */
+        .btn-text { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid var(--color-dark); padding-bottom: 0.2rem; }
+        .btn-solid { background-color: var(--color-dark); color: var(--color-white); padding: 1.2rem 2.5rem; font-family: var(--font-sans); font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: transform 0.3s var(--ease-out-expo); }
+        .btn-solid:hover { transform: translateY(-3px); }
+
+        /* Utilities per animazioni testi mascherati */
+        .text-mask { overflow: hidden; display: block; }
+        .text-mask span { display: block; transform: translateY(110%); transition: transform 1.2s var(--ease-out-expo); }
+        .js-reveal.is-revealed .text-mask span { transform: translateY(0); }
+
+        /* =========================================
+           3. HEADER
+        ========================================= */
+        .site-header { position: fixed; top: 0; left: 0; width: 100%; padding: 2rem 0; z-index: 1000; background-color: rgba(255, 255, 255, 0); transition: all 0.5s var(--ease-out-expo); }
+        .site-header.scrolled { padding: 1rem 0; background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-serif); font-size: 1.8rem; }
+        .main-nav { display: flex; gap: 3rem; }
+        .main-nav a { font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* =========================================
+           4. HERO SECTION (Nuova e Tipografica)
+        ========================================= */
+        .hero { 
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 8rem;
+            background: linear-gradient(135deg, var(--color-stone) 0%, var(--color-white) 100%);
+            overflow: hidden;
+        }
+
+        /* Elemento astratto decorativo di sfondo */
+        .hero-blob {
+            position: absolute;
+            top: -10%; right: -5%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(0,0,0,0.03) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: floatBlob 20s infinite alternate ease-in-out;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-100px, 100px) scale(1.2); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 9rem);
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 4rem;
+            color: var(--color-dark);
+        }
+
+        .hero-title .text-mask:nth-child(2) span { transition-delay: 0.1s; padding-left: 10vw; color: #555; }
+        .hero-title .text-mask:nth-child(3) span { transition-delay: 0.2s; }
+
+        .hero-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        .hero-desc { max-width: 400px; font-weight: 500; font-size: 1.1rem; }
+        
+        /* Badge Rotante */
+        .spinning-badge-wrapper {
+            position: relative;
+            width: 120px; height: 120px;
+            display: flex; justify-content: center; align-items: center;
+        }
+        
+        .spinning-text {
+            position: absolute;
+            width: 100%; height: 100%;
+            animation: spin 15s linear infinite;
+        }
+
+        .spinning-text svg { width: 100%; height: 100%; overflow: visible; }
+        .spinning-text path { fill: none; }
+        .spinning-text text { font-family: var(--font-sans); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; fill: var(--color-dark); }
+        
+        .badge-center { font-family: var(--font-serif); font-size: 2rem; line-height: 1; }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* =========================================
+           5. SERVIZI & CHI SIAMO
+        ========================================= */
+        .editorial-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(0,0,0,0.1); }
+        .editorial-card { padding: 3rem 2rem 3rem 0; border-right: 1px solid rgba(0,0,0,0.1); }
+        .editorial-card:last-child { border-right: none; padding-right: 0; }
+        .card-number { display: block; font-family: var(--font-serif); font-size: 1.5rem; opacity: 0.5; margin-bottom: 2rem; }
+
+        .about-simplistic { max-width: 900px; margin: 0 auto; text-align: center; }
+        .about-simplistic h2 { margin-bottom: 2rem; }
+        .about-simplistic .big-text { font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--color-dark); line-height: 1.3; opacity: 0.9; }
+
+        /* =========================================
+           6. SLIDER PORTFOLIO (Fix Overlap + Nuove Animazioni)
+        ========================================= */
+        .js-slider-section { 
+            position: relative; 
+            transition: background-color 1.2s cubic-bezier(0.65, 0, 0.35, 1); 
+            padding: 8rem 0; 
+        }
+
+        /* Container frecce esterne per evitare sovrapposizioni */
+        .slider-controls { 
+            position: absolute; 
+            top: 50%; left: 0; width: 100%; 
+            transform: translateY(-50%); 
+            display: flex; justify-content: space-between; 
+            padding: 0 2rem; 
+            z-index: 100; 
+            pointer-events: none; 
+        }
+        
+        .nav-arrow { 
+            pointer-events: auto; width: 70px; height: 70px; border-radius: 50%; 
+            background-color: transparent; border: 1px solid rgba(255, 255, 255, 0.2); 
+            color: var(--color-white); display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; transition: all 0.4s var(--ease-out-expo); 
+            backdrop-filter: blur(4px); 
+        }
+        .nav-arrow:hover { background-color: var(--color-white); color: var(--color-dark); transform: scale(1.1); }
+
+        .slider-header { margin-bottom: 4rem; }
+        .slider-container { position: relative; height: 600px; width: 100%; max-width: 1200px; margin: 0 auto; }
+
+        .slide { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            display: grid; grid-template-columns: 4fr 8fr; gap: 4rem; align-items: center; 
+            /* FIX FONDAMENTALE: margine interno per allontanare il testo dalle frecce */
+            padding: 0 5rem; 
+            visibility: hidden; pointer-events: none; z-index: 1; 
+        }
+        .slide.active { visibility: visible; pointer-events: auto; z-index: 10; }
+
+        /* A) Animazione Eclatante Testi (Maschera dal basso) */
+        .slide-content .text-mask span {
+            transform: translateY(110%);
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .slide.active .slide-cat.text-mask span { transition-delay: 0.1s; }
+        .slide.active .slide-title.text-mask span { transition-delay: 0.2s; }
+        .slide.active .slide-link.text-mask span { transition-delay: 0.35s; }
+        
+        .slide.active .slide-content .text-mask span { transform: translateY(0); }
+
+        .slide-cat span { font-family: var(--font-sans); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-bottom: 1.5rem; }
+        .slide-title span { font-family: var(--font-serif); font-size: clamp(3rem, 5vw, 5.5rem); margin-bottom: 2.5rem; line-height: 1; color: var(--color-white); }
+        .slide-link span { display: inline-block; width: max-content; font-family: var(--font-sans); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.5); padding-bottom: 0.3rem; }
+
+        /* B) Animazione Eclatante Immagine (Curtain Reveal + Zoom Out) */
+        .slide-image-wrapper {
+            position: relative;
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+
+        /* Il blocco scuro che copre l'immagine prima che si sveli */
+        .slide-image-wrapper::after {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--color-dark);
+            transform-origin: bottom;
+            transform: scaleY(1);
+            transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+            z-index: 2;
+        }
+
+        .slide.active .slide-image-wrapper::after {
+            transform: scaleY(0);
+            transform-origin: top;
+            transition-delay: 0.1s;
+        }
+
+        .slide-image-wrapper img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transform: scale(1.4); 
+            transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1); 
+            opacity: 0;
+        }
+
+        .slide.active .slide-image-wrapper img { 
+            transform: scale(1); 
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+
+        /* =========================================
+           7. CONTATTI & FOOTER
+        ========================================= */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+        .contact-meta { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 2rem; margin-top: 3rem; }
+        .contact-email { font-family: var(--font-serif); font-size: 2rem; display: block; margin-bottom: 0.5rem; color: var(--color-dark); }
+
+        .input-line { margin-bottom: 2.5rem; }
+        .input-line input, .input-line textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 1rem 0; font-family: var(--font-sans); font-size: 1.2rem; color: var(--color-dark); transition: border-color 0.3s ease; resize: none; }
+        .input-line input:focus, .input-line textarea:focus { outline: none; border-bottom-color: var(--color-dark); }
+
+        .site-footer { padding: 4rem 0; transition: background-color 1.2s var(--ease-in-out); }
+        .footer-layout { display: flex; justify-content: space-between; align-items: flex-end; }
+        .footer-left h3 { margin: 0; font-size: 2.5rem; }
+        .footer-right { display: flex; gap: 2rem; }
+        .footer-right a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* =========================================
+           8. RESPONSIVE (Mobile First)
+        ========================================= */
+        @media (max-width: 1024px) {
+            .container { padding: 0 2rem; }
+            .hero-title { font-size: 4.5rem; }
+            .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+            
+            .editorial-grid { grid-template-columns: 1fr; border-top: none; }
+            .editorial-card { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); padding: 3rem 0; }
+            .main-nav { display: none; }
+            .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+            
+            /* Gestione Frecce Tablet */
+            .slider-controls { padding: 0 1rem; }
+            .nav-arrow { width: 50px; height: 50px; }
+            .slide { grid-template-columns: 1fr; gap: 2rem; padding: 0 3rem; } /* Riduciamo il padding ma proteggiamo i lati */
+            .slider-container { height: auto; display: flex; align-items: center; padding-bottom: 3rem; }
+            .slide.active { position: relative; height: auto; }
+            .slide-image-wrapper { height: 400px; margin-top: 1rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero-title .text-mask:nth-child(2) span { padding-left: 0; }
+            
+            /* Su mobile le frecce vanno in basso al centro per evitare del tutto il tocco per sbaglio */
+            .slider-controls { top: auto; bottom: 1rem; transform: none; padding: 0; justify-content: center; gap: 1rem; position: relative; margin-top: 2rem; }
+            .slide { padding: 0; } /* Rimuoviamo il padding protettivo perché le frecce non sono più ai lati */
+            
+            .about-simplistic .big-text { font-size: 1.5rem; }
+            .footer-layout { flex-direction: column; align-items: flex-start; gap: 2rem; }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen">
+<body>
 
-<nav class="bg-white shadow-sm fixed w-full z-50 top-0">
-  <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-    <div class="flex items-center space-x-2">
-      <svg class="w-8 h-8 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-      <span class="font-bold text-xl tracking-tight text-gray-900">Dordoni<span class="text-brand">Cleaning</span></span>
-    </div>
-    <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
-      <a href="#chi-siamo" class="hover:text-brand transition">Chi Siamo</a>
-      <a href="#team" class="hover:text-brand transition">Il Nostro Team</a>
-      <a href="#proposta" class="bg-brand text-white px-5 py-2.5 rounded-lg hover:bg-brand-dark transition shadow-sm">Assumici Ora</a>
-    </div>
-  </div>
-</nav>
-
-<header class="bg-hero min-h-[85vh] flex items-center pt-20">
-  <div class="max-w-4xl mx-auto px-4 text-center text-white">
-    <span class="uppercase tracking-widest text-xs font-bold bg-white/20 px-4 py-1.5 rounded-full backdrop-blur-md border border-white/30">Soluzioni Domestiche a Km Zero</span>
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mt-8 mb-6 leading-tight">
-      L'Impresa di Pulizie che non ti aspetti.<br> <span class="text-brand-light font-medium italic text-3xl sm:text-4xl">(Soprattutto da noi)</span>
-    </h1>
-    <p class="text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-      Abbiamo intercettato la sua intenzione di rivolgersi a un'agenzia esterna. Gentile Cliente (Mamma), le chiediamo di fermare tutto. Abbiamo la soluzione perfetta già in casa.
-    </p>
-    <a href="#proposta" class="inline-block bg-white text-brand font-bold px-8 py-4 rounded-full shadow-xl hover:bg-gray-50 transition transform hover:-translate-y-1">
-      Valuta la Nostra Offerta
-    </a>
-  </div>
-</header>
-
-<section id="chi-siamo" class="py-20 bg-white">
-  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" alt="Pulizie" class="rounded-2xl shadow-xl border border-gray-100">
-    </div>
-    <div>
-      <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6 tracking-tight">Il Nostro Impegno Aziendale</h2>
-      <p class="text-gray-600 mb-4 leading-relaxed text-lg">
-        Siamo la <strong>Dordoni Cleaning Services</strong>, una startup innovativa nata esattamente 10 minuti fa in risposta a una chiara (e giustificata) minaccia contrattuale da parte dell'Amministratore Delegato della casa (Tu).
-      </p>
-      <p class="text-gray-600 mb-8 leading-relaxed">
-        Sappiamo che il livello di disordine ha raggiunto standard inaccettabili. Ma prima di far entrare sconosciuti in casa pagandoli a ore, le chiediamo di visionare il nostro team. Abbiamo deciso di cambiare approccio aziendale: basta vestiti sulle sedie, basta letti sfatti. 
-      </p>
-      <ul class="space-y-4 font-semibold text-gray-800">
-        <li class="flex items-center"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-light text-brand flex items-center justify-center mr-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></span> Zero costi di agenzia</li>
-        <li class="flex items-center"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-light text-brand flex items-center justify-center mr-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></span> 100% Legame di sangue biologico garantito</li>
-        <li class="flex items-center"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-light text-brand flex items-center justify-center mr-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg></span> Reale pentimento per il caos generato in passato</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section id="team" class="py-24 bg-gray-50 border-t border-gray-200">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="text-center mb-16">
-      <span class="text-brand font-bold tracking-widest uppercase text-sm">I Nostri Professionisti</span>
-      <h2 class="text-4xl font-extrabold text-gray-900 mt-2">Il Team Operativo</h2>
-      <p class="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">Un organico compatto, formato da 3 individui che da oggi hanno miracolosamente capito come funziona un cesto dei panni sporchi.</p>
-    </div>
-
-    <div class="space-y-12">
-      
-      <div class="flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-        <div class="md:w-2/5 relative h-72 md:h-auto bg-gray-200">
-          <img src="luca.jpeg" alt="Luca Dordoni" class="absolute inset-0 w-full h-full object-cover">
+    <header class="site-header js-header">
+        <div class="container header-inner">
+            <a href="#home" class="logo">Studiocodice.</a>
+            
+            <nav class="main-nav">
+                <a href="#servizi">Il Metodo</a>
+                <a href="#chi-siamo">Lo Studio</a>
+                <a href="#portfolio">Archivio</a>
+            </nav>
+            
+            <a href="#contatti" class="btn-text">Inizia un progetto ↗</a>
         </div>
-        <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
-          <h3 class="text-3xl font-bold text-gray-900 mb-2">Luca Dordoni</h3>
-          <p class="text-brand font-bold mb-6 uppercase tracking-widest text-sm">Capo Cantiere / CEO</p>
-          <p class="text-gray-600 text-lg leading-relaxed mb-6">
-            Supervisiona le operazioni strategiche della casa. Tende a delegare, ma assicura che da oggi gestirà il suo perimetro con un rigore militare. Promette di svuotare la lavastoviglie senza che gli venga chiesto per la quattordicesima volta nella stessa mattinata.
-          </p>
-          <div class="inline-flex items-center self-start text-sm font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded-lg">
-            <span class="w-2.5 h-2.5 rounded-full bg-green-500 mr-2.5"></span> Competenze: Gestione Rifiuti & Lavastoviglie
-          </div>
+    </header>
+
+    <main>
+        <!-- NUOVA HERO TIPOGRAFICA & EDITORIALE -->
+        <section id="home" class="hero js-reveal">
+            <div class="hero-blob"></div>
+            
+            <div class="container hero-content">
+                <h1 class="hero-title">
+                    <span class="text-mask"><span>Sviluppo</span></span>
+                    <span class="text-mask"><span><em>Sartoriale</em></span></span>
+                    <span class="text-mask"><span>Senza limiti.</span></span>
+                </h1>
+                
+                <div class="hero-bottom text-mask">
+                    <span style="display: flex; width: 100%; justify-content: space-between; align-items: flex-end;">
+                        <p class="hero-desc">Architetture digitali proprietarie per brand d'eccellenza. Niente template. Solo ecosistemi sicuri e velocissimi.</p>
+                        
+                        <!-- Badge animato in puro CSS -->
+                        <div class="spinning-badge-wrapper">
+                            <div class="spinning-text">
+                                <svg viewBox="0 0 100 100">
+                                    <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+                                    <text><textPath href="#circlePath" startOffset="0%">STUDIOCODICE WEB STUDIO • </textPath></text>
+                                </svg>
+                            </div>
+                            <span class="badge-center">↓</span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sezione Servizi -->
+        <section id="servizi" class="section bg-stone">
+            <div class="container">
+                <div class="section-header text-mask js-reveal">
+                    <h2><span>I fondamenti.</span></h2>
+                </div>
+
+                <div class="editorial-grid">
+                    <div class="editorial-card text-mask js-reveal">
+                        <span>
+                            <span class="card-number">01</span>
+                            <h3>Performance Assolute</h3>
+                            <p>Codice puro scritto a mano. Caricamenti istantanei, punteggi core web vitals perfetti e massima indicizzazione SEO.</p>
+                        </span>
+                    </div>
+
+                    <div class="editorial-card text-mask js-reveal">
+                        <span style="transition-delay: 0.1s;">
+                            <span class="card-number">02</span>
+                            <h3>Sicurezza Strutturale</h3>
+                            <p>Sistemi headless senza database esposti. Impossibili da hackerare, zero necessità di manutenzione o aggiornamenti server.</p>
+                        </span>
+                    </div>
+
+                    <div class="editorial-card text-mask js-reveal">
+                        <span style="transition-delay: 0.2s;">
+                            <span class="card-number">03</span>
+                            <h3>Estetica Funzionale</h3>
+                            <p>Design millimetrico orientato alla conversione. Tipografia curata e interfacce che guidano l'utente in modo intuitivo.</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sezione Chi Siamo -->
+        <section id="chi-siamo" class="section">
+            <div class="container">
+                <div class="about-simplistic js-reveal">
+                    <h2 class="text-mask"><span>Artigianato <em>digitale.</em></span></h2>
+                    <div class="text-mask">
+                        <span class="big-text" style="transition-delay: 0.1s;">Restituiamo il controllo alle aziende. Progettiamo asset web esclusivi e sicuri. Nessun abbonamento, solo codice proprietario destinato a durare.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Slider (Overlap risolto e Nuova Animazione) -->
+        <section id="portfolio" class="section text-white js-slider-section" style="background-color: var(--theme-1);">
+            
+            <div class="container relative-container">
+                <div class="slider-header text-center text-mask js-reveal">
+                    <h2><span>Opere <em>selezionate.</em></span></h2>
+                </div>
+
+                <div class="slider-container">
+                    
+                    <!-- Frecce Esterne (Assolute rispetto al contenitore) -->
+                    <div class="slider-controls">
+                        <button class="nav-arrow js-prev" aria-label="Precedente">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        <button class="nav-arrow js-next" aria-label="Successivo">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                    </div>
+
+                    <!-- Slide 1 -->
+                    <div class="slide active" data-theme="var(--theme-1)">
+                        <div class="slide-content">
+                            <div class="slide-cat text-mask"><span>Corporate & Interior</span></div>
+                            <h3 class="slide-title text-mask"><span>Atelier Forma</span></h3>
+                            <a href="#" class="slide-link text-mask"><span>Esplora il progetto</span></a>
+                        </div>
+                        <div class="slide-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000&auto=format&fit=crop" alt="Atelier Forma">
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="slide" data-theme="var(--theme-2)">
+                        <div class="slide-content">
+                            <div class="slide-cat text-mask"><span>Hospitality Platform</span></div>
+                            <h3 class="slide-title text-mask"><span>Tenuta San Rocco</span></h3>
+                            <a href="#" class="slide-link text-mask"><span>Esplora il progetto</span></a>
+                        </div>
+                        <div class="slide-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1541888081622-0d1dc903fb24?q=80&w=1000&auto=format&fit=crop" alt="Tenuta San Rocco">
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="slide" data-theme="var(--theme-3)">
+                        <div class="slide-content">
+                            <div class="slide-cat text-mask"><span>SaaS & Finanza</span></div>
+                            <h3 class="slide-title text-mask"><span>Nexus Tech</span></h3>
+                            <a href="#" class="slide-link text-mask"><span>Esplora il progetto</span></a>
+                        </div>
+                        <div class="slide-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Nexus Tech">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modulo di Contatto -->
+        <section id="contatti" class="section">
+            <div class="container contact-grid">
+                <div class="contact-intro">
+                    <div class="text-mask js-reveal"><h2><span>Iniziamo.</span></h2></div>
+                    <div class="text-mask js-reveal"><span style="transition-delay: 0.1s;"><p>Scrivici le tue necessità. Rispondiamo entro 24 ore con un'analisi tecnica preliminare.</p></span></div>
+                    
+                    <div class="contact-meta text-mask js-reveal">
+                        <span style="transition-delay: 0.2s;">
+                            <a href="mailto:info@studiocodice.it" class="contact-email">info@studiocodice.it</a>
+                            <p class="contact-address">Via Tortona 14<br>20144, Milano</p>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="contact-form-container js-reveal text-mask">
+                    <span style="transition-delay: 0.3s;">
+                        <form class="editorial-form">
+                            <div class="input-line">
+                                <input type="text" id="nome" required placeholder="Nome e Azienda">
+                            </div>
+                            <div class="input-line">
+                                <input type="email" id="email" required placeholder="Email aziendale">
+                            </div>
+                            <div class="input-line">
+                                <textarea id="messaggio" rows="1" required placeholder="Dettagli del progetto..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-solid">Invia Richiesta</button>
+                        </form>
+                    </span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer text-white js-footer" style="background-color: var(--theme-1);">
+        <div class="container footer-layout">
+            <div class="footer-left">
+                <h3>Studiocodice.</h3>
+            </div>
+            <div class="footer-right">
+                <a href="#">LinkedIn</a>
+                <a href="#">Privacy</a>
+            </div>
         </div>
-      </div>
+    </footer>
 
-      <div class="flex flex-col-reverse md:flex-row bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-        <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
-          <h3 class="text-3xl font-bold text-gray-900 mb-2">Gaia Dordoni</h3>
-          <p class="text-brand font-bold mb-6 uppercase tracking-widest text-sm">Senior Decluttering Specialist</p>
-          <p class="text-gray-600 text-lg leading-relaxed mb-6">
-            Ha appena concluso un master accelerato su come le sedie della camera non siano un prolungamento dell'armadio. È ora specializzata nella rimozione rapida di oggetti fuori posto e nel ripristino istantaneo di un pavimento calpestabile e visibile ad occhio nudo.
-          </p>
-          <div class="inline-flex items-center self-start text-sm font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded-lg">
-            <span class="w-2.5 h-2.5 rounded-full bg-green-500 mr-2.5"></span> Competenze: Recupero Sedie & Piegatura Rapida
-          </div>
-        </div>
-        <div class="md:w-2/5 relative h-72 md:h-auto bg-gray-200">
-          <img src="gaia.jpeg" alt="Gaia Dordoni" class="absolute inset-0 w-full h-full object-cover">
-        </div>
-      </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. GESTIONE HEADER SCROLL
+            const header = document.querySelector('.js-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
 
-      <div class="flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-        <div class="md:w-2/5 relative h-72 md:h-auto bg-gray-200">
-          <img src="lisa.jpeg" alt="Lisa Dordoni" class="absolute inset-0 w-full h-full object-cover">
-        </div>
-        <div class="md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
-          <h3 class="text-3xl font-bold text-gray-900 mb-2">Lisa Dordoni</h3>
-          <p class="text-brand font-bold mb-6 uppercase tracking-widest text-sm">Executive Surface Manager</p>
-          <p class="text-gray-600 text-lg leading-relaxed mb-6">
-            Armata di aspirapolvere e da un improvviso ma fortissimo senso di colpa, la sua mission aziendale è combattere le briciole in ogni ecosistema della casa. Garantisce letti rifatti al mattino presto (e non solo tirando su il piumone alla rinfusa nascondendo i cuscini).
-          </p>
-          <div class="inline-flex items-center self-start text-sm font-semibold text-gray-700 bg-gray-100 px-4 py-2 rounded-lg">
-            <span class="w-2.5 h-2.5 rounded-full bg-green-500 mr-2.5"></span> Competenze: Aspirazione Tattica & Letti a Piombo
-          </div>
-        </div>
-      </div>
+            // 2. ANIMAZIONI ON SCROLL (Intersection Observer)
+            // L'animazione avviene aggiungendo la classe is-revealed che fa scattare il CSS
+            const revealElements = document.querySelectorAll('.js-reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 
-    </div>
-  </div>
-</section>
+            revealElements.forEach(el => revealObserver.observe(el));
 
-<section id="proposta" class="py-24 bg-brand text-white text-center">
-  <div class="max-w-4xl mx-auto px-4">
-    <span class="uppercase tracking-widest text-sm font-bold bg-white/20 px-4 py-1.5 rounded-full backdrop-blur-md mb-6 inline-block">Offerta a Tempo Limitato</span>
-    <h2 class="text-4xl sm:text-5xl font-extrabold mb-6">La Nostra Proposta di Contratto</h2>
-    <p class="text-xl text-blue-100 mb-12 font-light leading-relaxed">
-      Mamma, non chiamare nessuna agenzia vera. Ti chiediamo ufficialmente di assumerci per un <strong>Periodo di Prova di 14 Giorni</strong>. 
-      Se al termine di queste due settimane la casa non sarà all'altezza dei tuoi standard, sarai libera di chiamare chi vuoi senza che noi fiataremo.
-    </p>
-    
-    <div class="bg-white text-gray-900 rounded-3xl p-8 sm:p-12 shadow-2xl mb-10 text-left max-w-2xl mx-auto transform hover:scale-[1.02] transition-transform">
-      <h4 class="text-2xl font-extrabold mb-6 border-b border-gray-200 pb-4 text-center text-brand">I Termini dell'Accordo</h4>
-      <ul class="space-y-4 text-lg font-medium text-gray-700">
-        <li class="flex items-center"><svg class="w-6 h-6 text-green-500 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Ordine costante e rigoroso nelle camere da letto.</li>
-        <li class="flex items-center"><svg class="w-6 h-6 text-green-500 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Zero scarpe lasciate ad ostacolo nell'ingresso.</li>
-        <li class="flex items-center"><svg class="w-6 h-6 text-green-500 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Collaborazione spontanea e non forzata.</li>
-        <li class="flex items-center mt-6 p-4 bg-blue-50 rounded-xl text-brand-dark"><svg class="w-6 h-6 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <strong>Costo del servizio:</strong> Amore materno e qualche cena calda.</li>
-      </ul>
-    </div>
-    
-    <button onclick="alert('Contratto Firmato! Da questo momento l\'Agenzia Dordoni è operativa. Se trovi un calzino fuori posto puoi licenziarci in tronco.')" class="bg-gray-900 text-white font-extrabold px-12 py-5 rounded-full text-xl shadow-2xl hover:bg-black transition transform hover:-translate-y-1">
-      Firma e Accetta il Periodo di Prova
-    </button>
-  </div>
-</section>
+            // Per la Hero, aggiungiamo la classe subito all'avvio
+            setTimeout(() => {
+                const hero = document.querySelector('.hero.js-reveal');
+                if(hero) hero.classList.add('is-revealed');
+            }, 100);
 
-<footer class="bg-gray-900 text-gray-400 py-10 text-center text-sm">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="font-bold text-xl text-white mb-4 tracking-tight">Dordoni<span class="text-brand">Cleaning</span></div>
-    <p>© 2026 Dordoni Cleaning Services. Tutti i diritti riservati.</p>
-    <p class="mt-4 text-gray-500 italic max-w-md mx-auto">"Siamo figli disordinati, ma stiamo cercando di migliorare davvero. Dacci fiducia mamma!"</p>
-  </div>
-</footer>
+            // 3. LOGICA SLIDER PORTFOLIO
+            const slides = document.querySelectorAll('.slide');
+            const btnNext = document.querySelector('.js-next');
+            const btnPrev = document.querySelector('.js-prev');
+            const portfolioSection = document.querySelector('.js-slider-section');
+            const footer = document.querySelector('.js-footer');
+            
+            let currentIndex = 0;
+            let isAnimating = false;
 
+            function goToSlide(index) {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                slides[currentIndex].classList.remove('active');
+                currentIndex = index;
+
+                const newSlide = slides[currentIndex];
+                newSlide.classList.add('active');
+
+                const themeColor = newSlide.getAttribute('data-theme');
+                portfolioSection.style.backgroundColor = themeColor;
+                footer.style.backgroundColor = themeColor;
+
+                // Time-out allineato all'animazione CSS più lunga (1.6s)
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 1400); 
+            }
+
+            if(slides.length > 0) {
+                btnNext.addEventListener('click', () => {
+                    let nextIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+                    goToSlide(nextIndex);
+                });
+
+                btnPrev.addEventListener('click', () => {
+                    let prevIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+                    goToSlide(prevIndex);
+                });
+            }
+
+            // 4. AUTORESIZE TEXTAREA
+            const textarea = document.querySelector('textarea');
+            if(textarea) {
+                textarea.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = (this.scrollHeight) + 'px';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
