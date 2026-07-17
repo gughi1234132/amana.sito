@@ -5,447 +5,509 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lievito Assoluto | Architettura del Gusto</title>
 
-    <!-- Tipografia rigorosa: Marcellus (Display) e Manrope (Sans-serif geometrico per dati e menu) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================================================
-           1. CORE VARIABLES & GEOMETRIC SYSTEM
+           1. CORE VARIABLES & DESIGN SYSTEM
            ========================================================================== */
         :root {
-            /* Palette Cromatico Premium */
-            --bg-base: #F2F0EB;       /* Gesso/Pietra chiara */
-            --text-main: #070707;     /* Nero profondo */
-            --text-muted: #6B6862;    /* Grigio architettonico */
-            --accent: #B25136;        /* Mattone brunito / Accento metallico */
-            --line-color: rgba(7, 7, 7, 0.15);
+            --bg-light: #F2F0EB;       /* Gesso */
+            --bg-contact: #ECEAE4;     /* Gesso leggermente più scuro/caldo */
+            --bg-dark: #0D0D0D;        /* Antracite profondo */
+            --accent: #B25136;         /* Mattone brunito / Rame */
             
-            /* Tipografia */
+            --text-dark: #0D0D0D;
+            --text-light: #F2F0EB;
+            --text-muted: #6B6862;
+            
             --font-display: 'Marcellus', serif;
-            --font-data: 'Manrope', sans-serif;
+            --font-body: 'Manrope', sans-serif;
             
-            /* Easing & Timing (Awwwards Standard) */
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-            --duration-slow: 1.2s;
-            --duration-med: 0.8s;
-            --duration-fast: 0.4s;
-            
-            /* Dinamiche Scroll JS */
-            --scroll-prog: 0;
+            --ease-custom: cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-slow: 1.2s var(--ease-custom);
+            --transition-med: 0.8s var(--ease-custom);
+            --transition-fast: 0.4s ease;
+
+            --scroll-progress: 0;
+            --header-color: var(--text-light); /* Default sull'hero scura */
         }
 
         /* ==========================================================================
-           2. RESET & GLOBAL ARCHITECTURE
+           2. RESET & GLOBAL STYLES
            ========================================================================== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { font-size: 16px; scroll-behavior: smooth; }
-
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
-            font-family: var(--font-data);
-            color: var(--text-main);
-            background-color: var(--bg-base);
+            font-family: var(--font-body);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Noise Overlay Globale */
+        /* Noise Overlay (Texture organica) */
         body::before {
             content: '';
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.04; pointer-events: none; z-index: 9999;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
         }
 
-        .container {
-            width: 100%; max-width: 1440px;
-            margin: 0 auto; padding: 0 2rem;
-        }
-
+        .container { max-width: 1440px; margin: 0 auto; padding: 0 2rem; }
         img { width: 100%; height: 100%; object-fit: cover; display: block; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
-        /* Typography Utilities */
-        .title-display { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1; text-transform: uppercase; }
-        .title-section { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); text-transform: uppercase; margin-bottom: 3rem; }
-        
-        /* Mask Reveal Animation Classes */
-        .mask-wrap { overflow: hidden; display: inline-block; vertical-align: top; }
+        /* Text Mask Reveal Utils */
+        .mask-wrap { display: inline-block; overflow: hidden; vertical-align: top; }
         .mask-inner {
-            display: inline-block; transform: translateY(110%);
-            transition: transform var(--duration-slow) var(--ease-out-expo);
+            display: inline-block;
+            transform: translateY(110%);
+            transition: transform var(--transition-slow);
             will-change: transform;
         }
         .is-revealed .mask-inner { transform: translateY(0); }
 
+        .title-display { font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1; text-transform: uppercase; }
+        .title-section { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); text-transform: uppercase; margin-bottom: 2rem; }
+
         /* ==========================================================================
-           3. HEADER (GLASSMORPHIC)
+           3. HEADER & MOBILE MENU
            ========================================================================== */
         header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(242, 240, 235, 0.7);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--line-color);
-            transition: background 0.4s ease;
+            padding: 1.5rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: transparent;
+            color: var(--header-color);
+            transition: color 0.5s ease, background 0.5s ease, backdrop-filter 0.5s ease;
         }
-        .logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.05em; }
-        .nav-links { display: flex; gap: 3rem; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
         
-        /* Link Hover Micro-interaction */
-        .nav-links a { position: relative; }
+        /* Glassmorphism attivato via JS quando non si è in cima e su sfondo chiaro */
+        header.is-scrolled.theme-light {
+            background: rgba(242, 240, 235, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--text-dark);
+            border-bottom: 1px solid rgba(13, 13, 13, 0.05);
+        }
+        header.is-scrolled.theme-dark {
+            background: rgba(13, 13, 13, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(242, 240, 235, 0.05);
+        }
+
+        .logo { font-family: var(--font-display); font-size: 1.25rem; letter-spacing: 0.05em; z-index: 1002; position: relative; }
+        
+        .nav-links { display: flex; gap: 3rem; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+        .nav-links a { position: relative; padding-bottom: 0.25rem; }
         .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 50%;
-            width: 0; height: 1px; background-color: var(--text-main);
-            transition: width 0.4s var(--ease-out-expo), left 0.4s var(--ease-out-expo);
+            content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 1px;
+            background-color: currentColor;
+            transition: width 0.4s var(--ease-custom), left 0.4s var(--ease-custom);
         }
         .nav-links a:hover::after { width: 100%; left: 0; }
 
+        /* Minimal Hamburger (2 lines) */
+        .hamburger { display: none; width: 30px; height: 12px; position: relative; cursor: pointer; z-index: 1002; }
+        .hamburger span {
+            position: absolute; left: 0; width: 100%; height: 1.5px; background-color: currentColor;
+            transition: transform 0.4s var(--ease-custom), top 0.4s var(--ease-custom), background-color 0.4s ease;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 10px; }
+        
+        .hamburger.active span { background-color: var(--text-dark); }
+        .hamburger.active span:nth-child(1) { top: 5px; transform: rotate(45deg); }
+        .hamburger.active span:nth-child(2) { top: 5px; transform: rotate(-45deg); }
+
+        /* Fullscreen Drawer Overlay */
+        .menu-overlay {
+            position: fixed; inset: 0; background-color: var(--bg-light); z-index: 1001;
+            display: flex; align-items: center; justify-content: center;
+            clip-path: circle(0% at 100% 0%);
+            transition: clip-path 0.8s var(--ease-custom);
+        }
+        .menu-overlay.active { clip-path: circle(150% at 100% 0%); }
+
+        .overlay-links { display: flex; flex-direction: column; gap: 2rem; text-align: center; }
+        .overlay-links a {
+            font-family: var(--font-display); font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--text-dark); text-transform: uppercase;
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.6s var(--ease-custom), transform 0.6s var(--ease-custom);
+        }
+        .menu-overlay.active .overlay-links a { opacity: 1; transform: translateY(0); }
+        .menu-overlay.active .overlay-links a:nth-child(1) { transition-delay: 0.2s; }
+        .menu-overlay.active .overlay-links a:nth-child(2) { transition-delay: 0.3s; }
+        .menu-overlay.active .overlay-links a:nth-child(3) { transition-delay: 0.4s; }
+        .menu-overlay.active .overlay-links a:nth-child(4) { transition-delay: 0.5s; }
+
         /* ==========================================================================
-           4. SECTION 1: HERO MORPHING
+           4. HERO SECTION (Scroll Morphing)
            ========================================================================== */
-        .hero { position: relative; height: 250vh; } /* 250vh per permettere lo scroll */
+        .hero { position: relative; height: 300vh; background-color: var(--bg-dark); }
         .hero-sticky {
             position: sticky; top: 0; height: 100vh; width: 100%;
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
         
-        .hero-content {
-            position: absolute; z-index: 2; text-align: center; width: 100%;
-            pointer-events: none; mix-blend-mode: difference; color: #FFFFFF;
-        }
-        .hero-subtitle {
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.2em;
-            margin-bottom: 1.5rem; font-weight: 500;
-        }
-
-        /* Maschera geometrica che si espande */
-        .hero-image-wrapper {
+        .hero-img-wrap {
             position: absolute; z-index: 1; width: 100%; height: 100%;
             display: flex; align-items: center; justify-content: center;
-            will-change: clip-path;
-            /* Inizia come una pillola monumentale, finisce a tutto schermo */
-            clip-path: inset(calc(20% - 20% * var(--scroll-prog)) calc(30% - 30% * var(--scroll-prog)) calc(20% - 20% * var(--scroll-prog)) calc(30% - 30% * var(--scroll-prog)) round calc(200px - 200px * var(--scroll-prog)));
+            will-change: clip-path, transform;
+            /* Maschera geometrica iniziale (pillola) che si espande con lo scroll */
+            clip-path: inset(
+                calc(25% - 25% * var(--scroll-progress)) 
+                calc(35% - 35% * var(--scroll-progress)) 
+                calc(25% - 25% * var(--scroll-progress)) 
+                calc(35% - 35% * var(--scroll-progress)) 
+                round calc(150px - 150px * var(--scroll-progress))
+            );
         }
-        .hero-image-wrapper img {
-            transform: scale(calc(1.2 - 0.2 * var(--scroll-prog)));
-            will-change: transform; filter: brightness(0.85);
-        }
-
-        /* ==========================================================================
-           5. SECTION 2: LE METRICHE (GRID RIGIDA)
-           ========================================================================== */
-        .metrics-section { border-bottom: 1px solid var(--line-color); }
-        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-        .metric-item {
-            padding: 5rem 2rem; text-align: center;
-            border-right: 1px solid var(--line-color);
-        }
-        .metric-item:last-child { border-right: none; }
-        .metric-num {
-            font-family: var(--font-display); font-size: 4rem; color: var(--accent);
-            line-height: 1; margin-bottom: 1rem;
-        }
-        .metric-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; }
-
-        /* ==========================================================================
-           6. SECTION 3: IL MENU (MATRICE 3XN ARCHITETTONICA)
-           ========================================================================== */
-        .menu-section { padding: 8rem 0; }
         
-        .menu-filters {
-            display: flex; justify-content: center; gap: 3rem; margin-bottom: 5rem;
-            border-bottom: 1px solid var(--line-color); padding-bottom: 1rem;
+        /* Dark vignette per leggibilità assoluta */
+        .hero-img-wrap::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(13,13,13,0.6) 0%, rgba(13,13,13,0.2) 50%, rgba(13,13,13,0.6) 100%);
+            z-index: 2; pointer-events: none;
         }
+
+        .hero-img-wrap img {
+            /* Zoom inverso */
+            transform: scale(calc(1.3 - 0.3 * var(--scroll-progress)));
+            will-change: transform; z-index: 1; position: relative;
+        }
+
+        .hero-content { position: absolute; z-index: 3; text-align: center; color: #FFFFFF; pointer-events: none; width: 100%; padding: 0 1rem; }
+        .hero-subtitle { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.25em; margin-bottom: 1.5rem; font-weight: 500; }
+
+        /* ==========================================================================
+           5. METRICS SECTION (Dark Band)
+           ========================================================================== */
+        .metrics-section { background-color: var(--bg-dark); color: var(--text-light); border-top: 1px solid rgba(242, 240, 235, 0.1); }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+        .metric-item { padding: 6rem 2rem; text-align: center; border-right: 1px solid rgba(242, 240, 235, 0.1); }
+        .metric-item:last-child { border-right: none; }
+        .metric-number { font-family: var(--font-display); font-size: clamp(3rem, 5vw, 4.5rem); color: var(--accent); line-height: 1; margin-bottom: 1rem; }
+        .metric-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; }
+
+        /* ==========================================================================
+           6. MENU SECTION (Matrix / Editorial)
+           ========================================================================== */
+        .menu-section { padding: 10rem 0; background-color: var(--bg-light); color: var(--text-dark); }
+        
+        .menu-filters { display: flex; justify-content: center; gap: 3rem; margin-bottom: 6rem; border-bottom: 1px solid rgba(13,13,13,0.1); padding-bottom: 1.5rem; }
         .filter-btn {
-            background: none; border: none; font-family: var(--font-data);
-            font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
-            color: var(--text-muted); cursor: pointer; position: relative;
-            transition: color var(--duration-fast) ease;
+            background: none; border: none; font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); cursor: pointer;
+            position: relative; transition: color 0.4s ease;
         }
-        .filter-btn.active { color: var(--text-main); }
+        .filter-btn.active { color: var(--text-dark); }
         .filter-btn::after {
-            content: ''; position: absolute; bottom: -1rem; left: 0; width: 100%; height: 2px;
-            background-color: var(--accent); transform: scaleX(0); transition: transform var(--duration-med) var(--ease-out-expo);
+            content: ''; position: absolute; bottom: -1.6rem; left: 0; width: 100%; height: 2px;
+            background-color: var(--accent); transform: scaleX(0); transition: transform 0.4s var(--ease-custom);
         }
         .filter-btn.active::after { transform: scaleX(1); }
 
         .menu-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem 2.5rem;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem 3rem;
+            transition: opacity 0.4s ease, transform 0.4s var(--ease-custom);
         }
-
-        .menu-card {
-            display: flex; flex-direction: column; gap: 1.5rem;
-            opacity: 1; transform: translateY(0);
-            transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
-        }
-        .menu-card.is-hidden { opacity: 0; transform: translateY(20px); pointer-events: none; position: absolute; visibility: hidden; }
-
-        /* Aspect Ratio Perfetto (4:3) */
-        .card-img-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; background-color: #E5E3DD; border-radius: 2px; }
-        .card-img-wrap img { transition: transform var(--duration-slow) var(--ease-out-expo); filter: grayscale(15%); }
-        .menu-card:hover .card-img-wrap img { transform: scale(1.05); filter: grayscale(0); }
-
-        /* Testo Speculare */
-        .card-header { display: flex; justify-content: space-between; align-items: baseline; position: relative; }
-        .card-header::after {
-            content: ''; flex-grow: 1; margin: 0 1rem; border-bottom: 1px dotted var(--line-color); opacity: 0.5;
-        }
-        .card-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; text-transform: uppercase; white-space: nowrap; }
-        .card-price { font-weight: 600; color: var(--accent); font-size: 1.1rem; white-space: nowrap; order: 3; }
-        .card-ingredients { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; font-weight: 400; }
+        .menu-grid.is-filtering { opacity: 0; transform: translateY(20px); }
+        
+        .menu-card { display: flex; flex-direction: column; gap: 1.5rem; }
+        .card-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 2px; background: #E5E3DD; }
+        .card-img img { transition: transform 1.5s var(--ease-custom); }
+        .menu-card:hover .card-img img { transform: scale(1.05); }
+        
+        .card-header { display: flex; justify-content: space-between; align-items: baseline; position: relative; margin-bottom: 0.5rem; }
+        .card-header::after { content: ''; flex-grow: 1; margin: 0 1rem; border-bottom: 1px dotted rgba(13,13,13,0.2); }
+        .card-title { font-family: var(--font-display); font-size: 1.25rem; text-transform: uppercase; white-space: nowrap; }
+        .card-price { font-weight: 600; color: var(--accent); font-size: 1.1rem; order: 3; }
+        .card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
 
         /* ==========================================================================
-           7. SECTION 4: FILOSOFIA (50/50 SIMMETRIA)
+           7. PHILOSOPHY SECTION (Dark Immersion)
            ========================================================================== */
-        .philosophy-section { padding: 8rem 0; border-top: 1px solid var(--line-color); }
-        .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: stretch; }
-        
-        .philosophy-content { display: flex; flex-direction: column; justify-content: center; }
-        .philosophy-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 2rem; max-width: 90%; }
-        
-        .philosophy-image { width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 2px; }
-        .philosophy-image img { filter: sepia(10%) contrast(1.05); }
+        .philosophy-section { padding: 12rem 0; background-color: var(--bg-dark); color: var(--text-light); }
+        .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center; }
+        .philosophy-text { display: flex; flex-direction: column; justify-content: center; }
+        .philosophy-text .title-section { color: var(--accent); }
+        .philosophy-text p { font-size: 1.15rem; line-height: 1.8; color: rgba(242, 240, 235, 0.7); margin-bottom: 2rem; }
+        .philosophy-img { width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 2px; }
+        .philosophy-img img { filter: grayscale(20%) contrast(1.1); }
 
         /* ==========================================================================
-           8. SECTION 5: CONTATTI E PRENOTAZIONE (PREMIUM FORMS)
+           8. CONTACT & RESERVATION (Premium Inputs)
            ========================================================================== */
-        .contact-section { padding: 8rem 0; background-color: #ECEAE4; border-top: 1px solid var(--line-color); }
+        .contact-section { padding: 10rem 0; background-color: var(--bg-contact); color: var(--text-dark); }
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
         
-        /* Informazioni Sinistra */
         .contact-info h3 { font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem; }
         .info-block { margin-bottom: 3rem; }
-        .info-block p, .info-block a { font-size: 1rem; line-height: 1.8; color: var(--text-muted); }
-        .info-block a { position: relative; color: var(--text-main); font-weight: 500; display: inline-block; }
+        .info-block p, .info-block a { font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); }
+        .info-block a { position: relative; color: var(--text-dark); font-weight: 500; display: inline-block; }
         .info-block a::after {
             content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
-            background-color: var(--accent); transform: scaleX(0); transform-origin: center;
-            transition: transform 0.4s var(--ease-out-expo);
+            background-color: var(--accent); transform: scaleX(0); transform-origin: center; transition: transform 0.4s var(--ease-custom);
         }
         .info-block a:hover::after { transform: scaleX(1); }
 
-        /* Form Destra (Floating Labels) */
-        .premium-form { display: flex; flex-direction: column; gap: 2.5rem; }
-        
+        .premium-form { display: flex; flex-direction: column; gap: 3rem; margin-top: 1rem; }
         .input-group { position: relative; width: 100%; }
         .input-group input, .input-group textarea {
-            width: 100%; border: none; border-bottom: 1px solid rgba(7,7,7,0.2);
-            background: transparent; padding: 0.5rem 0; font-family: var(--font-data);
-            font-size: 1rem; color: var(--text-main); outline: none; border-radius: 0;
-            transition: border-color 0.3s ease;
+            width: 100%; border: none; border-bottom: 1px solid rgba(13,13,13,0.2);
+            background: transparent; padding: 0.5rem 0; font-family: var(--font-body);
+            font-size: 1.05rem; color: var(--text-dark); outline: none; border-radius: 0; transition: border-color 0.4s ease;
         }
-        .input-group textarea { resize: none; min-height: 100px; }
+        .input-group textarea { resize: none; min-height: 80px; }
         
+        /* Floating Labels */
         .input-group label {
-            position: absolute; left: 0; top: 0.5rem; font-size: 1rem; color: var(--text-muted);
-            pointer-events: none; transition: all 0.4s var(--ease-out-expo);
+            position: absolute; left: 0; top: 0.5rem; font-size: 1.05rem; color: var(--text-muted);
+            pointer-events: none; transition: all 0.4s var(--ease-custom);
         }
-        
-        /* Floating logic: se in focus o se c'è testo (grazie al trucco del placeholder=" ") */
-        .input-group input:focus + label,
-        .input-group input:not(:placeholder-shown) + label,
-        .input-group textarea:focus + label,
-        .input-group textarea:not(:placeholder-shown) + label {
-            top: -1.2rem; font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+        .input-group input:focus + label, .input-group input:not(:placeholder-shown) + label,
+        .input-group textarea:focus + label, .input-group textarea:not(:placeholder-shown) + label {
+            top: -1.2rem; font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
         }
         .input-group input:focus, .input-group textarea:focus { border-bottom-color: var(--accent); }
 
+        /* Magnetic Button */
         .btn-submit {
-            align-self: flex-start; padding: 1.25rem 3.5rem; margin-top: 1rem;
-            background-color: transparent; border: 1px solid var(--text-main); color: var(--text-main);
-            font-family: var(--font-data); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
-            border-radius: 100px; cursor: pointer; position: relative; overflow: hidden;
-            transition: color 0.4s ease;
+            align-self: flex-start; padding: 1.25rem 3.5rem;
+            background-color: transparent; border: 1px solid var(--text-dark); color: var(--text-dark);
+            font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            border-radius: 100px; cursor: pointer; position: relative; overflow: hidden; transition: color 0.4s ease;
         }
         .btn-submit::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--text-main); z-index: -1;
-            transform: translateY(100%); transition: transform 0.6s var(--ease-out-expo);
+            background-color: var(--accent); z-index: -1; transform: translateY(100%); transition: transform 0.6s var(--ease-custom);
+            border-radius: 100px;
         }
-        .btn-submit:hover { color: #FFFFFF; }
+        .btn-submit:hover { color: #FFFFFF; border-color: var(--accent); }
         .btn-submit:hover::before { transform: translateY(0); }
 
-        footer { text-align: center; padding: 3rem 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+        footer { text-align: center; padding: 3rem 0; background-color: var(--bg-contact); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
 
         /* ==========================================================================
-           9. MEDIA QUERIES (MOBILE FIRST STRUCTURAL FALLBACKS)
+           9. RESPONSIVE DESIGN (Mobile Revolution)
            ========================================================================== */
         @media (max-width: 1024px) {
             .metrics-grid { grid-template-columns: 1fr; }
-            .metric-item { border-right: none; border-bottom: 1px solid var(--line-color); padding: 3rem 0; }
+            .metric-item { border-right: none; border-bottom: 1px solid rgba(242, 240, 235, 0.1); padding: 4rem 0; }
             .metric-item:last-child { border-bottom: none; }
-            
-            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 2rem; }
-            .philosophy-grid, .contact-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 4rem 2rem; }
+            .philosophy-grid, .contact-grid { grid-template-columns: 1fr; gap: 5rem; }
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; /* Hamburger menu da implementare per mobile se necessario */ }
-            .menu-grid { grid-template-columns: 1fr; }
-            .hero-image-wrapper { clip-path: inset(calc(10% - 10% * var(--scroll-prog)) calc(5% - 5% * var(--scroll-prog)) round calc(100px - 100px * var(--scroll-prog))); }
+            /* Header */
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            header { padding: 1.2rem 1.5rem; }
+
+            /* Hero */
+            .hero-img-wrap { clip-path: inset(calc(15% - 15% * var(--scroll-progress)) calc(10% - 10% * var(--scroll-progress)) round calc(100px - 100px * var(--scroll-progress))); }
+
+            /* Menu: Rigore Editoriale */
+            .menu-section { padding: 6rem 0; }
+            .menu-filters { justify-content: flex-start; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+            .menu-filters::-webkit-scrollbar { display: none; }
+            
+            .menu-grid { display: flex; flex-direction: column; gap: 2rem; }
+            .menu-card { flex-direction: row; align-items: center; gap: 1rem; border-bottom: 1px solid rgba(13,13,13,0.05); padding-bottom: 1.5rem; }
+            .menu-card:last-child { border-bottom: none; padding-bottom: 0; }
+            
+            /* Immagine geometrica piccola */
+            .card-img { width: 75px; height: 75px; aspect-ratio: 1/1; flex-shrink: 0; border-radius: 50%; /* Cerchio perfetto */ }
+            
+            /* Layout Testo Compatto */
+            .card-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+            .card-header { margin-bottom: 0.25rem; align-items: center; }
+            .card-header::after { display: none; } /* Rimossa linea su mobile */
+            .card-title { font-size: 1.05rem; white-space: normal; }
+            .card-price { font-size: 1rem; }
+            .card-desc { font-size: 0.8rem; line-height: 1.4; margin-top: 0.2rem; }
+
+            .philosophy-section, .contact-section { padding: 6rem 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header>
+    <!-- HEADER & OVERLAY MENU -->
+    <header id="main-header" data-theme="dark">
         <div class="logo">Lievito Assoluto</div>
         <nav class="nav-links">
-            <a href="#vision">La Visione</a>
+            <a href="#visione">Visione</a>
             <a href="#menu">Il Menu</a>
             <a href="#filosofia">Filosofia</a>
-            <a href="#prenota">Riserva</a>
+            <a href="#riserva">Riserva</a>
         </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+        </div>
     </header>
 
-    <!-- SECTION 1: HERO MORPHING -->
-    <section class="hero" id="vision">
+    <div class="menu-overlay" id="menu-overlay">
+        <nav class="overlay-links">
+            <a href="#visione" class="overlay-link">Visione</a>
+            <a href="#menu" class="overlay-link">Il Menu</a>
+            <a href="#filosofia" class="overlay-link">Filosofia</a>
+            <a href="#riserva" class="overlay-link">Riserva</a>
+        </nav>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero section-dark" id="visione">
         <div class="hero-sticky">
-            <div class="hero-image-wrapper">
+            <div class="hero-img-wrap">
                 <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=1600" alt="Impasto Perfetto">
             </div>
             <div class="hero-content">
-                <div class="hero-subtitle mask-wrap js-reveal"><span class="mask-inner">Purezza Geometrica. Lievito Vivo.</span></div>
+                <div class="hero-subtitle mask-wrap js-reveal"><span class="mask-inner">Geometria e Lievito Vivo</span></div>
                 <h1 class="title-display mask-wrap js-reveal"><span class="mask-inner">Architettura</span></h1><br>
                 <h1 class="title-display mask-wrap js-reveal" style="transition-delay: 0.1s;"><span class="mask-inner">del Gusto</span></h1>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: METRICHE -->
-    <section class="metrics-section">
-        <div class="container metrics-grid js-reveal-group">
-            <div class="metric-item mask-wrap"><div class="mask-inner">
-                <div class="metric-num">72H</div>
+    <!-- METRICS SECTION -->
+    <section class="metrics-section section-dark">
+        <div class="container metrics-grid">
+            <div class="metric-item mask-wrap js-reveal"><div class="mask-inner">
+                <div class="metric-number">72H</div>
                 <div class="metric-label">Lievitazione Lenta</div>
             </div></div>
-            <div class="metric-item mask-wrap"><div class="mask-inner" style="transition-delay: 0.1s;">
-                <div class="metric-num">85%</div>
+            <div class="metric-item mask-wrap js-reveal" style="transition-delay: 0.1s;"><div class="mask-inner">
+                <div class="metric-number">85%</div>
                 <div class="metric-label">Alta Idratazione</div>
             </div></div>
-            <div class="metric-item mask-wrap"><div class="mask-inner" style="transition-delay: 0.2s;">
-                <div class="metric-num">0 KM</div>
-                <div class="metric-label">Filiera Corta DOP</div>
+            <div class="metric-item mask-wrap js-reveal" style="transition-delay: 0.2s;"><div class="mask-inner">
+                <div class="metric-number">100%</div>
+                <div class="metric-label">Ingredienti DOP</div>
             </div></div>
         </div>
     </section>
 
-    <!-- SECTION 3: MENU MATRICE -->
-    <section class="menu-section" id="menu">
+    <!-- MENU SECTION -->
+    <section class="menu-section section-light" id="menu">
         <div class="container">
             <div class="menu-filters mask-wrap js-reveal"><div class="mask-inner">
                 <button class="filter-btn active" data-filter="all">Tutta la Collezione</button>
                 <button class="filter-btn" data-filter="classica">Le Classiche</button>
-                <button class="filter-btn" data-filter="speciale">Avanguardia</button>
+                <button class="filter-btn" data-filter="avanguardia">Avanguardia</button>
             </div></div>
 
             <div class="menu-grid" id="menu-grid">
-                
+                <!-- Items -->
                 <article class="menu-card" data-category="classica">
-                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=800" alt="Margherita Assoluta"></div>
-                    <div>
+                    <div class="card-img"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=800" alt="Margherita Assoluta"></div>
+                    <div class="card-content">
                         <div class="card-header">
-                            <span class="card-name">Margherita Assoluta</span>
-                            <span class="card-price">€ 9.00</span>
+                            <span class="card-title">Margherita Assoluta</span>
+                            <span class="card-price">€ 12</span>
                         </div>
-                        <p class="card-ingredients">Pomodoro San Marzano DOP, Fiordilatte di Agerola, Basilico fresco cristallizzato, Olio EVO.</p>
-                    </div>
-                </article>
-
-                <article class="menu-card" data-category="classica">
-                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800" alt="Marinara Geometrica"></div>
-                    <div>
-                        <div class="card-header">
-                            <span class="card-name">Marinara Geometrica</span>
-                            <span class="card-price">€ 8.00</span>
-                        </div>
-                        <p class="card-ingredients">Pomodoro Corbarino, Aglio nero fermentato, Origano selvatico di montagna.</p>
-                    </div>
-                </article>
-
-                <article class="menu-card" data-category="speciale">
-                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800" alt="Oro Verde"></div>
-                    <div>
-                        <div class="card-header">
-                            <span class="card-name">Oro Verde</span>
-                            <span class="card-price">€ 16.00</span>
-                        </div>
-                        <p class="card-ingredients">Crema di Pistacchio DOP, Mortadella Favola IGP, Stracciatella, Granella tostata.</p>
+                        <p class="card-desc">San Marzano DOP, Fiordilatte di Agerola, Basilico cristallizzato, Olio EVO.</p>
                     </div>
                 </article>
 
                 <article class="menu-card" data-category="classica">
-                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=800" alt="Cosacca Storica"></div>
-                    <div>
+                    <div class="card-img"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800" alt="Marinara Geometrica"></div>
+                    <div class="card-content">
                         <div class="card-header">
-                            <span class="card-name">Cosacca Storica</span>
-                            <span class="card-price">€ 10.00</span>
+                            <span class="card-title">Marinara Geometrica</span>
+                            <span class="card-price">€ 10</span>
                         </div>
-                        <p class="card-ingredients">Pomodorino del Piennolo, Pecorino Romano stagionato 24 mesi, Pepe nero.</p>
+                        <p class="card-desc">Pomodoro Corbarino, Aglio nero fermentato, Origano selvatico di montagna.</p>
                     </div>
                 </article>
 
-                <article class="menu-card" data-category="speciale">
-                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" alt="Tartufo & Terra"></div>
-                    <div>
+                <article class="menu-card" data-category="avanguardia">
+                    <div class="card-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800" alt="Oro Verde"></div>
+                    <div class="card-content">
                         <div class="card-header">
-                            <span class="card-name">Tartufo & Terra</span>
-                            <span class="card-price">€ 18.00</span>
+                            <span class="card-title">Oro Verde</span>
+                            <span class="card-price">€ 18</span>
                         </div>
-                        <p class="card-ingredients">Vellutata di patate, Tartufo nero estivo a scaglie, Nocciole tostate, Fiordilatte.</p>
+                        <p class="card-desc">Crema di Pistacchio DOP, Mortadella Favola IGP, Stracciatella, Granella tostata.</p>
                     </div>
                 </article>
 
-                <article class="menu-card" data-category="speciale">
-                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1593504049359-74330189a345?q=80&w=800" alt="Sottobosco"></div>
-                    <div>
+                <article class="menu-card" data-category="classica">
+                    <div class="card-img"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=800" alt="Cosacca Storica"></div>
+                    <div class="card-content">
                         <div class="card-header">
-                            <span class="card-name">Sottobosco</span>
-                            <span class="card-price">€ 15.00</span>
+                            <span class="card-title">Cosacca Storica</span>
+                            <span class="card-price">€ 11</span>
                         </div>
-                        <p class="card-ingredients">Funghi porcini cotti a legna, Provola affumicata campana, Polvere di liquirizia.</p>
+                        <p class="card-desc">Pomodorino del Piennolo, Pecorino Romano 24 mesi, Pepe nero tostato.</p>
                     </div>
                 </article>
 
+                <article class="menu-card" data-category="avanguardia">
+                    <div class="card-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" alt="Tartufo & Terra"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-title">Tartufo & Terra</span>
+                            <span class="card-price">€ 22</span>
+                        </div>
+                        <p class="card-desc">Vellutata di patate, Tartufo nero estivo, Nocciole tostate, Fiordilatte.</p>
+                    </div>
+                </article>
+
+                <article class="menu-card" data-category="avanguardia">
+                    <div class="card-img"><img src="https://images.unsplash.com/photo-1593504049359-74330189a345?q=80&w=800" alt="Sottobosco"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-title">Sottobosco</span>
+                            <span class="card-price">€ 16</span>
+                        </div>
+                        <p class="card-desc">Funghi porcini cotti a legna, Provola affumicata campana, Polvere di liquirizia.</p>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 4: FILOSOFIA -->
-    <section class="philosophy-section" id="filosofia">
+    <!-- PHILOSOPHY SECTION -->
+    <section class="philosophy-section section-dark" id="filosofia">
         <div class="container philosophy-grid">
-            <div class="philosophy-content">
-                <div class="mask-wrap js-reveal"><span class="mask-inner">
-                    <h2 class="title-section">La Materia<br>Prima</h2>
-                </span></div>
+            <div class="philosophy-text">
+                <div class="mask-wrap js-reveal"><span class="mask-inner"><h2 class="title-section">La Materia<br>Prima</h2></span></div>
                 <div class="mask-wrap js-reveal" style="transition-delay: 0.1s;"><span class="mask-inner">
-                    <p class="philosophy-text">Il nostro impasto è un organismo vivo. Non ammettiamo scorciatoie industriali. Utilizziamo esclusivamente farine macinate a pietra, idratate al limite della fisica e lasciate maturare nel rispetto del tempo atmosferico e delle temperature naturali.</p>
+                    <p>Il nostro impasto è un organismo vivo. Non ammettiamo scorciatoie industriali. Utilizziamo esclusivamente farine macinate a pietra, idratate al limite della fisica e lasciate maturare nel rispetto del tempo atmosferico e delle temperature naturali.</p>
                 </span></div>
                 <div class="mask-wrap js-reveal" style="transition-delay: 0.2s;"><span class="mask-inner">
-                    <p class="philosophy-text">Ogni ingrediente posizionato sul disco di pasta risponde a uno studio geometrico dei sapori: acidità, sapidità, dolcezza e croccantezza devono coincidere in un singolo morso perfetto.</p>
+                    <p>Ogni ingrediente posizionato sul disco di pasta risponde a uno studio geometrico dei sapori: acidità, sapidità, dolcezza e croccantezza devono coincidere in un singolo morso perfetto.</p>
                 </span></div>
             </div>
-            <div class="philosophy-image mask-wrap js-reveal"><span class="mask-inner">
-                <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=800" alt="Filosofia Lievito Assoluto">
+            <div class="philosophy-img mask-wrap js-reveal"><span class="mask-inner">
+                <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=800" alt="Materia Prima">
             </span></div>
         </div>
     </section>
 
-    <!-- SECTION 5: CONTATTI E PRENOTAZIONE -->
-    <section class="contact-section" id="prenota">
+    <!-- CONTACT SECTION -->
+    <section class="contact-section section-light" id="riserva">
         <div class="container contact-grid">
-            
             <div class="contact-info">
-                <div class="mask-wrap js-reveal"><span class="mask-inner"><h2 class="title-section">Architettura<br>dell'Accoglienza</h2></span></div>
+                <div class="mask-wrap js-reveal"><span class="mask-inner"><h2 class="title-section">Esperienza<br>Assoluta</h2></span></div>
                 
                 <div class="info-block mask-wrap js-reveal">
                     <span class="mask-inner">
@@ -474,118 +536,160 @@
                     <form class="premium-form" onsubmit="event.preventDefault();">
                         <div class="input-group">
                             <input type="text" id="name" placeholder=" " required>
-                            <label for="name">Nome Completo</label>
-                        </div>
-                        <div class="input-group">
-                            <input type="email" id="email" placeholder=" " required>
-                            <label for="email">Indirizzo Email</label>
+                            <label for="name">Nome e Cognome</label>
                         </div>
                         <div class="input-group">
                             <input type="tel" id="phone" placeholder=" " required>
-                            <label for="phone">Telefono</label>
+                            <label for="phone">Numero di Telefono</label>
                         </div>
                         <div class="input-group">
-                            <textarea id="details" placeholder=" "></textarea>
-                            <label for="details">Data e Dettagli Prenotazione</label>
+                            <input type="text" id="date" placeholder=" " required>
+                            <label for="date">Data e Numero Ospiti</label>
                         </div>
-                        <button type="submit" class="btn-submit">Riserva Tavolo</button>
+                        <div class="input-group">
+                            <textarea id="notes" placeholder=" "></textarea>
+                            <label for="notes">Richieste Particolari (Opzionale)</label>
+                        </div>
+                        <button type="submit" class="btn-submit">Riserva il Tavolo</button>
                     </form>
                 </span>
             </div>
-
         </div>
     </section>
 
     <footer>
-        <div class="container">&copy; 2026 Lievito Assoluto. Engineered & Designed with Rigor.</div>
+        <div class="container">&copy; 2026 Lievito Assoluto. Designed with Rigor.</div>
     </footer>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            /* --- 1. HERO MORPHING LOGIC (SCROLL-LINKED) --- */
-            // Calcoliamo la variabile CSS --scroll-prog da 0 a 1 nei primi 100vh di scroll
+            // 1. HERO SCROLL PROGRESS (Animazione Maschera)
             let ticking = false;
             window.addEventListener('scroll', () => {
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
                         const scrollY = window.scrollY;
                         const windowHeight = window.innerHeight;
-                        // Clamp tra 0 e 1
+                        // Calcola progresso tra 0 e 1 durante la prima height della finestra
                         let progress = Math.min(Math.max(scrollY / windowHeight, 0), 1);
-                        document.documentElement.style.setProperty('--scroll-prog', progress);
+                        document.documentElement.style.setProperty('--scroll-progress', progress);
                         ticking = false;
                     });
                     ticking = true;
                 }
             });
 
-            /* --- 2. INTERSECTION OBSERVER PER REVEAL ANIMATIONS --- */
-            // Animazione cinetica dal basso verso l'alto
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px 0px -10% 0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            // 2. INTERSECTION OBSERVER (Text & Image Reveal)
+            const revealOptions = { root: null, rootMargin: '0px 0px -15% 0px', threshold: 0.1 };
+            const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-revealed');
                         observer.unobserve(entry.target);
                     }
                 });
-            }, observerOptions);
+            }, revealOptions);
 
-            document.querySelectorAll('.js-reveal, .js-reveal-group').forEach(el => {
-                observer.observe(el);
-            });
+            document.querySelectorAll('.js-reveal').forEach(el => revealObserver.observe(el));
+            // Trigger immediato per la hero
+            setTimeout(() => { document.querySelectorAll('.hero .js-reveal').forEach(el => el.classList.add('is-revealed')); }, 100);
+
+            // 3. DYNAMIC HEADER (Light/Dark Mode e Glassmorphism)
+            const header = document.getElementById('main-header');
+            const sections = document.querySelectorAll('section');
             
-            // Forza reveal immediato della Hero all'apertura
-            setTimeout(() => {
-                document.querySelectorAll('.hero .js-reveal').forEach(el => el.classList.add('is-revealed'));
-            }, 100);
+            const headerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const isDark = entry.target.classList.contains('section-dark');
+                        // Se la sezione è scura, il testo dell'header diventa chiaro (e viceversa)
+                        if(isDark) {
+                            header.style.setProperty('--header-color', 'var(--text-light)');
+                            header.classList.remove('theme-light');
+                            header.classList.add('theme-dark');
+                        } else {
+                            header.style.setProperty('--header-color', 'var(--text-dark)');
+                            header.classList.remove('theme-dark');
+                            header.classList.add('theme-light');
+                        }
+                    }
+                });
+            }, { rootMargin: '-80px 0px -90% 0px' }); // Offset per triggerare all'altezza dell'header
 
-            /* --- 3. LOGICA FILTRI MENU (ELEGANT FADE & Y-SHIFT) --- */
+            sections.forEach(section => headerObserver.observe(section));
+
+            // Glassmorphism background trigger
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('is-scrolled');
+                } else {
+                    header.classList.remove('is-scrolled');
+                }
+            });
+
+            // 4. MENU FILTERS LOGIC (No jumps, fluid animation)
             const filterBtns = document.querySelectorAll('.filter-btn');
+            const menuGrid = document.getElementById('menu-grid');
             const menuCards = document.querySelectorAll('.menu-card');
 
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Gestione classe attiva sui bottoni
+                    // Update active state
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     
-                    const filterValue = btn.getAttribute('data-filter');
+                    const filter = btn.getAttribute('data-filter');
 
-                    menuCards.forEach(card => {
-                        const category = card.getAttribute('data-category');
+                    // Fade out & slide down
+                    menuGrid.classList.add('is-filtering');
+
+                    setTimeout(() => {
+                        menuCards.forEach(card => {
+                            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
                         
-                        // Per mantenere la griglia intatta ed evitare ricalcoli brutali, 
-                        // gestiamo le classi css per opacity, transform e display
-                        if (filterValue === 'all' || category === filterValue) {
-                            card.classList.remove('is-hidden');
-                            card.style.position = 'relative';
-                            card.style.visibility = 'visible';
-                            // Leggero delay per permettere al DOM di aggiornarsi prima della transizione opacità
-                            setTimeout(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'translateY(0)';
-                            }, 50);
-                        } else {
-                            card.style.opacity = '0';
-                            card.style.transform = 'translateY(20px)';
-                            // Attendi fine transizione prima di rimuovere dal flusso
-                            setTimeout(() => {
-                                if (!card.style.opacity || card.style.opacity === '0') {
-                                    card.classList.add('is-hidden');
-                                }
-                            }, 600); // Corrisponde al var(--duration-med) o transizione CSS
-                        }
-                    });
+                        // Fade in & slide up
+                        requestAnimationFrame(() => {
+                            menuGrid.classList.remove('is-filtering');
+                        });
+                    }, 400); // Wait for CSS transition (0.4s)
                 });
             });
 
+            // 5. MOBILE MENU (Hamburger & Overlay)
+            const hamburger = document.getElementById('hamburger');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const overlayLinks = document.querySelectorAll('.overlay-link');
+            
+            const toggleMenu = () => {
+                const isActive = hamburger.classList.contains('active');
+                
+                hamburger.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+                
+                if (!isActive) {
+                    // Quando aperto, forza colore scuro sull'hamburger per contrasto su sfondo chiaro
+                    header.style.setProperty('--header-color', 'var(--text-dark)');
+                    document.body.style.overflow = 'hidden'; // Prevents background scroll
+                } else {
+                    // Ripristina logica header in base allo scroll
+                    document.body.style.overflow = '';
+                    window.dispatchEvent(new Event('scroll'));
+                }
+            };
+
+            hamburger.addEventListener('click', toggleMenu);
+            overlayLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if(menuOverlay.classList.contains('active')) toggleMenu();
+                });
+            });
         });
     </script>
 </body>
