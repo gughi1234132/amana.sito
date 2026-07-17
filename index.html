@@ -3,450 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lievito Assoluto | Avant-Garde Pizza</title>
-    
+    <title>Lievito Assoluto | Architettura del Gusto</title>
+
+    <!-- Tipografia rigorosa: Marcellus (Display) e Manrope (Sans-serif geometrico per dati e menu) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+
     <style>
         /* ==========================================================================
-           1. CORE VARIABLES & LUXURY EDITORIAL THEME
+           1. CORE VARIABLES & GEOMETRIC SYSTEM
            ========================================================================== */
         :root {
-            /* Tema Notte (Base Elegante) */
-            --bg-dark: #0a0a0a;
-            --bg-darker: #050505;
-            --text-main: #F0EDE5;
-            --text-sec: #807D75;
-            --accent: #C84B31; /* Terracotta saturo */
+            /* Palette Cromatico Premium */
+            --bg-base: #F2F0EB;       /* Gesso/Pietra chiara */
+            --text-main: #070707;     /* Nero profondo */
+            --text-muted: #6B6862;    /* Grigio architettonico */
+            --accent: #B25136;        /* Mattone brunito / Accento metallico */
+            --line-color: rgba(7, 7, 7, 0.15);
             
+            /* Tipografia */
             --font-display: 'Marcellus', serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-data: 'Manrope', sans-serif;
             
-            --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
-            --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* Easing & Timing (Awwwards Standard) */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --duration-slow: 1.2s;
+            --duration-med: 0.8s;
+            --duration-fast: 0.4s;
             
+            /* Dinamiche Scroll JS */
             --scroll-prog: 0;
-            --smooth-y: 0px;
-        }
-
-        /* Tema Giorno (Editorial / Bottega Veneta Vibe) */
-        body.light-theme {
-            --bg-dark: #F0EDE5; /* Gesso / Farina */
-            --bg-darker: #E6E2D8; /* Pietra da macina */
-            --text-main: #111111; /* Nero Fumo */
-            --text-sec: #706A63;
-            --accent: #C84B31;
         }
 
         /* ==========================================================================
-           2. RESET & SMOOTH SCROLL ARCHITECTURE
+           2. RESET & GLOBAL ARCHITECTURE
            ========================================================================== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html, body {
-            width: 100%; min-height: 100vh;
-            background-color: var(--bg-dark);
+        html { font-size: 16px; scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-data);
             color: var(--text-main);
-            font-family: var(--font-body);
+            background-color: var(--bg-base);
             -webkit-font-smoothing: antialiased;
-            overscroll-behavior: none; /* Previene bounce nativo per JS Scroll */
-            transition: background-color 0.8s var(--ease-fluid), color 0.8s var(--ease-fluid);
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Wrapper per scroll inerziale via JS */
-        #smooth-wrapper {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            overflow: hidden; pointer-events: none;
+        /* Noise Overlay Globale */
+        body::before {
+            content: '';
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04; pointer-events: none; z-index: 9999;
         }
-        #smooth-content {
-            width: 100%; pointer-events: auto;
-            transform: translate3d(0, var(--smooth-y), 0);
-            will-change: transform;
+
+        .container {
+            width: 100%; max-width: 1440px;
+            margin: 0 auto; padding: 0 2rem;
         }
 
         img { width: 100%; height: 100%; object-fit: cover; display: block; }
         a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Typography Utilities */
+        .title-display { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1; text-transform: uppercase; }
+        .title-section { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); text-transform: uppercase; margin-bottom: 3rem; }
+        
+        /* Mask Reveal Animation Classes */
+        .mask-wrap { overflow: hidden; display: inline-block; vertical-align: top; }
+        .mask-inner {
+            display: inline-block; transform: translateY(110%);
+            transition: transform var(--duration-slow) var(--ease-out-expo);
+            will-change: transform;
+        }
+        .is-revealed .mask-inner { transform: translateY(0); }
 
         /* ==========================================================================
-           3. FLOATING THEME TOGGLE (MAGNETIC PILL)
+           3. HEADER (GLASSMORPHIC)
            ========================================================================== */
-        .theme-pill-wrapper {
-            position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
-            pointer-events: auto;
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242, 240, 235, 0.7);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line-color);
+            transition: background 0.4s ease;
         }
-        .theme-pill {
-            display: flex; align-items: center; gap: 0.75rem;
-            background-color: var(--text-main); color: var(--bg-dark);
-            padding: 1rem 1.5rem; border-radius: 100px;
-            font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;
-            cursor: pointer; border: none; outline: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: transform 0.4s var(--ease-elastic), background-color 0.8s var(--ease-fluid), color 0.8s var(--ease-fluid);
+        .logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-links { display: flex; gap: 3rem; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
+        
+        /* Link Hover Micro-interaction */
+        .nav-links a { position: relative; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 50%;
+            width: 0; height: 1px; background-color: var(--text-main);
+            transition: width 0.4s var(--ease-out-expo), left 0.4s var(--ease-out-expo);
         }
-        .theme-pill:active { transform: scale(0.92); }
-        .theme-pill svg { width: 20px; height: 20px; }
+        .nav-links a:hover::after { width: 100%; left: 0; }
 
         /* ==========================================================================
-           4. HERO: MORPHING ORGANICO & KINETIC TYPOGRAPHY
+           4. SECTION 1: HERO MORPHING
            ========================================================================== */
-        .hero-section { height: 250vh; position: relative; } /* Altezza extra per lo scroll */
+        .hero { position: relative; height: 250vh; } /* 250vh per permettere lo scroll */
         .hero-sticky {
             position: sticky; top: 0; height: 100vh; width: 100%;
             display: flex; align-items: center; justify-content: center;
             overflow: hidden;
         }
-
-        .hero-title {
-            position: absolute; z-index: 2; width: 100%; text-align: center;
-            font-family: var(--font-display); font-size: clamp(3rem, 10vw, 7rem);
-            line-height: 0.9; text-transform: uppercase; mix-blend-mode: difference; color: #fff;
-            display: flex; flex-direction: column; align-items: center;
-            pointer-events: none;
+        
+        .hero-content {
+            position: absolute; z-index: 2; text-align: center; width: 100%;
+            pointer-events: none; mix-blend-mode: difference; color: #FFFFFF;
         }
-        /* Divisione Asimmetrica del Titolo su scroll */
-        .hero-title .split-left {
-            transform: translateX(calc(var(--scroll-prog) * -40vw));
-            will-change: transform, letter-spacing;
-        }
-        .hero-title .split-right {
-            transform: translateX(calc(var(--scroll-prog) * 40vw));
-            will-change: transform, letter-spacing; padding-left: 20vw;
+        .hero-subtitle {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.2em;
+            margin-bottom: 1.5rem; font-weight: 500;
         }
 
-        /* La Bolla d'Impasto (Morphing Image) */
-        .hero-morph-wrapper {
-            position: absolute; z-index: 1;
-            /* Da bolla organica (progresso 0) a fullscreen (progresso 1) */
-            width: calc(300px + (100vw - 300px) * var(--scroll-prog));
-            height: calc(400px + (100vh - 400px) * var(--scroll-prog));
-            
-            /* Calcolo border-radius per morphing da organico a quadrato */
-            border-top-left-radius: calc(40% * (1 - var(--scroll-prog)));
-            border-top-right-radius: calc(60% * (1 - var(--scroll-prog)));
-            border-bottom-right-radius: calc(30% * (1 - var(--scroll-prog)));
-            border-bottom-left-radius: calc(70% * (1 - var(--scroll-prog)));
-            
-            overflow: hidden; will-change: width, height, border-radius;
-            transform: translateY(calc(var(--scroll-prog) * 10vh)); /* Leggero parallasse */
+        /* Maschera geometrica che si espande */
+        .hero-image-wrapper {
+            position: absolute; z-index: 1; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            will-change: clip-path;
+            /* Inizia come una pillola monumentale, finisce a tutto schermo */
+            clip-path: inset(calc(20% - 20% * var(--scroll-prog)) calc(30% - 30% * var(--scroll-prog)) calc(20% - 20% * var(--scroll-prog)) calc(30% - 30% * var(--scroll-prog)) round calc(200px - 200px * var(--scroll-prog)));
         }
-        .hero-morph-wrapper img {
+        .hero-image-wrapper img {
             transform: scale(calc(1.2 - 0.2 * var(--scroll-prog)));
-            will-change: transform; transition: filter 0.8s;
+            will-change: transform; filter: brightness(0.85);
         }
-        body.light-theme .hero-morph-wrapper img { filter: sepia(10%) contrast(1.1); }
 
         /* ==========================================================================
-           5. MENU: ASIMMETRIA EDITORIALE & FILTRI
+           5. SECTION 2: LE METRICHE (GRID RIGIDA)
            ========================================================================== */
-        .menu-section { padding: 8rem 1.5rem; background-color: var(--bg-darker); min-height: 100vh; }
-        
-        .menu-header { text-align: center; margin-bottom: 5rem; }
-        .kinetic-title { font-family: var(--font-display); font-size: 3rem; text-transform: uppercase; will-change: letter-spacing; }
+        .metrics-section { border-bottom: 1px solid var(--line-color); }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+        .metric-item {
+            padding: 5rem 2rem; text-align: center;
+            border-right: 1px solid var(--line-color);
+        }
+        .metric-item:last-child { border-right: none; }
+        .metric-num {
+            font-family: var(--font-display); font-size: 4rem; color: var(--accent);
+            line-height: 1; margin-bottom: 1rem;
+        }
+        .metric-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; }
 
-        /* Filtri Tattili */
-        .filters { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+        /* ==========================================================================
+           6. SECTION 3: IL MENU (MATRICE 3XN ARCHITETTONICA)
+           ========================================================================== */
+        .menu-section { padding: 8rem 0; }
+        
+        .menu-filters {
+            display: flex; justify-content: center; gap: 3rem; margin-bottom: 5rem;
+            border-bottom: 1px solid var(--line-color); padding-bottom: 1rem;
+        }
         .filter-btn {
-            background: transparent; border: 1px solid var(--text-sec);
-            color: var(--text-main); font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.1em; padding: 1rem 2rem; border-radius: 100px;
-            cursor: pointer; transition: all 0.4s var(--ease-elastic);
+            background: none; border: none; font-family: var(--font-data);
+            font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--text-muted); cursor: pointer; position: relative;
+            transition: color var(--duration-fast) ease;
         }
-        .filter-btn.active {
-            background: var(--accent); border-color: var(--accent); color: #fff;
+        .filter-btn.active { color: var(--text-main); }
+        .filter-btn::after {
+            content: ''; position: absolute; bottom: -1rem; left: 0; width: 100%; height: 2px;
+            background-color: var(--accent); transform: scaleX(0); transition: transform var(--duration-med) var(--ease-out-expo);
         }
-        /* Micro-interazione Compressione Tattile */
-        .filter-btn:active, .btn-premium:active { transform: scale(0.92); }
+        .filter-btn.active::after { transform: scaleX(1); }
 
-        /* Griglia Asimmetrica Mobile First */
         .menu-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
-            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem 2.5rem;
         }
 
-        .pizza-card {
-            display: flex; flex-direction: column; gap: 1rem;
-            will-change: transform, opacity;
+        .menu-card {
+            display: flex; flex-direction: column; gap: 1.5rem;
+            opacity: 1; transform: translateY(0);
+            transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
         }
-        
-        /* Layout Asimmetrico (Magia del CSS Grid) */
-        .pizza-card:nth-child(1) { grid-column: span 2; } /* Card Grande */
-        .pizza-card:nth-child(2) { grid-column: span 1; } /* Piccola Sx */
-        .pizza-card:nth-child(3) { grid-column: span 1; margin-top: 4rem; } /* Piccola Dx sfalsata */
-        .pizza-card:nth-child(4) { grid-column: span 2; padding: 0 2rem; } /* Centrata stretta */
-        .pizza-card:nth-child(5) { grid-column: span 1; margin-top: -2rem; }
-        .pizza-card:nth-child(6) { grid-column: span 1; margin-top: 2rem; }
+        .menu-card.is-hidden { opacity: 0; transform: translateY(20px); pointer-events: none; position: absolute; visibility: hidden; }
 
-        .pizza-img-wrap {
-            width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 2px;
-            background-color: var(--bg-dark);
+        /* Aspect Ratio Perfetto (4:3) */
+        .card-img-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; background-color: #E5E3DD; border-radius: 2px; }
+        .card-img-wrap img { transition: transform var(--duration-slow) var(--ease-out-expo); filter: grayscale(15%); }
+        .menu-card:hover .card-img-wrap img { transform: scale(1.05); filter: grayscale(0); }
+
+        /* Testo Speculare */
+        .card-header { display: flex; justify-content: space-between; align-items: baseline; position: relative; }
+        .card-header::after {
+            content: ''; flex-grow: 1; margin: 0 1rem; border-bottom: 1px dotted var(--line-color); opacity: 0.5;
         }
-        .pizza-img-wrap img { filter: grayscale(20%); transition: filter 0.5s, transform 1s var(--ease-fluid); }
-        .pizza-card:hover .pizza-img-wrap img { transform: scale(1.05); filter: grayscale(0); }
-        
-        .pizza-info { display: flex; flex-direction: column; gap: 0.5rem; }
-        .pizza-name { font-family: var(--font-display); font-size: 1.4rem; text-transform: uppercase; }
-        .pizza-desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.6; }
-        .pizza-price { font-weight: 600; color: var(--accent); font-size: 1.1rem; }
+        .card-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; text-transform: uppercase; white-space: nowrap; }
+        .card-price { font-weight: 600; color: var(--accent); font-size: 1.1rem; white-space: nowrap; order: 3; }
+        .card-ingredients { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; font-weight: 400; }
 
         /* ==========================================================================
-           6. FOOTER PRENOTAZIONE
+           7. SECTION 4: FILOSOFIA (50/50 SIMMETRIA)
            ========================================================================== */
-        .booking-section { padding: 10rem 1.5rem; text-align: center; }
-        .btn-premium {
-            display: inline-block; background-color: var(--accent); color: #fff;
-            font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
-            padding: 1.5rem 3rem; border-radius: 100px; margin-top: 3rem;
-            transition: transform 0.4s var(--ease-elastic); border: none; cursor: pointer;
+        .philosophy-section { padding: 8rem 0; border-top: 1px solid var(--line-color); }
+        .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: stretch; }
+        
+        .philosophy-content { display: flex; flex-direction: column; justify-content: center; }
+        .philosophy-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 2rem; max-width: 90%; }
+        
+        .philosophy-image { width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 2px; }
+        .philosophy-image img { filter: sepia(10%) contrast(1.05); }
+
+        /* ==========================================================================
+           8. SECTION 5: CONTATTI E PRENOTAZIONE (PREMIUM FORMS)
+           ========================================================================== */
+        .contact-section { padding: 8rem 0; background-color: #ECEAE4; border-top: 1px solid var(--line-color); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
+        
+        /* Informazioni Sinistra */
+        .contact-info h3 { font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem; }
+        .info-block { margin-bottom: 3rem; }
+        .info-block p, .info-block a { font-size: 1rem; line-height: 1.8; color: var(--text-muted); }
+        .info-block a { position: relative; color: var(--text-main); font-weight: 500; display: inline-block; }
+        .info-block a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
+            background-color: var(--accent); transform: scaleX(0); transform-origin: center;
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+        .info-block a:hover::after { transform: scaleX(1); }
+
+        /* Form Destra (Floating Labels) */
+        .premium-form { display: flex; flex-direction: column; gap: 2.5rem; }
+        
+        .input-group { position: relative; width: 100%; }
+        .input-group input, .input-group textarea {
+            width: 100%; border: none; border-bottom: 1px solid rgba(7,7,7,0.2);
+            background: transparent; padding: 0.5rem 0; font-family: var(--font-data);
+            font-size: 1rem; color: var(--text-main); outline: none; border-radius: 0;
+            transition: border-color 0.3s ease;
+        }
+        .input-group textarea { resize: none; min-height: 100px; }
+        
+        .input-group label {
+            position: absolute; left: 0; top: 0.5rem; font-size: 1rem; color: var(--text-muted);
+            pointer-events: none; transition: all 0.4s var(--ease-out-expo);
+        }
+        
+        /* Floating logic: se in focus o se c'è testo (grazie al trucco del placeholder=" ") */
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label,
+        .input-group textarea:focus + label,
+        .input-group textarea:not(:placeholder-shown) + label {
+            top: -1.2rem; font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .input-group input:focus, .input-group textarea:focus { border-bottom-color: var(--accent); }
+
+        .btn-submit {
+            align-self: flex-start; padding: 1.25rem 3.5rem; margin-top: 1rem;
+            background-color: transparent; border: 1px solid var(--text-main); color: var(--text-main);
+            font-family: var(--font-data); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            border-radius: 100px; cursor: pointer; position: relative; overflow: hidden;
+            transition: color 0.4s ease;
+        }
+        .btn-submit::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--text-main); z-index: -1;
+            transform: translateY(100%); transition: transform 0.6s var(--ease-out-expo);
+        }
+        .btn-submit:hover { color: #FFFFFF; }
+        .btn-submit:hover::before { transform: translateY(0); }
+
+        footer { text-align: center; padding: 3rem 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+
+        /* ==========================================================================
+           9. MEDIA QUERIES (MOBILE FIRST STRUCTURAL FALLBACKS)
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .metrics-grid { grid-template-columns: 1fr; }
+            .metric-item { border-right: none; border-bottom: 1px solid var(--line-color); padding: 3rem 0; }
+            .metric-item:last-child { border-bottom: none; }
+            
+            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 2rem; }
+            .philosophy-grid, .contact-grid { grid-template-columns: 1fr; gap: 4rem; }
         }
 
-        /* Desktop Enhancements */
-        @media (min-width: 1024px) {
-            .menu-grid { grid-template-columns: repeat(12, 1fr); gap: 2rem; }
-            .pizza-card:nth-child(1) { grid-column: span 5; }
-            .pizza-card:nth-child(2) { grid-column: span 3; margin-top: 15rem; }
-            .pizza-card:nth-child(3) { grid-column: span 4; }
-            .pizza-card:nth-child(4) { grid-column: span 6; margin-top: -5rem; }
-            .pizza-card:nth-child(5) { grid-column: span 3; margin-top: 5rem; }
-            .pizza-card:nth-child(6) { grid-column: span 3; margin-top: 10rem; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; /* Hamburger menu da implementare per mobile se necessario */ }
+            .menu-grid { grid-template-columns: 1fr; }
+            .hero-image-wrapper { clip-path: inset(calc(10% - 10% * var(--scroll-prog)) calc(5% - 5% * var(--scroll-prog)) round calc(100px - 100px * var(--scroll-prog))); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Floating Theme Toggle -->
-    <div class="theme-pill-wrapper">
-        <button class="theme-pill" id="theme-btn">
-            <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <!-- Moon icon (default for light mode trigger) -->
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-            <span id="theme-text">Editorial Light</span>
-        </button>
-    </div>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Lievito Assoluto</div>
+        <nav class="nav-links">
+            <a href="#vision">La Visione</a>
+            <a href="#menu">Il Menu</a>
+            <a href="#filosofia">Filosofia</a>
+            <a href="#prenota">Riserva</a>
+        </nav>
+    </header>
 
-    <!-- Struttura per lo Smooth Scroll JS -->
-    <div id="smooth-wrapper">
-        <div id="smooth-content">
+    <!-- SECTION 1: HERO MORPHING -->
+    <section class="hero" id="vision">
+        <div class="hero-sticky">
+            <div class="hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=1600" alt="Impasto Perfetto">
+            </div>
+            <div class="hero-content">
+                <div class="hero-subtitle mask-wrap js-reveal"><span class="mask-inner">Purezza Geometrica. Lievito Vivo.</span></div>
+                <h1 class="title-display mask-wrap js-reveal"><span class="mask-inner">Architettura</span></h1><br>
+                <h1 class="title-display mask-wrap js-reveal" style="transition-delay: 0.1s;"><span class="mask-inner">del Gusto</span></h1>
+            </div>
+        </div>
+    </section>
 
-            <!-- HERO ORGANICA -->
-            <section class="hero-section">
-                <div class="hero-sticky">
-                    <h1 class="hero-title kinetic-text">
-                        <span class="split-left">La Tradizione</span>
-                        <span class="split-right">Evoluta</span>
-                    </h1>
-                    <div class="hero-morph-wrapper">
-                        <!-- Immagine d'alta gamma per l'impasto -->
-                        <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=1600" alt="Impasto vivo">
+    <!-- SECTION 2: METRICHE -->
+    <section class="metrics-section">
+        <div class="container metrics-grid js-reveal-group">
+            <div class="metric-item mask-wrap"><div class="mask-inner">
+                <div class="metric-num">72H</div>
+                <div class="metric-label">Lievitazione Lenta</div>
+            </div></div>
+            <div class="metric-item mask-wrap"><div class="mask-inner" style="transition-delay: 0.1s;">
+                <div class="metric-num">85%</div>
+                <div class="metric-label">Alta Idratazione</div>
+            </div></div>
+            <div class="metric-item mask-wrap"><div class="mask-inner" style="transition-delay: 0.2s;">
+                <div class="metric-num">0 KM</div>
+                <div class="metric-label">Filiera Corta DOP</div>
+            </div></div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: MENU MATRICE -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <div class="menu-filters mask-wrap js-reveal"><div class="mask-inner">
+                <button class="filter-btn active" data-filter="all">Tutta la Collezione</button>
+                <button class="filter-btn" data-filter="classica">Le Classiche</button>
+                <button class="filter-btn" data-filter="speciale">Avanguardia</button>
+            </div></div>
+
+            <div class="menu-grid" id="menu-grid">
+                
+                <article class="menu-card" data-category="classica">
+                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=800" alt="Margherita Assoluta"></div>
+                    <div>
+                        <div class="card-header">
+                            <span class="card-name">Margherita Assoluta</span>
+                            <span class="card-price">€ 9.00</span>
+                        </div>
+                        <p class="card-ingredients">Pomodoro San Marzano DOP, Fiordilatte di Agerola, Basilico fresco cristallizzato, Olio EVO.</p>
                     </div>
+                </article>
+
+                <article class="menu-card" data-category="classica">
+                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800" alt="Marinara Geometrica"></div>
+                    <div>
+                        <div class="card-header">
+                            <span class="card-name">Marinara Geometrica</span>
+                            <span class="card-price">€ 8.00</span>
+                        </div>
+                        <p class="card-ingredients">Pomodoro Corbarino, Aglio nero fermentato, Origano selvatico di montagna.</p>
+                    </div>
+                </article>
+
+                <article class="menu-card" data-category="speciale">
+                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800" alt="Oro Verde"></div>
+                    <div>
+                        <div class="card-header">
+                            <span class="card-name">Oro Verde</span>
+                            <span class="card-price">€ 16.00</span>
+                        </div>
+                        <p class="card-ingredients">Crema di Pistacchio DOP, Mortadella Favola IGP, Stracciatella, Granella tostata.</p>
+                    </div>
+                </article>
+
+                <article class="menu-card" data-category="classica">
+                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=800" alt="Cosacca Storica"></div>
+                    <div>
+                        <div class="card-header">
+                            <span class="card-name">Cosacca Storica</span>
+                            <span class="card-price">€ 10.00</span>
+                        </div>
+                        <p class="card-ingredients">Pomodorino del Piennolo, Pecorino Romano stagionato 24 mesi, Pepe nero.</p>
+                    </div>
+                </article>
+
+                <article class="menu-card" data-category="speciale">
+                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" alt="Tartufo & Terra"></div>
+                    <div>
+                        <div class="card-header">
+                            <span class="card-name">Tartufo & Terra</span>
+                            <span class="card-price">€ 18.00</span>
+                        </div>
+                        <p class="card-ingredients">Vellutata di patate, Tartufo nero estivo a scaglie, Nocciole tostate, Fiordilatte.</p>
+                    </div>
+                </article>
+
+                <article class="menu-card" data-category="speciale">
+                    <div class="card-img-wrap"><img src="https://images.unsplash.com/photo-1593504049359-74330189a345?q=80&w=800" alt="Sottobosco"></div>
+                    <div>
+                        <div class="card-header">
+                            <span class="card-name">Sottobosco</span>
+                            <span class="card-price">€ 15.00</span>
+                        </div>
+                        <p class="card-ingredients">Funghi porcini cotti a legna, Provola affumicata campana, Polvere di liquirizia.</p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: FILOSOFIA -->
+    <section class="philosophy-section" id="filosofia">
+        <div class="container philosophy-grid">
+            <div class="philosophy-content">
+                <div class="mask-wrap js-reveal"><span class="mask-inner">
+                    <h2 class="title-section">La Materia<br>Prima</h2>
+                </span></div>
+                <div class="mask-wrap js-reveal" style="transition-delay: 0.1s;"><span class="mask-inner">
+                    <p class="philosophy-text">Il nostro impasto è un organismo vivo. Non ammettiamo scorciatoie industriali. Utilizziamo esclusivamente farine macinate a pietra, idratate al limite della fisica e lasciate maturare nel rispetto del tempo atmosferico e delle temperature naturali.</p>
+                </span></div>
+                <div class="mask-wrap js-reveal" style="transition-delay: 0.2s;"><span class="mask-inner">
+                    <p class="philosophy-text">Ogni ingrediente posizionato sul disco di pasta risponde a uno studio geometrico dei sapori: acidità, sapidità, dolcezza e croccantezza devono coincidere in un singolo morso perfetto.</p>
+                </span></div>
+            </div>
+            <div class="philosophy-image mask-wrap js-reveal"><span class="mask-inner">
+                <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=800" alt="Filosofia Lievito Assoluto">
+            </span></div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: CONTATTI E PRENOTAZIONE -->
+    <section class="contact-section" id="prenota">
+        <div class="container contact-grid">
+            
+            <div class="contact-info">
+                <div class="mask-wrap js-reveal"><span class="mask-inner"><h2 class="title-section">Architettura<br>dell'Accoglienza</h2></span></div>
+                
+                <div class="info-block mask-wrap js-reveal">
+                    <span class="mask-inner">
+                        <h3>Indirizzo</h3>
+                        <p>Via della Geometria, 42<br>20100 Milano, Italia</p>
+                    </span>
                 </div>
-            </section>
-
-            <!-- MENU ASIMMETRICO -->
-            <section class="menu-section">
-                <div class="menu-header">
-                    <h2 class="kinetic-text">Menu Assoluto</h2>
-                    <div class="filters">
-                        <button class="filter-btn active" data-filter="all">Collezione Completa</button>
-                        <button class="filter-btn" data-filter="classiche">Classiche</button>
-                        <button class="filter-btn" data-filter="avanguardia">Avanguardia</button>
-                    </div>
+                
+                <div class="info-block mask-wrap js-reveal">
+                    <span class="mask-inner">
+                        <h3>Orari</h3>
+                        <p>Lun - Dom: 19:00 — 23:30<br>Martedì: Chiuso</p>
+                    </span>
                 </div>
 
-                <div class="menu-grid" id="menu-grid">
-                    <!-- Cards con tag per FLIP -->
-                    <div class="pizza-card" data-category="classiche">
-                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=800" alt="Margherita"></div>
-                        <div class="pizza-info">
-                            <h3 class="pizza-name">Margherita Zero</h3>
-                            <p class="pizza-desc">Pomodoro San Marzano DOP, Fiordilatte di Agerola, Basilico cristallizzato.</p>
-                            <span class="pizza-price">€ 10.00</span>
-                        </div>
-                    </div>
-
-                    <div class="pizza-card" data-category="avanguardia">
-                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800" alt="Pizza"></div>
-                        <div class="pizza-info">
-                            <h3 class="pizza-name">Oro Verde</h3>
-                            <p class="pizza-desc">Pesto di pistacchio puro, Mortadella artigianale, Stracciatella.</p>
-                            <span class="pizza-price">€ 16.00</span>
-                        </div>
-                    </div>
-
-                    <div class="pizza-card" data-category="classiche">
-                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800" alt="Marinara"></div>
-                        <div class="pizza-info">
-                            <h3 class="pizza-name">Marinara Assoluta</h3>
-                            <p class="pizza-desc">Aglio nero fermentato, Origano di montagna, Olio EVO monocultivar.</p>
-                            <span class="pizza-price">€ 9.00</span>
-                        </div>
-                    </div>
-
-                    <div class="pizza-card" data-category="avanguardia">
-                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" alt="Pizza"></div>
-                        <div class="pizza-info">
-                            <h3 class="pizza-name">Tartufo & Terra</h3>
-                            <p class="pizza-desc">Crema di patate arrostite, Tartufo nero estivo, Nocciole tostate.</p>
-                            <span class="pizza-price">€ 18.00</span>
-                        </div>
-                    </div>
-
-                    <div class="pizza-card" data-category="classiche">
-                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=800" alt="Pizza"></div>
-                        <div class="pizza-info">
-                            <h3 class="pizza-name">Cosacca</h3>
-                            <p class="pizza-desc">Corbarino, Pecorino Romano 24 mesi, Pepe nero macinato al momento.</p>
-                            <span class="pizza-price">€ 11.00</span>
-                        </div>
-                    </div>
-
-                    <div class="pizza-card" data-category="avanguardia">
-                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1593504049359-74330189a345?q=80&w=800" alt="Pizza"></div>
-                        <div class="pizza-info">
-                            <h3 class="pizza-name">Sottobosco</h3>
-                            <p class="pizza-desc">Funghi porcini cotti a legna, Provola affumicata, Polvere di liquirizia.</p>
-                            <span class="pizza-price">€ 15.00</span>
-                        </div>
-                    </div>
+                <div class="info-block mask-wrap js-reveal">
+                    <span class="mask-inner">
+                        <h3>Contatti</h3>
+                        <p><a href="tel:+39021234567">T. +39 02 1234567</a><br><a href="mailto:info@lievitoassoluto.it">M. info@lievitoassoluto.it</a></p>
+                    </span>
                 </div>
-            </section>
+            </div>
 
-            <!-- FOOTER -->
-            <section class="booking-section">
-                <h2 class="kinetic-text" style="font-family: var(--font-display); font-size: 3rem; text-transform: uppercase;">L'Esperienza Inizia Ora</h2>
-                <button class="btn-premium">Riserva il tuo Tavolo</button>
-            </section>
+            <div class="contact-form-wrap mask-wrap js-reveal">
+                <span class="mask-inner" style="display:block; width:100%;">
+                    <form class="premium-form" onsubmit="event.preventDefault();">
+                        <div class="input-group">
+                            <input type="text" id="name" placeholder=" " required>
+                            <label for="name">Nome Completo</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="email" placeholder=" " required>
+                            <label for="email">Indirizzo Email</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" id="phone" placeholder=" " required>
+                            <label for="phone">Telefono</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea id="details" placeholder=" "></textarea>
+                            <label for="details">Data e Dettagli Prenotazione</label>
+                        </div>
+                        <button type="submit" class="btn-submit">Riserva Tavolo</button>
+                    </form>
+                </span>
+            </div>
 
         </div>
-    </div>
+    </section>
+
+    <footer>
+        <div class="container">&copy; 2026 Lievito Assoluto. Engineered & Designed with Rigor.</div>
+    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            /* ==========================================================
-               1. MOTORE DI SMOOTH SCROLL (INERZIA) & KINETIC TYPOGRAPHY
-               ========================================================== */
-            const body = document.body;
-            const content = document.getElementById('smooth-content');
-            const kineticTexts = document.querySelectorAll('.kinetic-text');
-            
-            let currentY = 0;
-            let targetY = 0;
-            let ease = 0.08; // Fluidità burrosa
-
-            // Imposta l'altezza fittizia del body per permettere lo scroll nativo
-            const setBodyHeight = () => { body.style.height = `${content.getBoundingClientRect().height}px`; };
-            window.addEventListener('resize', setBodyHeight);
-            // Delay per immagini
-            setTimeout(setBodyHeight, 500);
-
-            window.addEventListener('scroll', () => { targetY = window.scrollY; });
-
-            const renderLoop = () => {
-                // Lerp per inerzia
-                currentY += (targetY - currentY) * ease;
-                // Arrotonda per evitare calcoli infiniti su frazioni infinitesimali
-                if (Math.abs(targetY - currentY) < 0.1) currentY = targetY;
-                
-                // Aggiorna variabile CSS per il transform
-                content.style.transform = `translate3d(0, ${-currentY}px, 0)`;
-
-                // Calcolo velocità di scroll per la Tipografia Dinamica
-                let scrollSpeed = Math.abs(targetY - currentY);
-                let tracking = Math.min(scrollSpeed * 0.003, 0.3); // Cap massimo 0.3em
-                kineticTexts.forEach(el => el.style.letterSpacing = `${tracking}em`);
-
-                // Calcolo Progresso Hero (0 to 1) per il Morphing
-                // La hero è alta 250vh, il morphing si completa nei primi 100vh di scroll
-                let windowHeight = window.innerHeight;
-                let heroProgress = Math.min(Math.max(currentY / windowHeight, 0), 1);
-                document.documentElement.style.setProperty('--scroll-prog', heroProgress);
-
-                requestAnimationFrame(renderLoop);
-            };
-            requestAnimationFrame(renderLoop);
-
-
-            /* ==========================================================
-               2. TEMA EDITORIAL LUSSO (LIGHT/DARK)
-               ========================================================== */
-            const themeBtn = document.getElementById('theme-btn');
-            const themeText = document.getElementById('theme-text');
-            const themeIcon = document.getElementById('theme-icon');
-            
-            const sunSVG = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
-            const moonSVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-
-            themeBtn.addEventListener('click', () => {
-                body.classList.toggle('light-theme');
-                const isLight = body.classList.contains('light-theme');
-                
-                themeText.textContent = isLight ? "Deep Night" : "Editorial Light";
-                themeIcon.innerHTML = isLight ? sunSVG : moonSVG;
+            /* --- 1. HERO MORPHING LOGIC (SCROLL-LINKED) --- */
+            // Calcoliamo la variabile CSS --scroll-prog da 0 a 1 nei primi 100vh di scroll
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollY = window.scrollY;
+                        const windowHeight = window.innerHeight;
+                        // Clamp tra 0 e 1
+                        let progress = Math.min(Math.max(scrollY / windowHeight, 0), 1);
+                        document.documentElement.style.setProperty('--scroll-prog', progress);
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
             });
 
+            /* --- 2. INTERSECTION OBSERVER PER REVEAL ANIMATIONS --- */
+            // Animazione cinetica dal basso verso l'alto
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
+            };
 
-            /* ==========================================================
-               3. FLIP ANIMATION PER I FILTRI DEL MENU
-               ========================================================== */
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.js-reveal, .js-reveal-group').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Forza reveal immediato della Hero all'apertura
+            setTimeout(() => {
+                document.querySelectorAll('.hero .js-reveal').forEach(el => el.classList.add('is-revealed'));
+            }, 100);
+
+            /* --- 3. LOGICA FILTRI MENU (ELEGANT FADE & Y-SHIFT) --- */
             const filterBtns = document.querySelectorAll('.filter-btn');
-            const cards = Array.from(document.querySelectorAll('.pizza-card'));
+            const menuCards = document.querySelectorAll('.menu-card');
 
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    if(btn.classList.contains('active')) return;
-                    
+                    // Gestione classe attiva sui bottoni
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     
-                    const filter = btn.getAttribute('data-filter');
+                    const filterValue = btn.getAttribute('data-filter');
 
-                    // 1. FIRST: Memorizza le posizioni attuali di tutte le card
-                    const firstRects = new Map();
-                    cards.forEach(card => {
-                        firstRects.set(card, card.getBoundingClientRect());
-                    });
-
-                    // 2. Modifica il DOM (applica il filtro mascherando/smascherando)
-                    cards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                            card.style.display = ''; // Ripristina per la griglia
-                            card.style.opacity = '1';
+                    menuCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        
+                        // Per mantenere la griglia intatta ed evitare ricalcoli brutali, 
+                        // gestiamo le classi css per opacity, transform e display
+                        if (filterValue === 'all' || category === filterValue) {
+                            card.classList.remove('is-hidden');
+                            card.style.position = 'relative';
+                            card.style.visibility = 'visible';
+                            // Leggero delay per permettere al DOM di aggiornarsi prima della transizione opacità
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50);
                         } else {
-                            card.style.display = 'none'; // Nascondi
                             card.style.opacity = '0';
-                        }
-                    });
-
-                    // Ricalcola altezza body per smooth scroll dopo reflow
-                    setBodyHeight();
-
-                    // 3. LAST & INVERT & PLAY: Animazione FLIP
-                    requestAnimationFrame(() => {
-                        cards.forEach(card => {
-                            if (card.style.display !== 'none') {
-                                const lastRect = card.getBoundingClientRect();
-                                const firstRect = firstRects.get(card);
-                                
-                                if (firstRect) {
-                                    // Calcola la differenza di posizione
-                                    const deltaX = firstRect.left - lastRect.left;
-                                    const deltaY = firstRect.top - lastRect.top;
-                                    
-                                    // Inverti (sposta l'elemento dove era prima senza animazione)
-                                    card.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-                                    card.style.transition = 'none';
-                                    
-                                    // Play: anima verso la nuova posizione (translate 0,0)
-                                    requestAnimationFrame(() => {
-                                        card.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease';
-                                        card.style.transform = 'translate(0, 0)';
-                                    });
+                            card.style.transform = 'translateY(20px)';
+                            // Attendi fine transizione prima di rimuovere dal flusso
+                            setTimeout(() => {
+                                if (!card.style.opacity || card.style.opacity === '0') {
+                                    card.classList.add('is-hidden');
                                 }
-                            }
-                        });
+                            }, 600); // Corrisponde al var(--duration-med) o transizione CSS
+                        }
                     });
                 });
             });
