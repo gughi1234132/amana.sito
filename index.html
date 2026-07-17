@@ -1,6 +1,461 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lievito Assoluto | Avant-Garde Pizza</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. CORE VARIABLES & LUXURY EDITORIAL THEME
+           ========================================================================== */
+        :root {
+            /* Tema Notte (Base Elegante) */
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --text-main: #F0EDE5;
+            --text-sec: #807D75;
+            --accent: #C84B31; /* Terracotta saturo */
+            
+            --font-display: 'Marcellus', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            
+            --ease-fluid: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+            
+            --scroll-prog: 0;
+            --smooth-y: 0px;
+        }
+
+        /* Tema Giorno (Editorial / Bottega Veneta Vibe) */
+        body.light-theme {
+            --bg-dark: #F0EDE5; /* Gesso / Farina */
+            --bg-darker: #E6E2D8; /* Pietra da macina */
+            --text-main: #111111; /* Nero Fumo */
+            --text-sec: #706A63;
+            --accent: #C84B31;
+        }
+
+        /* ==========================================================================
+           2. RESET & SMOOTH SCROLL ARCHITECTURE
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100%; min-height: 100vh;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overscroll-behavior: none; /* Previene bounce nativo per JS Scroll */
+            transition: background-color 0.8s var(--ease-fluid), color 0.8s var(--ease-fluid);
+        }
+
+        /* Wrapper per scroll inerziale via JS */
+        #smooth-wrapper {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            overflow: hidden; pointer-events: none;
+        }
+        #smooth-content {
+            width: 100%; pointer-events: auto;
+            transform: translate3d(0, var(--smooth-y), 0);
+            will-change: transform;
+        }
+
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ==========================================================================
+           3. FLOATING THEME TOGGLE (MAGNETIC PILL)
+           ========================================================================== */
+        .theme-pill-wrapper {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+            pointer-events: auto;
+        }
+        .theme-pill {
+            display: flex; align-items: center; gap: 0.75rem;
+            background-color: var(--text-main); color: var(--bg-dark);
+            padding: 1rem 1.5rem; border-radius: 100px;
+            font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;
+            cursor: pointer; border: none; outline: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.4s var(--ease-elastic), background-color 0.8s var(--ease-fluid), color 0.8s var(--ease-fluid);
+        }
+        .theme-pill:active { transform: scale(0.92); }
+        .theme-pill svg { width: 20px; height: 20px; }
+
+        /* ==========================================================================
+           4. HERO: MORPHING ORGANICO & KINETIC TYPOGRAPHY
+           ========================================================================== */
+        .hero-section { height: 250vh; position: relative; } /* Altezza extra per lo scroll */
+        .hero-sticky {
+            position: sticky; top: 0; height: 100vh; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            position: absolute; z-index: 2; width: 100%; text-align: center;
+            font-family: var(--font-display); font-size: clamp(3rem, 10vw, 7rem);
+            line-height: 0.9; text-transform: uppercase; mix-blend-mode: difference; color: #fff;
+            display: flex; flex-direction: column; align-items: center;
+            pointer-events: none;
+        }
+        /* Divisione Asimmetrica del Titolo su scroll */
+        .hero-title .split-left {
+            transform: translateX(calc(var(--scroll-prog) * -40vw));
+            will-change: transform, letter-spacing;
+        }
+        .hero-title .split-right {
+            transform: translateX(calc(var(--scroll-prog) * 40vw));
+            will-change: transform, letter-spacing; padding-left: 20vw;
+        }
+
+        /* La Bolla d'Impasto (Morphing Image) */
+        .hero-morph-wrapper {
+            position: absolute; z-index: 1;
+            /* Da bolla organica (progresso 0) a fullscreen (progresso 1) */
+            width: calc(300px + (100vw - 300px) * var(--scroll-prog));
+            height: calc(400px + (100vh - 400px) * var(--scroll-prog));
+            
+            /* Calcolo border-radius per morphing da organico a quadrato */
+            border-top-left-radius: calc(40% * (1 - var(--scroll-prog)));
+            border-top-right-radius: calc(60% * (1 - var(--scroll-prog)));
+            border-bottom-right-radius: calc(30% * (1 - var(--scroll-prog)));
+            border-bottom-left-radius: calc(70% * (1 - var(--scroll-prog)));
+            
+            overflow: hidden; will-change: width, height, border-radius;
+            transform: translateY(calc(var(--scroll-prog) * 10vh)); /* Leggero parallasse */
+        }
+        .hero-morph-wrapper img {
+            transform: scale(calc(1.2 - 0.2 * var(--scroll-prog)));
+            will-change: transform; transition: filter 0.8s;
+        }
+        body.light-theme .hero-morph-wrapper img { filter: sepia(10%) contrast(1.1); }
+
+        /* ==========================================================================
+           5. MENU: ASIMMETRIA EDITORIALE & FILTRI
+           ========================================================================== */
+        .menu-section { padding: 8rem 1.5rem; background-color: var(--bg-darker); min-height: 100vh; }
+        
+        .menu-header { text-align: center; margin-bottom: 5rem; }
+        .kinetic-title { font-family: var(--font-display); font-size: 3rem; text-transform: uppercase; will-change: letter-spacing; }
+
+        /* Filtri Tattili */
+        .filters { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+        .filter-btn {
+            background: transparent; border: 1px solid var(--text-sec);
+            color: var(--text-main); font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em; padding: 1rem 2rem; border-radius: 100px;
+            cursor: pointer; transition: all 0.4s var(--ease-elastic);
+        }
+        .filter-btn.active {
+            background: var(--accent); border-color: var(--accent); color: #fff;
+        }
+        /* Micro-interazione Compressione Tattile */
+        .filter-btn:active, .btn-premium:active { transform: scale(0.92); }
+
+        /* Griglia Asimmetrica Mobile First */
+        .menu-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+            max-width: 1200px; margin: 0 auto;
+        }
+
+        .pizza-card {
+            display: flex; flex-direction: column; gap: 1rem;
+            will-change: transform, opacity;
+        }
+        
+        /* Layout Asimmetrico (Magia del CSS Grid) */
+        .pizza-card:nth-child(1) { grid-column: span 2; } /* Card Grande */
+        .pizza-card:nth-child(2) { grid-column: span 1; } /* Piccola Sx */
+        .pizza-card:nth-child(3) { grid-column: span 1; margin-top: 4rem; } /* Piccola Dx sfalsata */
+        .pizza-card:nth-child(4) { grid-column: span 2; padding: 0 2rem; } /* Centrata stretta */
+        .pizza-card:nth-child(5) { grid-column: span 1; margin-top: -2rem; }
+        .pizza-card:nth-child(6) { grid-column: span 1; margin-top: 2rem; }
+
+        .pizza-img-wrap {
+            width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 2px;
+            background-color: var(--bg-dark);
+        }
+        .pizza-img-wrap img { filter: grayscale(20%); transition: filter 0.5s, transform 1s var(--ease-fluid); }
+        .pizza-card:hover .pizza-img-wrap img { transform: scale(1.05); filter: grayscale(0); }
+        
+        .pizza-info { display: flex; flex-direction: column; gap: 0.5rem; }
+        .pizza-name { font-family: var(--font-display); font-size: 1.4rem; text-transform: uppercase; }
+        .pizza-desc { font-size: 0.85rem; color: var(--text-sec); line-height: 1.6; }
+        .pizza-price { font-weight: 600; color: var(--accent); font-size: 1.1rem; }
+
+        /* ==========================================================================
+           6. FOOTER PRENOTAZIONE
+           ========================================================================== */
+        .booking-section { padding: 10rem 1.5rem; text-align: center; }
+        .btn-premium {
+            display: inline-block; background-color: var(--accent); color: #fff;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            padding: 1.5rem 3rem; border-radius: 100px; margin-top: 3rem;
+            transition: transform 0.4s var(--ease-elastic); border: none; cursor: pointer;
+        }
+
+        /* Desktop Enhancements */
+        @media (min-width: 1024px) {
+            .menu-grid { grid-template-columns: repeat(12, 1fr); gap: 2rem; }
+            .pizza-card:nth-child(1) { grid-column: span 5; }
+            .pizza-card:nth-child(2) { grid-column: span 3; margin-top: 15rem; }
+            .pizza-card:nth-child(3) { grid-column: span 4; }
+            .pizza-card:nth-child(4) { grid-column: span 6; margin-top: -5rem; }
+            .pizza-card:nth-child(5) { grid-column: span 3; margin-top: 5rem; }
+            .pizza-card:nth-child(6) { grid-column: span 3; margin-top: 10rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Theme Toggle -->
+    <div class="theme-pill-wrapper">
+        <button class="theme-pill" id="theme-btn">
+            <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <!-- Moon icon (default for light mode trigger) -->
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <span id="theme-text">Editorial Light</span>
+        </button>
+    </div>
+
+    <!-- Struttura per lo Smooth Scroll JS -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- HERO ORGANICA -->
+            <section class="hero-section">
+                <div class="hero-sticky">
+                    <h1 class="hero-title kinetic-text">
+                        <span class="split-left">La Tradizione</span>
+                        <span class="split-right">Evoluta</span>
+                    </h1>
+                    <div class="hero-morph-wrapper">
+                        <!-- Immagine d'alta gamma per l'impasto -->
+                        <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=1600" alt="Impasto vivo">
+                    </div>
+                </div>
+            </section>
+
+            <!-- MENU ASIMMETRICO -->
+            <section class="menu-section">
+                <div class="menu-header">
+                    <h2 class="kinetic-text">Menu Assoluto</h2>
+                    <div class="filters">
+                        <button class="filter-btn active" data-filter="all">Collezione Completa</button>
+                        <button class="filter-btn" data-filter="classiche">Classiche</button>
+                        <button class="filter-btn" data-filter="avanguardia">Avanguardia</button>
+                    </div>
+                </div>
+
+                <div class="menu-grid" id="menu-grid">
+                    <!-- Cards con tag per FLIP -->
+                    <div class="pizza-card" data-category="classiche">
+                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=800" alt="Margherita"></div>
+                        <div class="pizza-info">
+                            <h3 class="pizza-name">Margherita Zero</h3>
+                            <p class="pizza-desc">Pomodoro San Marzano DOP, Fiordilatte di Agerola, Basilico cristallizzato.</p>
+                            <span class="pizza-price">€ 10.00</span>
+                        </div>
+                    </div>
+
+                    <div class="pizza-card" data-category="avanguardia">
+                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800" alt="Pizza"></div>
+                        <div class="pizza-info">
+                            <h3 class="pizza-name">Oro Verde</h3>
+                            <p class="pizza-desc">Pesto di pistacchio puro, Mortadella artigianale, Stracciatella.</p>
+                            <span class="pizza-price">€ 16.00</span>
+                        </div>
+                    </div>
+
+                    <div class="pizza-card" data-category="classiche">
+                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800" alt="Marinara"></div>
+                        <div class="pizza-info">
+                            <h3 class="pizza-name">Marinara Assoluta</h3>
+                            <p class="pizza-desc">Aglio nero fermentato, Origano di montagna, Olio EVO monocultivar.</p>
+                            <span class="pizza-price">€ 9.00</span>
+                        </div>
+                    </div>
+
+                    <div class="pizza-card" data-category="avanguardia">
+                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" alt="Pizza"></div>
+                        <div class="pizza-info">
+                            <h3 class="pizza-name">Tartufo & Terra</h3>
+                            <p class="pizza-desc">Crema di patate arrostite, Tartufo nero estivo, Nocciole tostate.</p>
+                            <span class="pizza-price">€ 18.00</span>
+                        </div>
+                    </div>
+
+                    <div class="pizza-card" data-category="classiche">
+                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=800" alt="Pizza"></div>
+                        <div class="pizza-info">
+                            <h3 class="pizza-name">Cosacca</h3>
+                            <p class="pizza-desc">Corbarino, Pecorino Romano 24 mesi, Pepe nero macinato al momento.</p>
+                            <span class="pizza-price">€ 11.00</span>
+                        </div>
+                    </div>
+
+                    <div class="pizza-card" data-category="avanguardia">
+                        <div class="pizza-img-wrap"><img src="https://images.unsplash.com/photo-1593504049359-74330189a345?q=80&w=800" alt="Pizza"></div>
+                        <div class="pizza-info">
+                            <h3 class="pizza-name">Sottobosco</h3>
+                            <p class="pizza-desc">Funghi porcini cotti a legna, Provola affumicata, Polvere di liquirizia.</p>
+                            <span class="pizza-price">€ 15.00</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <section class="booking-section">
+                <h2 class="kinetic-text" style="font-family: var(--font-display); font-size: 3rem; text-transform: uppercase;">L'Esperienza Inizia Ora</h2>
+                <button class="btn-premium">Riserva il tuo Tavolo</button>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            /* ==========================================================
+               1. MOTORE DI SMOOTH SCROLL (INERZIA) & KINETIC TYPOGRAPHY
+               ========================================================== */
+            const body = document.body;
+            const content = document.getElementById('smooth-content');
+            const kineticTexts = document.querySelectorAll('.kinetic-text');
+            
+            let currentY = 0;
+            let targetY = 0;
+            let ease = 0.08; // Fluidità burrosa
+
+            // Imposta l'altezza fittizia del body per permettere lo scroll nativo
+            const setBodyHeight = () => { body.style.height = `${content.getBoundingClientRect().height}px`; };
+            window.addEventListener('resize', setBodyHeight);
+            // Delay per immagini
+            setTimeout(setBodyHeight, 500);
+
+            window.addEventListener('scroll', () => { targetY = window.scrollY; });
+
+            const renderLoop = () => {
+                // Lerp per inerzia
+                currentY += (targetY - currentY) * ease;
+                // Arrotonda per evitare calcoli infiniti su frazioni infinitesimali
+                if (Math.abs(targetY - currentY) < 0.1) currentY = targetY;
+                
+                // Aggiorna variabile CSS per il transform
+                content.style.transform = `translate3d(0, ${-currentY}px, 0)`;
+
+                // Calcolo velocità di scroll per la Tipografia Dinamica
+                let scrollSpeed = Math.abs(targetY - currentY);
+                let tracking = Math.min(scrollSpeed * 0.003, 0.3); // Cap massimo 0.3em
+                kineticTexts.forEach(el => el.style.letterSpacing = `${tracking}em`);
+
+                // Calcolo Progresso Hero (0 to 1) per il Morphing
+                // La hero è alta 250vh, il morphing si completa nei primi 100vh di scroll
+                let windowHeight = window.innerHeight;
+                let heroProgress = Math.min(Math.max(currentY / windowHeight, 0), 1);
+                document.documentElement.style.setProperty('--scroll-prog', heroProgress);
+
+                requestAnimationFrame(renderLoop);
+            };
+            requestAnimationFrame(renderLoop);
+
+
+            /* ==========================================================
+               2. TEMA EDITORIAL LUSSO (LIGHT/DARK)
+               ========================================================== */
+            const themeBtn = document.getElementById('theme-btn');
+            const themeText = document.getElementById('theme-text');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            const sunSVG = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+            const moonSVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+
+            themeBtn.addEventListener('click', () => {
+                body.classList.toggle('light-theme');
+                const isLight = body.classList.contains('light-theme');
+                
+                themeText.textContent = isLight ? "Deep Night" : "Editorial Light";
+                themeIcon.innerHTML = isLight ? sunSVG : moonSVG;
+            });
+
+
+            /* ==========================================================
+               3. FLIP ANIMATION PER I FILTRI DEL MENU
+               ========================================================== */
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = Array.from(document.querySelectorAll('.pizza-card'));
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if(btn.classList.contains('active')) return;
+                    
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const filter = btn.getAttribute('data-filter');
+
+                    // 1. FIRST: Memorizza le posizioni attuali di tutte le card
+                    const firstRects = new Map();
+                    cards.forEach(card => {
+                        firstRects.set(card, card.getBoundingClientRect());
+                    });
+
+                    // 2. Modifica il DOM (applica il filtro mascherando/smascherando)
+                    cards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = ''; // Ripristina per la griglia
+                            card.style.opacity = '1';
+                        } else {
+                            card.style.display = 'none'; // Nascondi
+                            card.style.opacity = '0';
+                        }
+                    });
+
+                    // Ricalcola altezza body per smooth scroll dopo reflow
+                    setBodyHeight();
+
+                    // 3. LAST & INVERT & PLAY: Animazione FLIP
+                    requestAnimationFrame(() => {
+                        cards.forEach(card => {
+                            if (card.style.display !== 'none') {
+                                const lastRect = card.getBoundingClientRect();
+                                const firstRect = firstRects.get(card);
+                                
+                                if (firstRect) {
+                                    // Calcola la differenza di posizione
+                                    const deltaX = firstRect.left - lastRect.left;
+                                    const deltaY = firstRect.top - lastRect.top;
+                                    
+                                    // Inverti (sposta l'elemento dove era prima senza animazione)
+                                    card.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                                    card.style.transition = 'none';
+                                    
+                                    // Play: anima verso la nuova posizione (translate 0,0)
+                                    requestAnimationFrame(() => {
+                                        card.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease';
+                                        card.style.transform = 'translate(0, 0)';
+                                    });
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+
+        });
+    </script>
+</body>
+</html><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atelier Forma | Architettura d'Avanguardia & Luxury Design</title>
