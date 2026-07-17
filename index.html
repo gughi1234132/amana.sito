@@ -27,7 +27,7 @@
             --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
             --ease-out: cubic-bezier(0.21, 0.83, 0.26, 1);
             
-            --space-section: clamp(80px, 12vw, 160px);
+            --space-section: clamp(60px, 10vw, 120px);
             --space-container: clamp(20px, 5vw, 60px);
         }
 
@@ -43,7 +43,7 @@
         a, button { text-decoration: none; color: inherit; background: none; border: none; font-family: inherit; cursor: pointer; }
 
         h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.05; }
-        .section-title { font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: clamp(2rem, 4vw, 4rem); letter-spacing: -0.02em; }
+        .section-title { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: clamp(1.5rem, 4vw, 3rem); letter-spacing: -0.02em; }
         .subtitle { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-muted); }
 
         .noise-layer {
@@ -52,30 +52,23 @@
         }
 
         /* ==========================================================================
-           2. HEADER & DRAWER (Slim & Light)
+           2. HEADER & DRAWER 
            ========================================================================== */
         header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; 
-            padding: 0.75rem var(--space-container); /* Basso spessore */
-            background-color: rgba(247, 246, 242, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(26,26,26,0.08);
-            display: flex; justify-content: space-between; align-items: center;
-            color: var(--text-dark); /* Colore scuro */
-            transition: transform 0.4s var(--ease-out);
+            padding: 0.75rem var(--space-container); 
+            background-color: rgba(247, 246, 242, 0.95); backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(26,26,26,0.08); display: flex; justify-content: space-between; align-items: center;
+            color: var(--text-dark); transition: transform 0.4s var(--ease-out);
         }
         
         .logo { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.05em; z-index: 1002; position: relative; font-weight: 600; }
 
         .hamburger { width: 30px; height: 10px; position: relative; z-index: 1002; display: flex; align-items: center; }
         .hamburger-lines { width: 100%; height: 1px; background-color: var(--text-dark); position: relative; transition: background-color 0.3s; }
-        .hamburger-lines::before, .hamburger-lines::after {
-            content: ''; position: absolute; left: 0; width: 100%; height: 1px; background-color: var(--text-dark);
-            transition: transform 0.6s var(--ease-expo);
-        }
+        .hamburger-lines::before, .hamburger-lines::after { content: ''; position: absolute; left: 0; width: 100%; height: 1px; background-color: var(--text-dark); transition: transform 0.6s var(--ease-expo); }
         .hamburger-lines::before { top: -5px; }
         .hamburger-lines::after { top: 5px; }
-        
         .hamburger.active .hamburger-lines { background-color: transparent; }
         .hamburger.active .hamburger-lines::before { top: 0; transform: rotate(45deg); }
         .hamburger.active .hamburger-lines::after { top: 0; transform: rotate(-45deg); }
@@ -83,14 +76,8 @@
         .drawer-overlay { position: fixed; inset: 0; background: rgba(13,13,13,0.7); backdrop-filter: blur(12px); opacity: 0; pointer-events: none; z-index: 1000; transition: opacity 0.8s var(--ease-expo); }
         .drawer-overlay.active { opacity: 1; pointer-events: auto; }
 
-        .drawer-menu {
-            position: fixed; top: 0; right: 0; width: 85vw; max-width: 450px; height: 100vh;
-            background-color: var(--bg-light); color: var(--text-dark); z-index: 1001;
-            display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(2rem, 5vw, 4rem);
-            transform: translateX(100%); transition: transform 0.8s var(--ease-expo);
-        }
+        .drawer-menu { position: fixed; top: 0; right: 0; width: 85vw; max-width: 450px; height: 100vh; background-color: var(--bg-light); color: var(--text-dark); z-index: 1001; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(2rem, 5vw, 4rem); transform: translateX(100%); transition: transform 0.8s var(--ease-expo); }
         .drawer-menu.active { transform: translateX(0); }
-
         .drawer-link { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); color: var(--text-dark); margin-bottom: 1.5rem; display: block; overflow: hidden; }
         .drawer-link span { display: block; transform: translateY(110%); transition: transform 0.8s var(--ease-expo); will-change: transform; }
         .drawer-menu.active .drawer-link span { transform: translateY(0); }
@@ -100,32 +87,29 @@
         .drawer-menu.active .drawer-link:nth-child(4) span { transition-delay: 0.4s; }
 
         /* ==========================================================================
-           3. HERO SECTION (Reveal & Cinematic Pan)
+           3. HERO SECTION (Miglior Contrasto Visivo)
            ========================================================================== */
         .hero { position: relative; height: 100vh; background-color: var(--bg-dark); display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding: 0 var(--space-container); }
         
-        .hero-bg-wrap { 
-            position: absolute; inset: 0; z-index: 1; overflow: hidden;
-            clip-path: inset(100% 0 0 0); /* Sipario chiuso inizialmente */
-            transition: clip-path 1.8s var(--ease-expo);
-        }
+        .hero-bg-wrap { position: absolute; inset: 0; z-index: 1; overflow: hidden; clip-path: inset(100% 0 0 0); transition: clip-path 1.8s var(--ease-expo); }
         body.is-ready .hero-bg-wrap { clip-path: inset(0 0 0 0); }
         
-        .hero-bg-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,13,13,0.3), rgba(13,13,13,0.8)); z-index: 2; }
+        /* OVERLAY RINFORZATO: Gradiente lineare scuro + gradiente radiale al centro */
+        .hero-bg-wrap::after { 
+            content: ''; position: absolute; inset: 0; 
+            background: linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.95) 100%),
+                        radial-gradient(circle at center, rgba(13,13,13,0.6) 0%, transparent 70%); 
+            z-index: 2; 
+        }
         
-        /* Animazione Cinematografica Continua */
         @keyframes cinematicPan {
             0% { transform: scale(1.05) translate(0, 0); }
             50% { transform: scale(1.12) translate(-2%, 1%); }
             100% { transform: scale(1.05) translate(0, 0); }
         }
-        .hero-bg-img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            animation: cinematicPan 25s ease-in-out infinite; 
-            will-change: transform;
-        }
+        .hero-bg-img { width: 100%; height: 100%; object-fit: cover; animation: cinematicPan 25s ease-in-out infinite; will-change: transform; }
 
-        .hero-content { position: relative; z-index: 3; color: var(--text-light); text-align: center; margin-top: -5vh; }
+        .hero-content { position: relative; z-index: 3; color: var(--text-light); text-align: center; margin-top: -5vh; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         
         .hero-line { display: block; overflow: hidden; margin-bottom: -0.1em; padding-bottom: 0.1em; }
         .hero-word { display: inline-block; font-family: var(--font-display); font-size: clamp(3.5rem, 10vw, 9rem); line-height: 1; transform: translateY(110%); opacity: 0; transition: transform 1.8s var(--ease-expo), opacity 1.2s ease; will-change: transform, opacity; }
@@ -134,26 +118,18 @@
 
         .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 1rem; opacity: 0; transition: opacity 1s 1.5s ease; }
         body.is-ready .scroll-indicator { opacity: 1; }
-        .scroll-text { font-family: var(--font-body); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(247,246,242,0.5); writing-mode: vertical-rl; text-orientation: mixed; }
+        .scroll-text { font-family: var(--font-body); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(247,246,242,0.6); writing-mode: vertical-rl; text-orientation: mixed; }
         .scroll-line { width: 1px; height: 60px; background-color: rgba(247,246,242,0.15); position: relative; overflow: hidden; }
         .scroll-line::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--accent); transform-origin: top; animation: scrollLineAnim 2s var(--ease-expo) infinite; }
         @keyframes scrollLineAnim { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 50.1% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
         /* ==========================================================================
-           4. MARQUEE SECTION (Dinamismo Continuo)
+           4. MARQUEE
            ========================================================================== */
-        .marquee-section {
-            background-color: var(--accent); color: var(--text-light); padding: 1.5rem 0;
-            overflow: hidden; display: flex; white-space: nowrap; align-items: center;
-        }
-        .marquee-content {
-            display: flex; animation: marqueeScroll 20s linear infinite;
-        }
-        .marquee-text {
-            font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); text-transform: uppercase;
-            padding: 0 2rem; display: flex; align-items: center; gap: 2rem;
-        }
-        .marquee-dot { width: 8px; height: 8px; background-color: var(--text-light); border-radius: 50%; }
+        .marquee-section { background-color: var(--accent); color: var(--text-light); padding: 1rem 0; overflow: hidden; display: flex; white-space: nowrap; align-items: center; }
+        .marquee-content { display: flex; animation: marqueeScroll 20s linear infinite; }
+        .marquee-text { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 2rem); text-transform: uppercase; padding: 0 2rem; display: flex; align-items: center; gap: 2rem; }
+        .marquee-dot { width: 6px; height: 6px; background-color: var(--text-light); border-radius: 50%; }
         @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* ==========================================================================
@@ -162,67 +138,73 @@
         .philosophy { background-color: var(--bg-light); padding-top: var(--space-section); position: relative; z-index: 4; }
         .phil-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
         @media (min-width: 992px) { .phil-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 6rem; } }
-        .phil-text p { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.8; color: var(--text-muted); margin-bottom: 2rem; }
+        .phil-text p { font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.8; color: var(--text-muted); margin-bottom: 1.5rem; }
         .phil-img-mask { width: 100%; aspect-ratio: 4/5; overflow: hidden; clip-path: inset(100% 0 0 0); transition: clip-path 1.6s var(--ease-expo); will-change: clip-path; }
         .phil-img-mask.is-visible { clip-path: inset(0 0 0 0); }
         .phil-img-parallax { width: 100%; height: 115%; object-fit: cover; filter: grayscale(100%); transform: translateY(-5%); will-change: transform; transition: transform 0.1s linear; }
 
-        .meta-strip { margin-top: var(--space-section); padding: 2rem 0; border-top: 1px solid rgba(26,26,26,0.1); border-bottom: 1px solid rgba(26,26,26,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem; font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; }
+        .meta-strip { margin-top: var(--space-section); padding: 1.5rem 0; border-top: 1px solid rgba(26,26,26,0.1); border-bottom: 1px solid rgba(26,26,26,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem; font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; }
         .meta-item { display: flex; align-items: center; gap: 0.75rem; }
         .meta-counter { color: var(--accent); font-family: var(--font-display); font-size: 2rem; line-height: 1; }
 
         /* ==========================================================================
-           6. NEW: THE ELEMENTS (Accordion)
+           6. THE ELEMENTS (Compatto ed Elegante)
            ========================================================================== */
-        .elements-section { padding: var(--space-section) 0 0 0; background-color: var(--bg-light); }
-        .accordion-wrap { border-top: 1px solid rgba(26,26,26,0.1); margin-top: 3rem; }
+        .elements-section { padding: calc(var(--space-section) * 0.7) 0; background-color: var(--bg-light); }
+        
+        .elements-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
+        @media (min-width: 992px) {
+            .elements-grid { grid-template-columns: 1fr 2fr; gap: 6rem; }
+        }
+
+        .elements-intro p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; max-width: 400px; margin-top: 1rem; }
+
+        .accordion-wrap { border-top: 1px solid rgba(26,26,26,0.1); }
         .accordion-item { border-bottom: 1px solid rgba(26,26,26,0.1); overflow: hidden; }
         
         .accordion-header {
-            width: 100%; text-align: left; padding: 2rem 0; display: flex; justify-content: space-between; align-items: center;
-            font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text-dark); transition: color 0.3s;
+            width: 100%; text-align: left; padding: 1.25rem 0; display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--text-dark); transition: color 0.3s;
         }
         .accordion-header:hover { color: var(--accent); }
-        .accordion-icon {
-            position: relative; width: 20px; height: 20px;
-        }
-        .accordion-icon::before, .accordion-icon::after {
-            content: ''; position: absolute; background-color: currentColor; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: transform 0.4s var(--ease-expo);
-        }
-        .accordion-icon::before { width: 100%; height: 2px; }
-        .accordion-icon::after { height: 100%; width: 2px; }
+        .accordion-icon { position: relative; width: 16px; height: 16px; flex-shrink: 0; margin-left: 1rem; }
+        .accordion-icon::before, .accordion-icon::after { content: ''; position: absolute; background-color: currentColor; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: transform 0.4s var(--ease-expo); }
+        .accordion-icon::before { width: 100%; height: 1px; }
+        .accordion-icon::after { height: 100%; width: 1px; }
         .accordion-item.active .accordion-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
         
         .accordion-content {
             max-height: 0; padding: 0; opacity: 0; transition: max-height 0.6s var(--ease-expo), opacity 0.4s ease, padding 0.6s var(--ease-expo);
-            color: var(--text-muted); line-height: 1.6; font-size: 1.1rem;
+            color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; max-width: 600px;
         }
-        .accordion-item.active .accordion-content {
-            max-height: 200px; padding-bottom: 2rem; opacity: 1;
-        }
+        .accordion-item.active .accordion-content { max-height: 150px; padding-bottom: 1.5rem; opacity: 1; }
 
         /* ==========================================================================
-           7. MENU 
+           7. MENU (Dark Mode per Massimo Risalto)
            ========================================================================== */
-        .menu-section { padding: var(--space-section) 0; background-color: var(--bg-light); }
-        .menu-filters { display: flex; gap: 2rem; margin-bottom: 4rem; overflow-x: auto; scrollbar-width: none; }
+        .menu-section { padding: var(--space-section) 0; background-color: var(--bg-dark); color: var(--text-light); }
+        
+        .menu-filters { display: flex; gap: 2rem; margin-bottom: 3rem; overflow-x: auto; scrollbar-width: none; }
         .menu-filters::-webkit-scrollbar { display: none; }
-        .filter-btn { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); padding-bottom: 0.5rem; position: relative; transition: color 0.3s; white-space: nowrap; }
-        .filter-btn.active { color: var(--text-dark); font-weight: 600; }
-        .filter-btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: var(--text-dark); transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease-expo); }
+        
+        .filter-btn { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(247,246,242,0.4); padding-bottom: 0.5rem; position: relative; transition: color 0.3s; white-space: nowrap; }
+        .filter-btn.active { color: var(--text-light); font-weight: 600; }
+        .filter-btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: var(--text-light); transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease-expo); }
         .filter-btn.active::after { transform: scaleX(1); }
 
-        .menu-list { display: flex; flex-direction: column; border-top: 1px solid rgba(26,26,26,0.1); }
-        .menu-row { display: flex; align-items: center; padding: 2.5rem 0; border-bottom: 1px solid rgba(26,26,26,0.1); opacity: 0; transform: translateY(30px); transition: opacity 1.2s var(--ease-expo), transform 1.2s var(--ease-expo); will-change: opacity, transform; }
+        .menu-list { display: flex; flex-direction: column; border-top: 1px solid rgba(247,246,242,0.1); }
+        .menu-row { display: flex; align-items: center; padding: 2.5rem 0; border-bottom: 1px solid rgba(247,246,242,0.1); opacity: 0; transform: translateY(30px); transition: opacity 1.2s var(--ease-expo), transform 1.2s var(--ease-expo); will-change: opacity, transform; }
         .menu-row.is-visible { opacity: 1; transform: translateY(0); }
         .menu-img-wrap { width: 70px; height: 70px; margin-right: 2rem; flex-shrink: 0; overflow: hidden; clip-path: inset(100% 0 0 0); transition: clip-path 1.2s var(--ease-expo); }
         .menu-row.is-visible .menu-img-wrap { clip-path: inset(0 0 0 0); transition-delay: 0.1s; }
         .menu-img-wrap img { transform: scale(1.3); transition: transform 1.2s var(--ease-expo); }
         .menu-row.is-visible .menu-img-wrap img { transform: scale(1); transition-delay: 0.1s; }
+        
         .menu-info { flex-grow: 1; }
-        .menu-name { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 2rem); margin-bottom: 0.25rem; }
-        .menu-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; max-width: 500px; }
-        .menu-price { font-family: var(--font-body); font-weight: 500; font-size: 1.2rem; margin-left: 1rem; }
+        .menu-name { font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.8rem); margin-bottom: 0.25rem; }
+        .menu-desc { font-size: 0.85rem; color: rgba(247,246,242,0.6); line-height: 1.5; max-width: 500px; }
+        .menu-price { font-family: var(--font-body); font-weight: 500; font-size: 1.2rem; margin-left: 1rem; color: var(--accent); }
+        
         @media (max-width: 768px) { .menu-row { padding: 1.5rem 0; } .menu-img-wrap { width: 50px; height: 50px; margin-right: 1rem; } }
 
         /* ==========================================================================
@@ -243,7 +225,9 @@
         .input-line::after { content: ''; position: absolute; inset: 0; background-color: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease-expo); }
         .input-group input:focus + label, .input-group input:not(:placeholder-shown) + label { top: -1.2rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
         .input-group input:focus ~ .input-line::after { transform: scaleX(1); }
-        .btn-submit { align-self: flex-start; margin-top: 1rem; padding: 1.2rem 3rem; background-color: var(--text-light); color: var(--text-dark); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; border-radius: 2px; overflow: hidden; position: relative; transition: color 0.4s; }
+        .btn-submit { align-self: flex-start; margin-top: 1rem; padding: 1.2rem 3rem; background-color: var(--text-light); color: var(--text-dark); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; border-radius: 2px; overflow: hidden; position: relative; transition: opacity 0.4s; }
+        .btn-submit:hover { opacity: 0.8; }
+        
         footer { text-align: center; padding: 2rem 0; background-color: var(--bg-dark); color: rgba(247,246,242,0.3); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; border-top: 1px solid rgba(247,246,242,0.05); }
 
         /* Utility */
@@ -272,7 +256,7 @@
         </div>
     </nav>
 
-    <!-- HERO RIELABORATA -->
+    <!-- HERO SECTION (Contrasto Ottimizzato) -->
     <section class="hero" id="hero">
         <div class="hero-bg-wrap">
             <img class="hero-bg-img" src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=100&w=2000" alt="Texture Impasto">
@@ -294,30 +278,23 @@
         </div>
     </section>
 
-    <!-- NUOVA SEZIONE: MARQUEE -->
     <section class="marquee-section">
         <div class="marquee-content">
-            <!-- Il contenuto viene duplicato per creare il loop infinito continuo -->
             <div class="marquee-text">
-                Oltre la Tradizione <span class="marquee-dot"></span> 
-                Chimica e Passione <span class="marquee-dot"></span> 
-                Ricerca Estrema <span class="marquee-dot"></span>
+                Oltre la Tradizione <span class="marquee-dot"></span> Chimica e Passione <span class="marquee-dot"></span> Ricerca Estrema <span class="marquee-dot"></span>
             </div>
             <div class="marquee-text">
-                Oltre la Tradizione <span class="marquee-dot"></span> 
-                Chimica e Passione <span class="marquee-dot"></span> 
-                Ricerca Estrema <span class="marquee-dot"></span>
+                Oltre la Tradizione <span class="marquee-dot"></span> Chimica e Passione <span class="marquee-dot"></span> Ricerca Estrema <span class="marquee-dot"></span>
             </div>
         </div>
     </section>
 
-    <!-- Philosophy -->
     <section class="philosophy" id="filosofia">
         <div class="container phil-grid">
             <div class="phil-text js-scroll-reveal">
                 <div class="subtitle">La Materia</div>
                 <h2 class="section-title">Strutture<br>Perfette.</h2>
-                <p>Nessun compromesso. Nel nostro laboratorio la chimica incontra il calore. Farine non raffinate, idratazione millimetrica e tempo. Questo è l'unico alfabeto che riconosciamo.</p>
+                <p>Nessun compromesso. Nel nostro laboratorio la chimica incontra il calore. Farine non raffinate, idratazione millimetrica e tempo.</p>
                 <p>Non cerchiamo l'eccesso visivo, ma un impatto sensoriale puro. Ogni disco di pasta risponde a un rigoroso studio geometrico e strutturale.</p>
             </div>
             <div class="phil-img-wrap">
@@ -329,27 +306,20 @@
 
         <div class="container">
             <div class="meta-strip js-scroll-reveal">
-                <div class="meta-item">
-                    <span class="meta-counter js-counter" data-target="72">0</span>
-                    <span>Ore di Maturazione</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-counter js-counter" data-target="85">0</span>
-                    <span>% Idratazione Estrema</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-counter js-counter" data-target="100">0</span>
-                    <span>% Ingredienti Puri</span>
-                </div>
+                <div class="meta-item"><span class="meta-counter js-counter" data-target="72">0</span><span>Ore Maturazione</span></div>
+                <div class="meta-item"><span class="meta-counter js-counter" data-target="85">0</span><span>% Idratazione</span></div>
+                <div class="meta-item"><span class="meta-counter js-counter" data-target="100">0</span><span>% Grani Italiani</span></div>
             </div>
         </div>
     </section>
 
-    <!-- NUOVA SEZIONE: GLI ELEMENTI (Accordion interattivo) -->
+    <!-- THE ELEMENTS (Sezione più compatta e laterale su desktop) -->
     <section class="elements-section" id="elementi">
-        <div class="container">
-            <h2 class="section-title js-scroll-reveal" style="text-align: center; margin-bottom: 1rem;">L'Anatomia</h2>
-            <p class="js-scroll-reveal" style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Scomponiamo l'eccellenza nei suoi vettori primari. Nessun ingrediente viene lasciato al caso.</p>
+        <div class="container elements-grid">
+            <div class="elements-intro js-scroll-reveal">
+                <h2 class="section-title" style="margin-bottom: 0;">L'Anatomia</h2>
+                <p>Scomponiamo l'eccellenza nei suoi vettori primari. Nessun dettaglio viene lasciato al caso nella nostra ricerca della struttura perfetta.</p>
+            </div>
             
             <div class="accordion-wrap js-scroll-reveal">
                 <article class="accordion-item">
@@ -358,7 +328,7 @@
                         <div class="accordion-icon"></div>
                     </button>
                     <div class="accordion-content">
-                        L'acqua subisce un processo di osmosi inversa per garantire un bilancio del PH assoluto. Questo permette al lievito di esprimere il suo massimo potenziale senza subire alterazioni da metalli pesanti o cloro residuo.
+                        L'acqua subisce un processo di osmosi inversa per garantire un bilancio del PH assoluto. Questo permette al lievito di esprimere il potenziale senza alterazioni.
                     </div>
                 </article>
                 <article class="accordion-item">
@@ -367,7 +337,7 @@
                         <div class="accordion-icon"></div>
                     </button>
                     <div class="accordion-content">
-                        Non utilizziamo farine commerciali. Il nostro blend è il risultato di 42 test chimico-fisici: uniamo forza proteica ed elasticità utilizzando unicamente grani italiani macinati a pietra a bassa temperatura.
+                        Non utilizziamo farine commerciali. Uniamo forza proteica ed elasticità utilizzando unicamente grani italiani macinati a pietra a bassa temperatura.
                     </div>
                 </article>
                 <article class="accordion-item">
@@ -376,20 +346,21 @@
                         <div class="accordion-icon"></div>
                     </button>
                     <div class="accordion-content">
-                        La cottura avviene a 480°C per un massimo di 90 secondi. Questa esposizione violenta permette di caramellizzare gli zuccheri complessi sviluppati durante le 72 ore di maturazione, sigillando l'alveolatura.
+                        Cottura a 480°C per un massimo di 90 secondi. L'esposizione violenta permette di caramellizzare gli zuccheri complessi sviluppati in maturazione.
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- Menu -->
+    <!-- MENU (Reso Dark per farlo saltare all'occhio) -->
     <section class="menu-section" id="menu">
         <div class="container">
-            <h2 class="section-title js-scroll-reveal">Collezione</h2>
+            <div class="subtitle" style="color: var(--accent);">Il Prodotto</div>
+            <h2 class="section-title js-scroll-reveal">Collezione.</h2>
             
             <div class="menu-filters js-scroll-reveal">
-                <button class="filter-btn active" data-filter="all">Completo</button>
+                <button class="filter-btn active" data-filter="all">Tutte</button>
                 <button class="filter-btn" data-filter="classiche">Classiche</button>
                 <button class="filter-btn" data-filter="avanguardia">Avanguardia</button>
             </div>
@@ -399,7 +370,7 @@
                     <div class="menu-img-wrap"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=400" alt="Margherita" loading="lazy"></div>
                     <div class="menu-info">
                         <h3 class="menu-name">Margherita Assoluta</h3>
-                        <p class="menu-desc">San Marzano DOP, Fiordilatte di Agerola, Basilico in infusione.</p>
+                        <p class="menu-desc">San Marzano DOP, Fiordilatte di Agerola, Basilico in infusione a freddo.</p>
                     </div>
                     <div class="menu-price">12</div>
                 </article>
@@ -408,7 +379,7 @@
                     <div class="menu-img-wrap"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=400" alt="Marinara" loading="lazy"></div>
                     <div class="menu-info">
                         <h3 class="menu-name">Marinara Geometrica</h3>
-                        <p class="menu-desc">Pomodoro Corbarino, Aglio nero fermentato, Origano selvatico.</p>
+                        <p class="menu-desc">Pomodoro Corbarino, Aglio nero fermentato, Origano selvatico siciliano.</p>
                     </div>
                     <div class="menu-price">10</div>
                 </article>
@@ -417,7 +388,7 @@
                     <div class="menu-img-wrap"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=400" alt="Oro Verde" loading="lazy"></div>
                     <div class="menu-info">
                         <h3 class="menu-name">Struttura Pistacchio</h3>
-                        <p class="menu-desc">Crema di Pistacchio, Mortadella Favola, Stracciatella liquida.</p>
+                        <p class="menu-desc">Crema di Pistacchio tostata, Mortadella Favola, Stracciatella liquida.</p>
                     </div>
                     <div class="menu-price">18</div>
                 </article>
@@ -426,7 +397,7 @@
                     <div class="menu-img-wrap"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400" alt="Sottobosco" loading="lazy"></div>
                     <div class="menu-info">
                         <h3 class="menu-name">Sottobosco</h3>
-                        <p class="menu-desc">Vellutata di patate, Tartufo nero, Nocciole tostate.</p>
+                        <p class="menu-desc">Vellutata di patate di montagna, Tartufo nero estivo, Nocciole tostate.</p>
                     </div>
                     <div class="menu-price">22</div>
                 </article>
@@ -435,16 +406,14 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact-section" id="contatti">
+    <section class="contact-section" id="contatti" style="padding-top: 4rem;">
         <div class="container contact-grid">
             <div class="contact-info js-scroll-reveal">
                 <div class="live-time">
-                    <span class="blink-dot"></span> 
-                    Milano &mdash; IT &bull; <span id="time-display">00:00 CEST</span>
+                    <span class="blink-dot"></span> Milano &mdash; IT &bull; <span id="time-display">00:00 CEST</span>
                 </div>
-                
-                <h2 class="section-title" style="margin-bottom: 2rem;">Accesso.</h2>
-                <p>Manteniamo un limite rigoroso di ospiti per garantire la precisione di ogni esecuzione. Compila i dati per richiedere l'accesso al laboratorio.</p>
+                <h2 class="section-title" style="margin-bottom: 1rem;">Accesso.</h2>
+                <p>Manteniamo un limite rigoroso di ospiti per garantire la precisione di ogni esecuzione. Compila i dati per la tua richiesta.</p>
             </div>
 
             <form class="form-wrap js-scroll-reveal" onsubmit="event.preventDefault();">
@@ -455,10 +424,9 @@
                 </div>
                 <div class="input-group">
                     <input type="text" id="date" placeholder=" " required>
-                    <label for="date">Data e numero ospiti</label>
+                    <label for="date">Data desiderata</label>
                     <div class="input-line"></div>
                 </div>
-                
                 <button type="submit" class="btn-submit">Invia Richiesta</button>
             </form>
         </div>
@@ -472,10 +440,9 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // 1. Initial Reveal
             setTimeout(() => { document.body.classList.add('is-ready'); }, 150);
 
-            // 2. Hide Header on Scroll Down, Show on Scroll Up
+            // Hide Header on Scroll Down
             let lastScroll = 0;
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
@@ -488,7 +455,7 @@
                 lastScroll = currentScroll;
             }, { passive: true });
 
-            // 3. Drawer Menu Logic
+            // Drawer Menu
             const hamburger = document.getElementById('hamburger');
             const drawerMenu = document.getElementById('drawer-menu');
             const drawerOverlay = document.getElementById('drawer-overlay');
@@ -506,23 +473,18 @@
             drawerOverlay.addEventListener('click', toggleMenu);
             drawerLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-            // 4. Accordion Logic (Gli Elementi)
+            // Accordion Logic
             const accordionTriggers = document.querySelectorAll('.js-accordion-trigger');
             accordionTriggers.forEach(trigger => {
                 trigger.addEventListener('click', () => {
                     const parent = trigger.parentElement;
                     const isActive = parent.classList.contains('active');
-                    
-                    // Chiude gli altri
                     document.querySelectorAll('.accordion-item').forEach(item => item.classList.remove('active'));
-                    
-                    if (!isActive) {
-                        parent.classList.add('active');
-                    }
+                    if (!isActive) parent.classList.add('active');
                 });
             });
 
-            // 5. Functional Menu Filter Logic
+            // Functional Menu Filters
             const filterBtns = document.querySelectorAll('.filter-btn');
             const menuItems = document.querySelectorAll('.js-menu-item');
 
@@ -530,30 +492,24 @@
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(f => f.classList.remove('active'));
                     btn.classList.add('active');
-                    
                     const category = btn.getAttribute('data-filter');
 
                     menuItems.forEach((item, index) => {
                         item.classList.remove('is-visible');
-                        
                         setTimeout(() => {
                             if (category === 'all' || item.getAttribute('data-category') === category) {
                                 item.style.display = 'flex';
                                 void item.offsetWidth;
-                                
-                                setTimeout(() => {
-                                    item.classList.add('is-visible');
-                                }, index * 100); 
-                                
+                                setTimeout(() => { item.classList.add('is-visible'); }, index * 100); 
                             } else {
                                 item.style.display = 'none';
                             }
-                        }, 500); 
+                        }, 400); 
                     });
                 });
             });
 
-            // 6. Scroll Intersections
+            // Scroll Intersections & Counters
             const revealElements = document.querySelectorAll('.js-scroll-reveal, .js-mask-reveal, .js-menu-item');
             const counters = document.querySelectorAll('.js-counter');
 
@@ -565,9 +521,7 @@
                     if(current < target) {
                         el.innerText = Math.ceil(current);
                         requestAnimationFrame(update);
-                    } else {
-                        el.innerText = target;
-                    }
+                    } else { el.innerText = target; }
                 };
                 update();
             };
@@ -576,7 +530,6 @@
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
                         const target = entry.target;
-                        
                         if (target.classList.contains('js-menu-item') && target.style.display !== 'none') {
                             target.style.transitionDelay = `${index * 0.1}s, ${index * 0.1}s`;
                             target.classList.add('is-visible');
@@ -584,19 +537,17 @@
                         } else {
                             target.classList.add('is-visible');
                         }
-
                         if (target.classList.contains('meta-strip')) {
                             counters.forEach(c => runCounter(c));
                         }
-                        
                         observer.unobserve(target);
                     }
                 });
-            }, { root: null, rootMargin: '0px 0px -15% 0px', threshold: 0 });
+            }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0 });
 
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // 7. Light Image Parallax
+            // Parallax
             const parallaxImage = document.querySelector('.js-parallax');
             let ticking = false;
             window.addEventListener('scroll', () => {
@@ -615,7 +566,7 @@
                 }
             }, { passive: true });
 
-            // 8. Live Time
+            // Live Time
             const timeDisplay = document.getElementById('time-display');
             const updateTime = () => {
                 const options = { timeZone: 'Europe/Rome', hour: '2-digit', minute: '2-digit', hour12: false };
