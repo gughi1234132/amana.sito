@@ -5,550 +5,594 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lievito Assoluto | Architettura del Gusto</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================================================
-           1. CORE VARIABLES & DESIGN SYSTEM (QUIET LUXURY)
+           1. CORE VARIABLES & TYPOGRAPHY
            ========================================================================== */
         :root {
-            /* Palette */
-            --bg-light: #F9F8F6;       /* Avorio caldo */
-            --bg-dark: #1A1A1A;        /* Antracite profondo */
-            --text-main: #222222;      /* Testo su fondo chiaro */
-            --text-light: #F9F8F6;     /* Testo su fondo scuro */
-            --text-muted: #7A7671;     /* Testo secondario */
-            --accent: #A85D41;         /* Rame elegante */
+            --bg-light: #F7F6F2;
+            --bg-dark: #0D0D0D;
+            --text-light: #F7F6F2;
+            --text-dark: #1A1A1A;
+            --text-muted: #737373;
+            --accent: #9A4E31;
             
-            /* Typography */
             --font-display: 'Marcellus', serif;
             --font-body: 'Manrope', sans-serif;
             
-            /* Animation */
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-slow: 1.2s var(--ease-out-expo);
-            --transition-med: 0.8s var(--ease-out-expo);
-            --transition-fast: 0.4s ease;
-
-            /* Spacing */
-            --section-pad-desktop: 120px;
-            --section-pad-mobile: 80px;
+            /* High-end cinematic easings */
+            --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+            --ease-out: cubic-bezier(0.21, 0.83, 0.26, 1);
+            
+            --space-section: clamp(80px, 12vw, 160px);
+            --space-container: clamp(20px, 5vw, 60px);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body { font-family: var(--font-body); color: var(--text-main); background-color: var(--bg-light); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        html { scroll-behavior: auto; font-size: 16px; }
+        body { 
+            font-family: var(--font-body); 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            background-color: var(--bg-dark); /* Inizia scuro per evitare flash */
+        }
 
-        .container { max-width: 1440px; margin: 0 auto; padding: 0 2rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 var(--space-container); }
         img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
+        a, button { text-decoration: none; color: inherit; background: none; border: none; font-family: inherit; cursor: pointer; }
 
-        /* Typography Core */
-        .title-display { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 6rem); line-height: 1.1; font-weight: 400; }
-        .title-section { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 3rem; font-weight: 400; }
-        .title-subtitle { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 1rem; font-weight: 600; }
-
-        /* Scroll Reveal Utility Classes */
-        .reveal-wrap { overflow: hidden; display: block; }
-        .reveal-inner { display: block; transform: translateY(100%); transition: transform var(--transition-med); will-change: transform; }
-        .reveal-fade { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
-        .is-visible .reveal-inner { transform: translateY(0); }
-        .is-visible.reveal-fade, .is-visible .reveal-fade { opacity: 1; transform: translateY(0); }
+        h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.05; }
+        .section-title { font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: clamp(2rem, 4vw, 4rem); letter-spacing: -0.02em; }
+        .subtitle { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-muted); }
 
         /* ==========================================================================
-           2. HEADER & DESKTOP NAVIGATION
+           2. STATIC NOISE (Elegant Print Vibe)
            ========================================================================== */
-        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; transition: background 0.5s ease, backdrop-filter 0.5s ease, padding 0.5s ease, color 0.5s ease; color: var(--text-light); }
-        header.scrolled { background: rgba(249, 248, 246, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: var(--text-main); padding: 1rem 2rem; border-bottom: 1px solid rgba(34, 34, 34, 0.05); }
-        
-        .logo { font-family: var(--font-display); font-size: 1.3rem; z-index: 1002; position: relative; }
-        
-        .nav-desktop { display: flex; gap: 3rem; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
-        .nav-desktop a { position: relative; padding-bottom: 0.25rem; transition: color var(--transition-fast); }
-        .nav-desktop a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: var(--accent); transition: width 0.4s var(--ease-out-expo); }
-        .nav-desktop a:hover { color: var(--accent); }
-        .nav-desktop a:hover::after { width: 100%; }
-
-        /* Minimal Hamburger */
-        .hamburger { display: none; width: 30px; height: 12px; position: relative; cursor: pointer; z-index: 1002; }
-        .hamburger span { position: absolute; left: 0; width: 100%; height: 1.5px; background-color: currentColor; transition: transform 0.4s var(--ease-out-expo), top 0.4s var(--ease-out-expo), background-color 0.4s ease; }
-        .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 10px; }
-        .hamburger.active span { background-color: var(--text-main); }
-        .hamburger.active span:nth-child(1) { top: 5px; transform: rotate(45deg); }
-        .hamburger.active span:nth-child(2) { top: 5px; transform: rotate(-45deg); }
+        .noise-layer {
+            position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.2; mix-blend-mode: multiply;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
 
         /* ==========================================================================
-           3. MOBILE DRAWER MENU (75% / 25%)
+           3. HEADER & DRAWER
            ========================================================================== */
-        .drawer-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; backdrop-filter: blur(4px); }
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.5rem var(--space-container);
+            display: flex; justify-content: space-between; align-items: center;
+            color: var(--text-light); transition: padding 0.6s var(--ease-expo), background 0.6s var(--ease-expo);
+            mix-blend-mode: difference;
+        }
+        
+        .logo { font-family: var(--font-display); font-size: 1.25rem; letter-spacing: 0.05em; z-index: 1002; position: relative; }
+
+        .hamburger { width: 30px; height: 10px; position: relative; z-index: 1002; display: flex; align-items: center; }
+        .hamburger-lines { width: 100%; height: 1px; background-color: currentColor; position: relative; transition: background-color 0.3s; }
+        .hamburger-lines::before, .hamburger-lines::after {
+            content: ''; position: absolute; left: 0; width: 100%; height: 1px; background-color: currentColor;
+            transition: transform 0.6s var(--ease-expo);
+        }
+        .hamburger-lines::before { top: -5px; }
+        .hamburger-lines::after { top: 5px; }
+        
+        .hamburger.active .hamburger-lines { background-color: transparent; }
+        .hamburger.active .hamburger-lines::before { top: 0; transform: rotate(45deg); }
+        .hamburger.active .hamburger-lines::after { top: 0; transform: rotate(-45deg); }
+
+        .drawer-overlay {
+            position: fixed; inset: 0; background: rgba(13,13,13,0.7); backdrop-filter: blur(12px);
+            opacity: 0; pointer-events: none; z-index: 1000; transition: opacity 0.8s var(--ease-expo);
+        }
         .drawer-overlay.active { opacity: 1; pointer-events: auto; }
 
-        .drawer-menu { position: fixed; top: 0; right: 0; width: 75vw; height: 100vh; background-color: var(--bg-light); z-index: 1001; transform: translateX(100%); transition: transform 0.8s var(--ease-out-expo); display: flex; flex-direction: column; justify-content: center; padding: 4rem 2rem; box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
+        .drawer-menu {
+            position: fixed; top: 0; right: 0; width: 85vw; max-width: 450px; height: 100vh;
+            background-color: var(--bg-light); color: var(--text-dark); z-index: 1001;
+            display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(2rem, 5vw, 4rem);
+            transform: translateX(100%); transition: transform 0.8s var(--ease-expo);
+        }
         .drawer-menu.active { transform: translateX(0); }
 
-        .drawer-links { display: flex; flex-direction: column; gap: 2.5rem; }
-        .drawer-links a { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3rem); color: var(--text-main); opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo); }
-        .drawer-menu.active .drawer-links a { opacity: 1; transform: translateY(0); }
-        .drawer-menu.active .drawer-links a:nth-child(1) { transition-delay: 0.1s; }
-        .drawer-menu.active .drawer-links a:nth-child(2) { transition-delay: 0.2s; }
-        .drawer-menu.active .drawer-links a:nth-child(3) { transition-delay: 0.3s; }
-        .drawer-menu.active .drawer-links a:nth-child(4) { transition-delay: 0.4s; }
+        .drawer-link {
+            font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); color: var(--text-dark);
+            margin-bottom: 1.5rem; display: block; overflow: hidden;
+        }
+        .drawer-link span { 
+            display: block; transform: translateY(110%); transition: transform 0.8s var(--ease-expo); will-change: transform; 
+        }
+        .drawer-menu.active .drawer-link span { transform: translateY(0); }
+        .drawer-menu.active .drawer-link:nth-child(1) span { transition-delay: 0.1s; }
+        .drawer-menu.active .drawer-link:nth-child(2) span { transition-delay: 0.2s; }
+        .drawer-menu.active .drawer-link:nth-child(3) span { transition-delay: 0.3s; }
 
         /* ==========================================================================
-           4. HERO SECTION (Expansion & Vignette)
+           4. HERO SECTION (High-End Reveal)
            ========================================================================== */
-        .hero { position: relative; height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; background-color: var(--bg-dark); }
+        .hero { position: relative; height: 100vh; background-color: var(--bg-dark); display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding: 0 var(--space-container); }
         
-        .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; transform: scale(1); will-change: transform; }
-        /* Vignette gradient per leggibilità 100% */
-        .hero-img::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(26,26,26,0.2) 0%, rgba(26,26,26,0.8) 100%), linear-gradient(to bottom, rgba(26,26,26,0.4) 0%, rgba(26,26,26,0.1) 50%, rgba(26,26,26,0.6) 100%); z-index: 2; }
+        .hero-bg-wrap { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+        .hero-bg-wrap::after { 
+            content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,13,13,0.2), rgba(13,13,13,0.8)); z-index: 2; 
+        }
+        
+        /* Ken Burns Effect continuo e impercettibile */
+        .hero-bg-img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transform: scale(1.1); transition: transform 4s var(--ease-out); will-change: transform;
+        }
+        body.is-ready .hero-bg-img { transform: scale(1); }
 
-        .hero-content { position: relative; z-index: 3; text-align: center; color: var(--text-light); width: 100%; padding: 0 1rem; }
+        .hero-content { position: relative; z-index: 3; color: var(--text-light); text-align: center; margin-top: -5vh; }
         
-        /* ==========================================================================
-           5. PHILOSOPHY SECTION (Light)
-           ========================================================================== */
-        .philosophy { padding: var(--section-pad-desktop) 0; background-color: var(--bg-light); color: var(--text-main); }
-        .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-        .philosophy-text p { font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 2rem; }
-        .philosophy-img { width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 4px; }
-        .philosophy-img img { transition: transform var(--transition-slow); }
-        .philosophy:hover .philosophy-img img { transform: scale(1.03); }
+        /* Cinematic Text Reveal */
+        .hero-line { display: block; overflow: hidden; margin-bottom: -0.1em; padding-bottom: 0.1em; }
+        .hero-word {
+            display: inline-block; font-family: var(--font-display); font-size: clamp(3.5rem, 10vw, 9rem); line-height: 1;
+            transform: translateY(110%); opacity: 0;
+            transition: transform 1.8s var(--ease-expo), opacity 1.2s ease; will-change: transform, opacity;
+        }
+        body.is-ready .hero-word { transform: translateY(0); opacity: 1; }
+        
+        .hero-italic { font-style: italic; color: var(--accent); padding-left: 0.2em; }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 3;
+            display: flex; flex-direction: column; align-items: center; gap: 1rem;
+            opacity: 0; transition: opacity 1s 1.5s ease;
+        }
+        body.is-ready .scroll-indicator { opacity: 1; }
+        
+        .scroll-text {
+            font-family: var(--font-body); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(247,246,242,0.5);
+            writing-mode: vertical-rl; text-orientation: mixed;
+        }
+        .scroll-line {
+            width: 1px; height: 60px; background-color: rgba(247,246,242,0.15); position: relative; overflow: hidden;
+        }
+        .scroll-line::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--accent);
+            transform-origin: top; animation: scrollLineAnim 2s var(--ease-expo) infinite;
+        }
+        @keyframes scrollLineAnim {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            50.1% { transform: scaleY(1); transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
 
         /* ==========================================================================
-           6. METRICS SECTION (Dark with Counters)
+           5. PHILOSOPHY & METADATA (Refined Scroll Reveals)
            ========================================================================== */
-        .metrics { padding: var(--section-pad-desktop) 0; background-color: var(--bg-dark); color: var(--text-light); }
-        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem; text-align: center; }
-        .metric-item { display: flex; flex-direction: column; gap: 0.5rem; }
-        .metric-number { font-family: var(--font-display); font-size: clamp(4rem, 6vw, 6rem); color: var(--accent); line-height: 1; }
-        .metric-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 500; color: rgba(249, 248, 246, 0.7); }
+        .philosophy { background-color: var(--bg-light); padding-top: var(--space-section); position: relative; z-index: 4; border-radius: 20px 20px 0 0; margin-top: -20px; }
+        
+        .phil-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+        @media (min-width: 992px) {
+            .phil-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 6rem; }
+        }
+        
+        .phil-text p { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.8; color: var(--text-muted); margin-bottom: 2rem; }
+        
+        .phil-img-mask { 
+            width: 100%; aspect-ratio: 4/5; overflow: hidden; 
+            clip-path: inset(100% 0 0 0); transition: clip-path 1.6s var(--ease-expo); will-change: clip-path;
+        }
+        .phil-img-mask.is-visible { clip-path: inset(0 0 0 0); }
+        
+        .phil-img-parallax { 
+            width: 100%; height: 115%; object-fit: cover; filter: grayscale(100%);
+            transform: translateY(-5%); will-change: transform; transition: transform 0.1s linear;
+        }
+
+        .meta-strip {
+            margin-top: var(--space-section); padding: 2rem 0; 
+            border-top: 1px solid rgba(26,26,26,0.1); border-bottom: 1px solid rgba(26,26,26,0.1);
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2rem;
+            font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600;
+        }
+        .meta-item { display: flex; align-items: center; gap: 0.75rem; }
+        .meta-counter { color: var(--accent); font-family: var(--font-display); font-size: 2rem; line-height: 1; }
 
         /* ==========================================================================
-           7. MENU SECTION (Grid Desktop / List Mobile)
+           6. MENU & FUNCTIONAL FILTERS
            ========================================================================== */
-        .menu-gastronomico { padding: var(--section-pad-desktop) 0; background-color: var(--bg-light); color: var(--text-main); }
+        .menu-section { padding: var(--space-section) 0; background-color: var(--bg-light); }
         
-        .menu-header { text-align: center; margin-bottom: 4rem; }
+        .menu-filters { display: flex; gap: 2rem; margin-bottom: 4rem; overflow-x: auto; scrollbar-width: none; }
+        .menu-filters::-webkit-scrollbar { display: none; }
         
-        .menu-filters { display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 4rem; }
-        .filter-btn { background: none; border: none; font-family: var(--font-body); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); cursor: pointer; position: relative; transition: color 0.3s ease; padding-bottom: 0.5rem; }
-        .filter-btn.active { color: var(--text-main); }
-        .filter-btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: var(--accent); transform: scaleX(0); transition: transform 0.4s var(--ease-out-expo); }
+        .filter-btn { 
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); 
+            padding-bottom: 0.5rem; position: relative; transition: color 0.3s; white-space: nowrap;
+        }
+        .filter-btn.active { color: var(--text-dark); font-weight: 600; }
+        .filter-btn::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: var(--text-dark);
+            transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease-expo);
+        }
         .filter-btn.active::after { transform: scaleX(1); }
 
-        /* Layout Grid per transizioni morbide */
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem 2.5rem; transition: opacity 0.4s ease; opacity: 1; }
-        .menu-grid.is-filtering { opacity: 0; }
+        .menu-list { display: flex; flex-direction: column; border-top: 1px solid rgba(26,26,26,0.1); }
         
-        .menu-card { display: flex; flex-direction: column; gap: 1.5rem; }
-        .card-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 4px; background: #EFECE5; }
-        .card-img img { transition: transform 0.8s var(--ease-out-expo); }
-        .menu-card:hover .card-img img { transform: scale(1.05); }
-        
-        .card-content { display: flex; flex-direction: column; gap: 0.5rem; }
-        .card-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(34,34,34,0.1); padding-bottom: 0.5rem; }
-        .card-title { font-family: var(--font-display); font-size: 1.3rem; }
-        .card-price { font-weight: 600; color: var(--accent); font-size: 1.1rem; }
-        .card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
-
-        /* ==========================================================================
-           8. CONTACT SECTION (Dark Form)
-           ========================================================================== */
-        .contact { padding: var(--section-pad-desktop) 0; background-color: var(--bg-dark); color: var(--text-light); }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 8rem; }
-        
-        .contact-info p { font-size: 1.1rem; color: rgba(249, 248, 246, 0.7); margin-bottom: 1.5rem; line-height: 1.8; }
-        .contact-link { display: inline-block; color: var(--text-light); font-size: 1.5rem; font-family: var(--font-display); position: relative; margin-top: 1rem; }
-        .contact-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform 0.4s var(--ease-out-expo); }
-        .contact-link:hover::after { transform: scaleX(1); transform-origin: left; }
-
-        /* Premium Form - Floating Labels */
-        .premium-form { display: flex; flex-direction: column; gap: 3.5rem; }
-        .input-wrapper { position: relative; width: 100%; }
-        
-        .input-wrapper input, .input-wrapper textarea { width: 100%; border: none; border-bottom: 1px solid rgba(249, 248, 246, 0.2); background: transparent; padding: 0.5rem 0; font-family: var(--font-body); font-size: 1.1rem; color: var(--text-light); outline: none; border-radius: 0; transition: border-color 0.4s ease; }
-        .input-wrapper textarea { resize: none; min-height: 100px; }
-        
-        .input-wrapper label { position: absolute; left: 0; top: 0.5rem; font-size: 1.1rem; color: rgba(249, 248, 246, 0.5); pointer-events: none; transition: all 0.4s var(--ease-out-expo); }
-        
-        /* Floating logic */
-        .input-wrapper input:focus + label, .input-wrapper input:not(:placeholder-shown) + label,
-        .input-wrapper textarea:focus + label, .input-wrapper textarea:not(:placeholder-shown) + label { top: -1.5rem; font-size: 0.8rem; color: var(--accent); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; }
-        .input-wrapper input:focus, .input-wrapper textarea:focus { border-bottom-color: var(--accent); }
-
-        .btn-submit { margin-top: 1rem; align-self: flex-start; padding: 1.2rem 3rem; background-color: var(--text-light); color: var(--text-main); font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: none; border-radius: 100px; cursor: pointer; transition: all 0.4s var(--ease-out-expo); box-shadow: 0 4px 15px rgba(0,0,0,0); }
-        .btn-submit:hover { background-color: var(--accent); color: var(--text-light); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(168, 93, 65, 0.3); }
-
-        footer { text-align: center; padding: 3rem 0; background-color: var(--bg-dark); color: rgba(249, 248, 246, 0.4); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; border-top: 1px solid rgba(249, 248, 246, 0.05); }
-
-        /* ==========================================================================
-           9. RESPONSIVE DESIGN (Quiet Luxury Mobile)
-           ========================================================================== */
-        @media (max-width: 1024px) {
-            .philosophy-grid { grid-template-columns: 1fr; gap: 4rem; }
-            .contact-grid { grid-template-columns: 1fr; gap: 5rem; }
-            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 2rem; }
+        .menu-row {
+            display: flex; align-items: center; padding: 2.5rem 0;
+            border-bottom: 1px solid rgba(26,26,26,0.1);
+            opacity: 0; transform: translateY(30px); 
+            transition: opacity 1.2s var(--ease-expo), transform 1.2s var(--ease-expo);
+            will-change: opacity, transform;
         }
+        .menu-row.is-visible { opacity: 1; transform: translateY(0); }
+        
+        .menu-img-wrap { 
+            width: 70px; height: 70px; margin-right: 2rem; flex-shrink: 0; overflow: hidden; 
+            clip-path: inset(100% 0 0 0); transition: clip-path 1.2s var(--ease-expo); 
+        }
+        .menu-row.is-visible .menu-img-wrap { clip-path: inset(0 0 0 0); transition-delay: 0.1s; }
+        .menu-img-wrap img { transform: scale(1.3); transition: transform 1.2s var(--ease-expo); }
+        .menu-row.is-visible .menu-img-wrap img { transform: scale(1); transition-delay: 0.1s; }
+        
+        .menu-info { flex-grow: 1; }
+        .menu-name { font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 2rem); margin-bottom: 0.25rem; }
+        .menu-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; max-width: 500px; }
+        .menu-price { font-family: var(--font-body); font-weight: 500; font-size: 1.2rem; margin-left: 1rem; }
 
         @media (max-width: 768px) {
-            :root { --section-pad-desktop: var(--section-pad-mobile); }
-            
-            /* Header & Nav */
-            .nav-desktop { display: none; }
-            .hamburger { display: block; }
-            header { padding: 1.2rem 1.5rem; }
-            header.scrolled { padding: 1rem 1.5rem; }
-
-            /* Metrics */
-            .metrics-grid { grid-template-columns: 1fr; gap: 3rem; }
-
-            /* Menu Grid -> Linear List */
-            .menu-filters { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 0.5rem; }
-            .menu-filters::-webkit-scrollbar { display: none; }
-            
-            .menu-grid { display: flex; flex-direction: column; gap: 2rem; }
-            .menu-card { flex-direction: row; align-items: center; gap: 1.5rem; }
-            .card-img { width: 90px; height: 90px; aspect-ratio: 1/1; flex-shrink: 0; border-radius: 4px; }
-            
-            .card-content { flex: 1; justify-content: center; gap: 0.25rem; }
-            .card-header { border-bottom: none; padding-bottom: 0; align-items: center; }
-            .card-title { font-size: 1.1rem; }
-            .card-price { font-size: 1rem; }
-            .card-desc { font-size: 0.85rem; line-height: 1.4; }
+            .menu-row { padding: 1.5rem 0; }
+            .menu-img-wrap { width: 50px; height: 50px; margin-right: 1rem; }
         }
+
+        /* ==========================================================================
+           7. CONTACT
+           ========================================================================== */
+        .contact-section { padding: var(--space-section) 0; background-color: var(--bg-dark); color: var(--text-light); }
+        
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+        @media (min-width: 992px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; } }
+
+        .live-time {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(247,246,242,0.5);
+            margin-bottom: 3rem;
+        }
+        .blink-dot { width: 6px; height: 6px; background-color: #A85D41; border-radius: 50%; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        .contact-info p { font-size: 1.1rem; line-height: 1.8; color: rgba(247,246,242,0.7); margin-bottom: 2rem; max-width: 400px; }
+        
+        .form-wrap { display: flex; flex-direction: column; gap: 3rem; }
+        .input-group { position: relative; width: 100%; }
+        .input-group input {
+            width: 100%; padding: 0.5rem 0; background: transparent; border: none; border-radius: 0;
+            font-family: var(--font-body); font-size: 1.2rem; color: var(--text-light); outline: none;
+        }
+        .input-group label {
+            position: absolute; left: 0; top: 0.5rem; font-size: 1.2rem; color: rgba(247,246,242,0.4);
+            pointer-events: none; transition: all 0.5s var(--ease-expo);
+        }
+        .input-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: rgba(247,246,242,0.2); }
+        .input-line::after {
+            content: ''; position: absolute; inset: 0; background-color: var(--accent);
+            transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease-expo);
+        }
+
+        .input-group input:focus + label, .input-group input:not(:placeholder-shown) + label {
+            top: -1.2rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent);
+        }
+        .input-group input:focus ~ .input-line::after { transform: scaleX(1); }
+
+        .btn-submit {
+            align-self: flex-start; margin-top: 1rem; padding: 1.2rem 3rem;
+            background-color: var(--text-light); color: var(--text-dark);
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+            border-radius: 2px; overflow: hidden; position: relative; transition: color 0.4s;
+        }
+
+        footer { text-align: center; padding: 2rem 0; background-color: var(--bg-dark); color: rgba(247,246,242,0.3); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; border-top: 1px solid rgba(247,246,242,0.05); }
+
+        /* Animation utilities */
+        .js-scroll-reveal { opacity: 0; transform: translateY(40px); transition: opacity 1.2s var(--ease-expo), transform 1.2s var(--ease-expo); }
+        .js-scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header id="main-header">
-        <div class="logo">Lievito Assoluto</div>
-        <nav class="nav-desktop">
-            <a href="#filosofia">Filosofia</a>
-            <a href="#metriche">L'Essenza</a>
-            <a href="#menu">Menu</a>
-            <a href="#prenota">Riserva</a>
-        </nav>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-        </div>
+    <div class="noise-layer"></div>
+
+    <header id="header">
+        <a href="#" class="logo">Lievito Assoluto</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <div class="hamburger-lines"></div>
+        </button>
     </header>
 
-    <!-- MOBILE DRAWER & OVERLAY -->
     <div class="drawer-overlay" id="drawer-overlay"></div>
     <nav class="drawer-menu" id="drawer-menu">
         <div class="drawer-links">
-            <a href="#filosofia" class="drawer-link">Filosofia</a>
-            <a href="#metriche" class="drawer-link">L'Essenza</a>
-            <a href="#menu" class="drawer-link">Menu</a>
-            <a href="#prenota" class="drawer-link">Riserva</a>
+            <a href="#filosofia" class="drawer-link"><span>Il Manifesto</span></a>
+            <a href="#menu" class="drawer-link"><span>Collezione</span></a>
+            <a href="#contatti" class="drawer-link"><span>Riserva</span></a>
         </div>
     </nav>
 
-    <!-- HERO SECTION (Dark Image) -->
+    <!-- HIGHLIGHT: HERO RIELABORATA -->
     <section class="hero" id="hero">
-        <div class="hero-img" id="hero-img">
-            <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=80&w=1600" alt="Impasto Lievito">
+        <div class="hero-bg-wrap">
+            <img class="hero-bg-img" src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?q=100&w=2000" alt="Texture Impasto">
         </div>
+        
         <div class="hero-content">
-            <div class="title-subtitle reveal-wrap js-reveal"><span class="reveal-inner">Silenzio, Tempo, Materia</span></div>
-            <h1 class="title-display reveal-wrap js-reveal"><span class="reveal-inner">Architettura</span></h1>
-            <h1 class="title-display reveal-wrap js-reveal" style="transition-delay: 0.1s;"><span class="reveal-inner">del Gusto</span></h1>
+            <span class="hero-line">
+                <span class="hero-word" style="transition-delay: 0.1s">Architettura</span>
+            </span>
+            <span class="hero-line">
+                <span class="hero-word" style="transition-delay: 0.25s">del</span>
+                <span class="hero-word hero-italic" style="transition-delay: 0.35s">Gusto</span>
+            </span>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scorri</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- PHILOSOPHY SECTION (Light) -->
+    <!-- Philosophy -->
     <section class="philosophy" id="filosofia">
-        <div class="container philosophy-grid">
-            <div class="philosophy-text reveal-fade js-reveal">
-                <div class="title-subtitle">Il Manifesto</div>
-                <h2 class="title-section">Quiet Luxury,<br>Loud Ingredients.</h2>
-                <p>Non cerchiamo l'eccesso visivo, ma l'impatto sensoriale assoluto. La nostra materia prima parla da sola. Selezioniamo farine biologiche macinate a pietra e le idratiamo fino al limite strutturale, rispettando i tempi dettati dalla natura, non dalle macchine.</p>
-                <p>Ogni disco di pasta è una tela bianca in cui acidità, sapidità e croccantezza trovano il loro perfetto equilibrio geometrico.</p>
+        <div class="container phil-grid">
+            <div class="phil-text js-scroll-reveal">
+                <div class="subtitle">La Materia</div>
+                <h2 class="section-title">Strutture<br>Perfette.</h2>
+                <p>Nessun compromesso. Nel nostro laboratorio la chimica incontra il calore. Farine non raffinate, idratazione millimetrica e tempo. Questo è l'unico alfabeto che riconosciamo.</p>
+                <p>Non cerchiamo l'eccesso visivo, ma un impatto sensoriale puro. Ogni disco di pasta risponde a un rigoroso studio geometrico e strutturale.</p>
             </div>
-            <div class="philosophy-img reveal-fade js-reveal" style="transition-delay: 0.2s;">
-                <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=800" alt="Materia prima">
-            </div>
-        </div>
-    </section>
-
-    <!-- METRICS SECTION (Dark) -->
-    <section class="metrics" id="metriche">
-        <div class="container metrics-grid">
-            <div class="metric-item reveal-fade js-reveal">
-                <div class="metric-number js-counter" data-target="72" data-suffix="H">0</div>
-                <div class="metric-label">Lievitazione Lenta</div>
-            </div>
-            <div class="metric-item reveal-fade js-reveal" style="transition-delay: 0.1s;">
-                <div class="metric-number js-counter" data-target="85" data-suffix="%">0</div>
-                <div class="metric-label">Alta Idratazione</div>
-            </div>
-            <div class="metric-item reveal-fade js-reveal" style="transition-delay: 0.2s;">
-                <div class="metric-number js-counter" data-target="100" data-suffix="%">0</div>
-                <div class="metric-label">Eccellenza DOP</div>
+            <div class="phil-img-wrap">
+                <div class="phil-img-mask js-mask-reveal">
+                    <img class="phil-img-parallax js-parallax" src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=1000" alt="Dettaglio impasto">
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- MENU SECTION (Light) -->
-    <section class="menu-gastronomico" id="menu">
         <div class="container">
-            <!-- TITOLO DEDICATO AGGIUNTO PRIMA DEL MENU -->
-            <div class="menu-header reveal-fade js-reveal">
-                <div class="title-subtitle">Gastronomia</div>
-                <h2 class="title-section">La Nostra Collezione</h2>
+            <div class="meta-strip js-scroll-reveal">
+                <div class="meta-item">
+                    <span class="meta-counter js-counter" data-target="72">0</span>
+                    <span>Ore di Maturazione</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-counter js-counter" data-target="85">0</span>
+                    <span>% Idratazione Estrema</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-counter js-counter" data-target="100">0</span>
+                    <span>% Ingredienti Puri</span>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="menu-filters reveal-fade js-reveal" style="transition-delay: 0.1s;">
-                <button class="filter-btn active" data-filter="all">Tutta la Collezione</button>
-                <button class="filter-btn" data-filter="classiche">Le Classiche</button>
+    <!-- Menu -->
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <h2 class="section-title js-scroll-reveal">Collezione</h2>
+            
+            <div class="menu-filters js-scroll-reveal">
+                <button class="filter-btn active" data-filter="all">Completo</button>
+                <button class="filter-btn" data-filter="classiche">Classiche</button>
                 <button class="filter-btn" data-filter="avanguardia">Avanguardia</button>
             </div>
 
-            <div class="menu-grid reveal-fade js-reveal" id="menu-grid" style="transition-delay: 0.2s;">
-                
-                <article class="menu-card" data-category="classiche">
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=800" alt="Margherita Assoluta"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-title">Margherita Assoluta</span>
-                            <span class="card-price">€ 12</span>
-                        </div>
-                        <p class="card-desc">San Marzano DOP, Fiordilatte di Agerola, Basilico fresco cristallizzato, Olio EVO.</p>
+            <div class="menu-list" id="menu-list">
+                <article class="menu-row js-menu-item" data-category="classiche">
+                    <div class="menu-img-wrap"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=400" alt="Margherita" loading="lazy"></div>
+                    <div class="menu-info">
+                        <h3 class="menu-name">Margherita Assoluta</h3>
+                        <p class="menu-desc">San Marzano DOP, Fiordilatte di Agerola, Basilico in infusione.</p>
                     </div>
+                    <div class="menu-price">12</div>
                 </article>
 
-                <article class="menu-card" data-category="classiche">
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800" alt="Marinara Geometrica"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-title">Marinara Geometrica</span>
-                            <span class="card-price">€ 10</span>
-                        </div>
-                        <p class="card-desc">Pomodoro Corbarino, Aglio nero fermentato, Origano selvatico di montagna.</p>
+                <article class="menu-row js-menu-item" data-category="classiche">
+                    <div class="menu-img-wrap"><img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=400" alt="Marinara" loading="lazy"></div>
+                    <div class="menu-info">
+                        <h3 class="menu-name">Marinara Geometrica</h3>
+                        <p class="menu-desc">Pomodoro Corbarino, Aglio nero fermentato, Origano selvatico.</p>
                     </div>
+                    <div class="menu-price">10</div>
                 </article>
 
-                <article class="menu-card" data-category="avanguardia">
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800" alt="Oro Verde"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-title">Oro Verde</span>
-                            <span class="card-price">€ 18</span>
-                        </div>
-                        <p class="card-desc">Crema di Pistacchio, Mortadella Favola IGP, Stracciatella, Granella tostata.</p>
+                <article class="menu-row js-menu-item" data-category="avanguardia">
+                    <div class="menu-img-wrap"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=400" alt="Oro Verde" loading="lazy"></div>
+                    <div class="menu-info">
+                        <h3 class="menu-name">Struttura Pistacchio</h3>
+                        <p class="menu-desc">Crema di Pistacchio, Mortadella Favola, Stracciatella liquida.</p>
                     </div>
+                    <div class="menu-price">18</div>
                 </article>
 
-                <article class="menu-card" data-category="classiche">
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=800" alt="Cosacca Storica"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-title">Cosacca Storica</span>
-                            <span class="card-price">€ 11</span>
-                        </div>
-                        <p class="card-desc">Pomodorino del Piennolo, Pecorino Romano 24 mesi, Pepe nero tostato.</p>
+                <article class="menu-row js-menu-item" data-category="avanguardia">
+                    <div class="menu-img-wrap"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=400" alt="Sottobosco" loading="lazy"></div>
+                    <div class="menu-info">
+                        <h3 class="menu-name">Sottobosco</h3>
+                        <p class="menu-desc">Vellutata di patate, Tartufo nero, Nocciole tostate.</p>
                     </div>
+                    <div class="menu-price">22</div>
                 </article>
-
-                <article class="menu-card" data-category="avanguardia">
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" alt="Tartufo & Terra"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-title">Tartufo & Terra</span>
-                            <span class="card-price">€ 22</span>
-                        </div>
-                        <p class="card-desc">Vellutata di patate, Tartufo nero estivo, Nocciole tostate, Fiordilatte.</p>
-                    </div>
-                </article>
-
-                <article class="menu-card" data-category="avanguardia">
-                    <div class="card-img"><img src="https://images.unsplash.com/photo-1593504049359-74330189a345?q=80&w=800" alt="Sottobosco"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-title">Sottobosco</span>
-                            <span class="card-price">€ 16</span>
-                        </div>
-                        <p class="card-desc">Funghi porcini cotti a legna, Provola affumicata campana, Polvere di liquirizia.</p>
-                    </div>
-                </article>
-
             </div>
         </div>
     </section>
 
-    <!-- CONTACT SECTION (Dark Form) -->
-    <section class="contact" id="prenota">
+    <!-- Contact Section -->
+    <section class="contact-section" id="contatti">
         <div class="container contact-grid">
-            <div class="contact-info reveal-fade js-reveal">
-                <div class="title-subtitle">Esperienza</div>
-                <h2 class="title-section">Riserva il tuo<br>Tavolo.</h2>
-                <p>Via della Geometria, 42<br>20100 Milano, Italia</p>
-                <p>Lun - Dom: 19:00 — 23:30<br>Martedì: Chiuso</p>
-                <a href="tel:+39021234567" class="contact-link">T. +39 02 1234567</a>
+            <div class="contact-info js-scroll-reveal">
+                <div class="live-time">
+                    <span class="blink-dot"></span> 
+                    Milano &mdash; IT &bull; <span id="time-display">00:00 CEST</span>
+                </div>
+                
+                <h2 class="section-title" style="margin-bottom: 2rem;">Accesso.</h2>
+                <p>Manteniamo un limite rigoroso di ospiti per garantire la precisione di ogni esecuzione. Compila i dati per richiedere l'accesso al laboratorio.</p>
             </div>
 
-            <div class="contact-form-wrap reveal-fade js-reveal" style="transition-delay: 0.2s;">
-                <form class="premium-form" onsubmit="event.preventDefault();">
-                    <div class="input-wrapper">
-                        <!-- L'uso di placeholder=" " abilita la logica CSS :placeholder-shown per il Floating Label -->
-                        <input type="text" id="name" placeholder=" " required>
-                        <label for="name">Nome e Cognome</label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="email" id="email" placeholder=" " required>
-                        <label for="email">Indirizzo Email</label>
-                    </div>
-                    <div class="input-wrapper">
-                        <input type="text" id="date" placeholder=" " required>
-                        <label for="date">Data e Numero di Ospiti</label>
-                    </div>
-                    <button type="submit" class="btn-submit">Invia Richiesta</button>
-                </form>
-            </div>
+            <form class="form-wrap js-scroll-reveal" onsubmit="event.preventDefault();">
+                <div class="input-group">
+                    <input type="text" id="name" placeholder=" " required>
+                    <label for="name">Nome completo</label>
+                    <div class="input-line"></div>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="date" placeholder=" " required>
+                    <label for="date">Data e numero ospiti</label>
+                    <div class="input-line"></div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Invia Richiesta</button>
+            </form>
         </div>
     </section>
 
     <footer>
-        <div class="container">&copy; 2026 Lievito Assoluto. Quiet Luxury, Masterfully Crafted.</div>
+        <div class="container">&copy; 2026 Lievito Assoluto.</div>
     </footer>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT ENGINE -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            /* --- 1. HEADER GLASSMORPHISM & SCROLL --- */
-            const header = document.getElementById('main-header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) header.classList.add('scrolled');
-                else header.classList.remove('scrolled');
+            // 1. Initial Reveal (Triggers Hero Animations)
+            setTimeout(() => { document.body.classList.add('is-ready'); }, 150);
+
+            // 2. Drawer Menu Logic
+            const hamburger = document.getElementById('hamburger');
+            const drawerMenu = document.getElementById('drawer-menu');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+            const drawerLinks = document.querySelectorAll('.drawer-link');
+
+            const toggleMenu = () => {
+                const isActive = hamburger.classList.contains('active');
+                hamburger.classList.toggle('active');
+                drawerMenu.classList.toggle('active');
+                drawerOverlay.classList.toggle('active');
+                document.body.style.overflow = isActive ? '' : 'hidden';
+            };
+
+            hamburger.addEventListener('click', toggleMenu);
+            drawerOverlay.addEventListener('click', toggleMenu);
+            drawerLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+            // 3. Functional Menu Filter Logic
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const menuItems = document.querySelectorAll('.js-menu-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(f => f.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const category = btn.getAttribute('data-filter');
+
+                    menuItems.forEach((item, index) => {
+                        item.classList.remove('is-visible');
+                        
+                        setTimeout(() => {
+                            if (category === 'all' || item.getAttribute('data-category') === category) {
+                                item.style.display = 'flex';
+                                void item.offsetWidth; // Force reflow
+                                
+                                // Staggered reveal for filtered items
+                                setTimeout(() => {
+                                    item.classList.add('is-visible');
+                                }, index * 100); 
+                                
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }, 500); 
+                    });
+                });
             });
 
-            /* --- 2. HERO PARALLAX EXPANSION --- */
-            const heroImg = document.getElementById('hero-img');
+            // 4. Scroll Intersections
+            const revealElements = document.querySelectorAll('.js-scroll-reveal, .js-mask-reveal, .js-menu-item');
+            const counters = document.querySelectorAll('.js-counter');
+
+            const observerOptions = { root: null, rootMargin: '0px 0px -15% 0px', threshold: 0 };
+
+            const runCounter = (el) => {
+                const target = parseInt(el.getAttribute('data-target'));
+                let current = 0;
+                const update = () => {
+                    current += target / 60; 
+                    if(current < target) {
+                        el.innerText = Math.ceil(current);
+                        requestAnimationFrame(update);
+                    } else {
+                        el.innerText = target;
+                    }
+                };
+                update();
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        
+                        if (target.classList.contains('js-menu-item') && target.style.display !== 'none') {
+                            target.style.transitionDelay = `${index * 0.1}s, ${index * 0.1}s`;
+                            target.classList.add('is-visible');
+                            
+                            // Reset delay after animation to allow clean filtering later
+                            setTimeout(() => { target.style.transitionDelay = '0s, 0s'; }, 1000);
+                        } else {
+                            target.classList.add('is-visible');
+                        }
+
+                        if (target.classList.contains('meta-strip')) {
+                            counters.forEach(c => runCounter(c));
+                        }
+                        
+                        observer.unobserve(target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 5. Light Image Parallax on Scroll (Mobile Safe)
+            const parallaxImage = document.querySelector('.js-parallax');
             let ticking = false;
+
             window.addEventListener('scroll', () => {
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
-                        // Scala l'immagine in base allo scroll (max 1.15x)
-                        let scale = 1 + (window.scrollY * 0.0003);
-                        if (scale > 1.15) scale = 1.15;
-                        heroImg.style.transform = `scale(${scale})`;
+                        if (parallaxImage) {
+                            const rect = parallaxImage.parentElement.getBoundingClientRect();
+                            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                                const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+                                parallaxImage.style.transform = `translateY(${ (scrollPercent * 15) - 7.5 }%)`;
+                            }
+                        }
                         ticking = false;
                     });
                     ticking = true;
                 }
             });
 
-            /* --- 3. INTERSECTION OBSERVER (REVEAL & COUNTERS) --- */
-            const observerOptions = { root: null, rootMargin: '0px 0px -15% 0px', threshold: 0.1 };
-            
-            // Animazione contatori
-            const animateCounter = (el) => {
-                const target = parseInt(el.getAttribute('data-target'));
-                const suffix = el.getAttribute('data-suffix');
-                let count = 0;
-                const duration = 2000; // 2 secondi
-                const increment = target / (duration / 16); // 60fps
-
-                const updateCount = () => {
-                    count += increment;
-                    if (count < target) {
-                        el.innerText = Math.ceil(count) + suffix;
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        el.innerText = target + suffix;
-                    }
-                };
-                updateCount();
+            // 6. Live Time Indicator
+            const timeDisplay = document.getElementById('time-display');
+            const updateTime = () => {
+                const options = { timeZone: 'Europe/Rome', hour: '2-digit', minute: '2-digit', hour12: false };
+                timeDisplay.textContent = new Intl.DateTimeFormat([], options).format(new Date()) + ' CEST';
             };
-
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        
-                        // Check per i contatori
-                        const counters = entry.target.querySelectorAll('.js-counter');
-                        counters.forEach(counter => animateCounter(counter));
-                        if(entry.target.classList.contains('js-counter')) animateCounter(entry.target);
-
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.js-reveal').forEach(el => revealObserver.observe(el));
-            // Innesco immediato per l'hero
-            setTimeout(() => { document.querySelectorAll('.hero .js-reveal').forEach(el => el.classList.add('is-visible')); }, 100);
-
-            /* --- 4. MOBILE DRAWER MENU --- */
-            const hamburger = document.getElementById('hamburger');
-            const drawerMenu = document.getElementById('drawer-menu');
-            const drawerOverlay = document.getElementById('drawer-overlay');
-            const drawerLinks = document.querySelectorAll('.drawer-link');
-
-            const toggleDrawer = () => {
-                const isActive = hamburger.classList.contains('active');
-                hamburger.classList.toggle('active');
-                drawerMenu.classList.toggle('active');
-                drawerOverlay.classList.toggle('active');
-                
-                if (!isActive) {
-                    document.body.style.overflow = 'hidden';
-                    // Forza colore scuro dell'hamburger su sfondo chiaro del menu
-                    hamburger.style.color = 'var(--text-main)';
-                } else {
-                    document.body.style.overflow = '';
-                    hamburger.style.color = '';
-                }
-            };
-
-            hamburger.addEventListener('click', toggleDrawer);
-            drawerOverlay.addEventListener('click', toggleDrawer);
-            drawerLinks.forEach(link => link.addEventListener('click', () => {
-                if (drawerMenu.classList.contains('active')) toggleDrawer();
-            }));
-
-            /* --- 5. MENU FILTERS (FADE IN/OUT) --- */
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const menuGrid = document.getElementById('menu-grid');
-            const menuCards = document.querySelectorAll('.menu-card');
-
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const filter = btn.getAttribute('data-filter');
-
-                    // Fase 1: Fade out (opacità a 0)
-                    menuGrid.classList.add('is-filtering');
-
-                    // Fase 2: Riordino DOM e Fade in
-                    setTimeout(() => {
-                        menuCards.forEach(card => {
-                            if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                                card.style.display = 'flex'; // Ripristina flex layout
-                            } else {
-                                card.style.display = 'none'; // Rimuove spazio occupato
-                            }
-                        });
-                        
-                        // Wait frame per innescare transizione CSS
-                        requestAnimationFrame(() => {
-                            menuGrid.classList.remove('is-filtering');
-                        });
-                    }, 400); // Wait time matching CSS transition
-                });
-            });
-
+            updateTime();
+            setInterval(updateTime, 1000);
         });
     </script>
 </body>
