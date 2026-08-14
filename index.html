@@ -45,7 +45,6 @@
        TYPOGRAPHY & ACCENTS
        ========================================== */
     h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; color: var(--text-main); line-height: 1.2; }
-    /* Leggermente ridotto l'header principale per aiutare gli ingombri verticali */
     h1 { font-size: clamp(3rem, 8vw, 5.5rem); letter-spacing: 0.03em; text-transform: uppercase; }
     h2 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.01em; margin-bottom: 1.5rem; }
     h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 1rem; }
@@ -99,11 +98,10 @@
 
 
     /* ==========================================
-       1. HERO SECTION (Compatta per stare su 1 schermo)
+       1. HERO SECTION (Immagine in HTML)
        ========================================== */
     .hero-premium {
       position: relative;
-      /* Ridotta l'altezza per evitare lo scroll */
       min-height: calc(100vh - 85px); 
       display: flex;
       align-items: center;
@@ -116,10 +114,16 @@
       right: 0;
       width: 100%;
       height: 60vh;
-      background-image: url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-      background-size: cover;
-      background-position: center;
       z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-image-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
     }
 
     .hero-image-bg::after {
@@ -133,12 +137,12 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      margin-top: 10vh; /* Ridotto */
+      margin-top: 10vh;
     }
 
     .hero-text-box {
       background-color: var(--bg-surface);
-      padding: 2.5rem 2rem; /* Ridotto il padding */
+      padding: 2.5rem 2rem;
       max-width: 650px;
       box-shadow: 0 30px 60px rgba(0,0,0,0.08);
       border: 1px solid var(--border-color);
@@ -161,7 +165,7 @@
     }
     
     .hero-text-content { 
-      margin-top: 1.5rem; /* Margine ridotto per compattare */
+      margin-top: 1.5rem;
       padding-top: 1.5rem; 
       border-top: 1px solid var(--border-color); 
     }
@@ -171,7 +175,7 @@
     @media (min-width: 992px) {
       .hero-premium { 
         padding: 0; 
-        height: calc(100vh - 85px); /* Altezza esatta per non sforare */
+        height: calc(100vh - 85px);
         min-height: auto;
       }
       .hero-image-bg {
@@ -182,13 +186,12 @@
         background: linear-gradient(to right, rgba(250, 248, 245, 1) 0%, rgba(250, 248, 245, 0) 30%);
       }
       .hero-content-wrapper { margin-top: 0; }
-      /* Margini e padding decisamente più stretti su desktop */
       .hero-text-box { padding: 2.5rem 3.5rem; margin-left: 0; margin-top: 0; } 
     }
 
 
     /* ==========================================
-       2. EDITORIAL VISION (Migliorato Font & Animazione Quote)
+       2. EDITORIAL VISION
        ========================================== */
     .vision-premium { 
       padding: 9rem 0; 
@@ -235,7 +238,7 @@
 
 
     /* ==========================================
-       3. LE TRE DIMENSIONI (Perfezionata)
+       3. LE TRE DIMENSIONI
        ========================================== */
     .dimensions-premium { padding: 8rem 0; background-color: var(--bg-main); }
     .dimensions-header { text-align: center; margin-bottom: 6rem; }
@@ -280,16 +283,24 @@
 
 
     /* ==========================================
-       4. AREE DI LAVORO (Aggiunta Immagine Parallax)
+       4. AREE DI LAVORO (Immagine in HTML)
        ========================================== */
     .parallax-sanctuary {
       position: relative;
       padding: 12rem 0;
-      background-image: url('https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
       background-color: #333; 
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
+      overflow: hidden;
+    }
+
+    .parallax-bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
     }
 
     .parallax-sanctuary::before {
@@ -396,6 +407,48 @@
 
 
     /* ==========================================
+       STILI PER SEZIONE MASSAGGI A SCHEDE (TABS)
+       ========================================== */
+    .tabs-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      padding: 0.8rem 1.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background-color: var(--primary-gold);
+      color: #FFFFFF;
+      border-color: var(--primary-gold);
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+
+    /* ==========================================
        ANIMAZIONI DI INGRESSO (SCROLL)
        ========================================== */
     .animate-up { opacity: 0; transform: translateY(40px); }
@@ -425,7 +478,7 @@
 
 
     /* ==========================================
-       SEZIONI INTERNE E CONTATTI (Intatte)
+       SEZIONI INTERNE E CONTATTI
        ========================================== */
     .sub-section { margin-bottom: 5rem; scroll-margin-top: 110px; }
     .content-card {
@@ -487,7 +540,7 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="#craniosacrale" class="dropdown-toggle nav-trigger">TRATTAMENTI</a>
+          <a href="#massaggi-section" class="dropdown-toggle nav-trigger">TRATTAMENTI</a>
           <ul class="dropdown-menu">
             <li><a href="#craniosacrale" class="nav-trigger">Craniosacrale</a></li>
             <li><a href="#massaggio-rilassante" class="nav-trigger">Massaggio rilassante</a></li>
@@ -507,7 +560,7 @@
         <li class="has-dropdown">
           <a href="#movimento-respiro" class="dropdown-toggle nav-trigger">ATTIVITÀ</a>
           <ul class="dropdown-menu">
-            <li><a href="#movimento-respiro" class="nav-trigger">Movimento e Respiro</a></li>
+            <li><a href="#movimento-respiro-sub" class="nav-trigger">Movimento e Respiro</a></li>
             <li><a href="#meditazioni" class="nav-trigger">Meditazioni</a></li>
             <li><a href="#incontri-workshop" class="nav-trigger">Incontri e Workshop</a></li>
           </ul>
@@ -520,9 +573,11 @@
   <main>
     <section id="home" class="page-section active" style="padding-top: 0;">
       
-      <!-- 1. HERO SECTION (Ottimizzata) -->
+      <!-- 1. HERO SECTION (Con Immagine in HTML) -->
       <div class="hero-premium">
-        <div class="hero-image-bg"></div>
+        <div class="hero-image-bg">
+          <img src="hero.jpg" alt="Amana Hero Image">
+        </div>
         <div class="container">
           <div class="hero-content-wrapper">
             <div class="hero-text-box">
@@ -539,7 +594,7 @@
         </div>
       </div>
 
-      <!-- 2. VISIONE EDITORIALE (Migliorata l'animazione) -->
+      <!-- 2. VISIONE EDITORIALE -->
       <div class="vision-premium">
         <div class="container">
           <div class="vision-inner">
@@ -558,7 +613,7 @@
         </div>
       </div>
 
-      <!-- 3. LE TRE DIMENSIONI (Perfezionata) -->
+      <!-- 3. LE TRE DIMENSIONI -->
       <div class="dimensions-premium">
         <div class="container">
           <div class="dimensions-header animate-up" style="animation-delay: 0.1s;">
@@ -595,13 +650,14 @@
           </div>
 
           <div class="triptych-footer-quote animate-up" style="animation-delay: 0.6s;">
-            <p>"Non esiste un unico modo di stare bene. Esiste il modo che, in quel momento, può essere più adatto a te."</p>
+            <p>"Non existe un unico modo di stare bene. Esiste il modo che, in quel momento, può essere più adatto a te."</p>
           </div>
         </div>
       </div>
 
-      <!-- 4. AREE DI LAVORO (Aggiunta Immagine Parallax) -->
+      <!-- 4. AREE DI LAVORO (Con Immagine in HTML) -->
       <div class="parallax-sanctuary">
+        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Sanctuary Parallax Image" class="parallax-bg-img">
         <div class="container parallax-content-wrapper">
           
           <div class="parallax-header animate-up" style="animation-delay: 0.1s;">
@@ -639,7 +695,7 @@
     </section>
 
     <!-- ==========================================
-         ALTRE SEZIONI (TOTALMENTE INTATTE)
+         SEZIONE: IL MIO CAMMINO (Totalmente Invariata)
          ========================================== -->
     <section id="il-mio-cammino" class="page-section">
       <div class="container" style="text-align: center; margin-bottom: 3rem;">
@@ -676,25 +732,125 @@
       </div>
     </section>
 
-    <section id="craniosacrale" class="page-section">
-      <div class="container content-card">
-        <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamenti</span>
-        <h2>Trattamento Craniosacrale</h2>
-        <p>Ispirato all'approccio del Dr. John E. Upledger...</p>
+    <!-- ==========================================
+         SEZIONE: MASSAGGI / TRATTAMENTI (A Schede - Tabs)
+         ========================================== -->
+    <section id="massaggi-section" class="page-section">
+      <div class="container" style="text-align: center; margin-bottom: 2rem;">
+        <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.4rem;">Trattamenti & Massaggi</span>
+        <h2>Scegli il tuo momento di ascolto</h2>
+      </div>
+
+      <div class="container">
+        <!-- Bottoni Schede -->
+        <div class="tabs-nav">
+          <button class="tab-btn active" onclick="switchTab('craniosacrale')">Craniosacrale</button>
+          <button class="tab-btn" onclick="switchTab('massaggio-rilassante')">Massaggio Rilassante</button>
+          <button class="tab-btn" onclick="switchTab('massaggio-coppia')">Massaggio di Coppia</button>
+          <button class="tab-btn" onclick="switchTab('fram')">FRAM</button>
+          <button class="tab-btn" onclick="switchTab('trattamenti-distanza')">A Distanza</button>
+        </div>
+
+        <!-- Contenuto Schede -->
+        <div id="craniosacrale" class="tab-pane active content-card">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
+          <h2>Trattamento Craniosacrale</h2>
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Craniosacrale" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
+          <p>Ispirato all'approccio del Dr. John E. Upledger, il trattamento craniosacrale lavora delicatamente sui ritmi profondi del corpo e sul rilascio emozionale, favorendo un profondo riequilibrio dell'intero sistema nervoso.</p>
+        </div>
+
+        <div id="massaggio-rilassante" class="tab-pane content-card">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
+          <h2>Massaggio Rilassante</h2>
+          <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Massaggio Rilassante" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
+          <p>Un'esperienza dedicata al rilassamento muscolare e mentale. Attraverso sfioramenti caldi e avvolgenti, aiuta a sciogliere le tensioni accumulate nella vita quotidiana.</p>
+        </div>
+
+        <div id="massaggio-coppia" class="tab-pane content-card">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
+          <h2>Massaggio di Coppia</h2>
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Massaggio di Coppia" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
+          <p>Un momento condiviso di armonia e benessere per due persone. Uno spazio calmo e accogliente per rigenerarsi insieme, sintonizzando respiro e presenza.</p>
+        </div>
+
+        <div id="fram" class="tab-pane content-card">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
+          <h2>FRAM (Corpo, Respiro, Energia)</h2>
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="FRAM" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
+          <p>Un percorso sintetico e integrato che unisce lavoro corporeo, consapevolezza del respiro e armonizzazione energetica per ritrovare equilibrio interiore.</p>
+        </div>
+
+        <div id="trattamenti-distanza" class="tab-pane content-card">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
+          <h2>Trattamenti a Distanza</h2>
+          <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Trattamenti a Distanza" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
+          <p>Sessioni dedicate all'ascolto energetico anche a distanza, pensate per chi desidera ricevere un riequilibrio interiore ovunque si trovi.</p>
+        </div>
+
       </div>
     </section>
     
+    <!-- ==========================================
+         SEZIONE: PERCORSI (Uno Sotto l'Altro)
+         ========================================== -->
     <section id="percorsi" class="page-section">
-      <div class="container content-card">
-        <h2>Percorsi</h2>
-        <p>Contenuto da inserire.</p>
+      <div class="container" style="text-align: center; margin-bottom: 3rem;">
+        <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.4rem;">Cammini di Crescita</span>
+        <h2>I Percorsi</h2>
+      </div>
+
+      <div class="container">
+        
+        <div id="percorsi-individuali" class="sub-section content-card">
+          <h2>Percorsi Individuali</h2>
+          <p>Sezione provvisoria per i percorsi individuali. Un cammino personalizzato creato su misura per accompagnare la persona verso la propria consapevolezza.</p>
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Percorsi Individuali" style="margin-top: 1.5rem;">
+        </div>
+
+        <div id="percorsi-energia" class="sub-section content-card">
+          <h2>Percorsi sull'Energia</h2>
+          <p>Sezione provvisoria per i percorsi sull'energia. Esperienze mirate alla sensibilità, alla gestione e all'ascolto delle frequenze vitali.</p>
+          <img src="https://images.unsplash.com/photo-1507120410856-1f35574c3b45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Percorsi sull'Energia" style="margin-top: 1.5rem;">
+        </div>
+
+        <div id="corsi-energia" class="sub-section content-card">
+          <h2>Corsi sull'Energia</h2>
+          <p>Sezione provvisoria per i corsi sull'energia. Incontri formativi ed esperienziali per imparare a conoscere le dinamiche energetiche.</p>
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corsi sull'Energia" style="margin-top: 1.5rem;">
+        </div>
+
       </div>
     </section>
     
+    <!-- ==========================================
+         SEZIONE: ATTIVITÀ (Uno Sotto l'Altro)
+         ========================================== -->
     <section id="movimento-respiro" class="page-section">
-      <div class="container content-card">
-        <h2>Attività</h2>
-        <p>Contenuto da inserire.</p>
+      <div class="container" style="text-align: center; margin-bottom: 3rem;">
+        <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.4rem;">Spazio Condiviso</span>
+        <h2>Le Attività</h2>
+      </div>
+
+      <div class="container">
+        
+        <div id="movimento-respiro-sub" class="sub-section content-card">
+          <h2>Movimento e Respiro</h2>
+          <p>Sezione provvisoria per Movimento e Respiro. Pratiche corporee per sciogliere le rigidità e ritrovare il naturale ritmo respiratorio.</p>
+          <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Movimento e Respiro" style="margin-top: 1.5rem;">
+        </div>
+
+        <div id="meditazioni" class="sub-section content-card">
+          <h2>Meditazioni</h2>
+          <p>Sezione provvisoria per le Meditazioni. Spazi guidati di ascolto interiore, calma mentale e presenza radicata.</p>
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Meditazioni" style="margin-top: 1.5rem;">
+        </div>
+
+        <div id="incontri-workshop" class="sub-section content-card">
+          <h2>Incontri e Workshop</h2>
+          <p>Sezione provvisoria per Incontri e Workshop. Esperienze di gruppo a tema per esplorare la relazione con se stessi e gli altri.</p>
+          <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Incontri e Workshop" style="margin-top: 1.5rem;">
+        </div>
+
       </div>
     </section>
 
@@ -752,6 +908,28 @@
   </footer>
 
   <script>
+    // FUNZIONE CAMBIO SCHEDA (TABS MASSAGGI)
+    function switchTab(tabId) {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+
+      tabBtns.forEach(btn => {
+        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      tabPanes.forEach(pane => {
+        if (pane.id === tabId) {
+          pane.classList.add('active');
+        } else {
+          pane.classList.remove('active');
+        }
+      });
+    }
+
     // GESTIONE SEZIONI COME SINGOLE PAGINE
     const navTriggers = document.querySelectorAll('.nav-trigger');
     const pageSections = document.querySelectorAll('.page-section');
@@ -764,6 +942,14 @@
       if(!sectionId) return;
       const targetId = sectionId.replace('#', '');
       let found = false;
+
+      // Se il link punta a una specifica scheda massaggio
+      const isTab = document.querySelector(`.tab-pane#${targetId}`);
+      if (isTab) {
+        switchTab(targetId);
+        showSection('#massaggi-section');
+        return;
+      }
 
       pageSections.forEach(section => {
         section.classList.remove('active');
