@@ -45,7 +45,8 @@
        TYPOGRAPHY & ACCENTS
        ========================================== */
     h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; color: var(--text-main); line-height: 1.2; }
-    h1 { font-size: clamp(3.2rem, 9vw, 6.5rem); letter-spacing: 0.03em; text-transform: uppercase; }
+    /* Leggermente ridotto l'header principale per aiutare gli ingombri verticali */
+    h1 { font-size: clamp(3rem, 8vw, 5.5rem); letter-spacing: 0.03em; text-transform: uppercase; }
     h2 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.01em; margin-bottom: 1.5rem; }
     h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); margin-bottom: 1rem; }
     p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; }
@@ -98,12 +99,12 @@
 
 
     /* ==========================================
-       1. HERO SECTION (Modificata proporzioni e font)
+       1. HERO SECTION (Compatta per stare su 1 schermo)
        ========================================== */
     .hero-premium {
       position: relative;
-      /* Ridotta l'altezza per non sforare lo schermo */
-      min-height: 80vh; 
+      /* Ridotta l'altezza per evitare lo scroll */
+      min-height: calc(100vh - 85px); 
       display: flex;
       align-items: center;
       background-color: var(--bg-main);
@@ -132,12 +133,12 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      margin-top: 15vh; /* Leggermente ridotto */
+      margin-top: 10vh; /* Ridotto */
     }
 
     .hero-text-box {
       background-color: var(--bg-surface);
-      padding: 3rem 2rem; /* Ridotto il padding verticale per non allungarlo troppo */
+      padding: 2.5rem 2rem; /* Ridotto il padding */
       max-width: 650px;
       box-shadow: 0 30px 60px rgba(0,0,0,0.08);
       border: 1px solid var(--border-color);
@@ -145,30 +146,34 @@
 
     .hero-kicker {
       font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--primary-gold);
-      display: block; margin-bottom: 1.5rem; font-weight: 500;
+      display: block; margin-bottom: 1rem; font-weight: 500;
     }
     
     .hero-title-wrap h1 { 
       line-height: 0.95; 
       color: var(--text-main); 
-      margin-bottom: 0.5rem; 
+      margin-bottom: 0; 
     }
     
     .hero-title-wrap .hero-subtitle-text {
-      font-family: var(--font-serif); font-style: italic; font-size: clamp(2rem, 5vw, 3.5rem);
-      color: var(--primary-gold); display: block; margin-top: 1rem; font-weight: 400; text-transform: none;
+      font-family: var(--font-serif); font-style: italic; font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--primary-gold); display: block; margin-top: 0.2rem; font-weight: 400; text-transform: none;
     }
     
     .hero-text-content { 
-      margin-top: 2.5rem; 
-      padding-top: 2rem; 
+      margin-top: 1.5rem; /* Margine ridotto per compattare */
+      padding-top: 1.5rem; 
       border-top: 1px solid var(--border-color); 
     }
     
-    .hero-text-content p { font-size: 1.15rem; line-height: 1.8; color: var(--text-muted); }
+    .hero-text-content p { font-size: 1.05rem; line-height: 1.7; color: var(--text-muted); }
 
     @media (min-width: 992px) {
-      .hero-premium { padding: 0; min-height: 80vh; }
+      .hero-premium { 
+        padding: 0; 
+        height: calc(100vh - 85px); /* Altezza esatta per non sforare */
+        min-height: auto;
+      }
       .hero-image-bg {
         width: 62%;
         height: 100%;
@@ -177,7 +182,8 @@
         background: linear-gradient(to right, rgba(250, 248, 245, 1) 0%, rgba(250, 248, 245, 0) 30%);
       }
       .hero-content-wrapper { margin-top: 0; }
-      .hero-text-box { padding: 4.5rem 4.5rem; margin-left: 0; margin-top: 2rem; }
+      /* Margini e padding decisamente più stretti su desktop */
+      .hero-text-box { padding: 2.5rem 3.5rem; margin-left: 0; margin-top: 0; } 
     }
 
 
@@ -198,7 +204,6 @@
       margin-bottom: 5rem;
     }
 
-    /* Font molto più elegante e autorevole */
     .editorial-quote {
       font-family: var(--font-serif); 
       font-size: clamp(2rem, 4.5vw, 3.2rem);
@@ -239,7 +244,6 @@
 
     .triptych-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
     
-    /* Aggiunto un leggero hover effect per perfezionare le card */
     .triptych-card { 
       display: flex; flex-direction: column; background-color: transparent; 
       padding: 1rem; transition: var(--transition); cursor: pointer; 
@@ -252,15 +256,15 @@
     }
     
     .triptych-img { 
-      aspect-ratio: 3 / 4; /* Proporzione più classica e corretta */
+      aspect-ratio: 3 / 4; 
       margin-bottom: 2.5rem; overflow: hidden; 
-      border-radius: 160px 160px 0 0; /* Arco perfezionato */
+      border-radius: 160px 160px 0 0; 
       position: relative;
     }
     .triptych-img::after { content: ''; position: absolute; inset: 0; background: rgba(30,28,26,0.06); transition: opacity 0.8s var(--ease-human); }
     .triptych-card:hover .triptych-img::after { opacity: 0; }
     .triptych-img img { width: 100%; height: 100%; transition: transform 1.5s var(--ease-human); }
-    .triptych-card:hover .triptych-img img { transform: scale(1.04); } /* Scale ridotto, più fine */
+    .triptych-card:hover .triptych-img img { transform: scale(1.04); } 
 
     .triptych-card h3 { font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 1.2rem; color: var(--text-main); text-align: center; position: relative; }
     .triptych-card h3::after { content: ''; display: block; width: 30px; height: 1px; background: var(--primary-gold); margin: 1rem auto 0; transition: width 0.6s var(--ease-human); }
@@ -281,9 +285,8 @@
     .parallax-sanctuary {
       position: relative;
       padding: 12rem 0;
-      /* Immagine garantita e bellissima, perfetta per un sito olistico */
       background-image: url('https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-      background-color: #333; /* Fallback */
+      background-color: #333; 
       background-attachment: fixed;
       background-size: cover;
       background-position: center;
@@ -293,7 +296,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-color: rgba(20, 18, 16, 0.45); /* Overlay calibrato per far leggere i testi */
+      background-color: rgba(20, 18, 16, 0.45); 
       z-index: 1;
     }
 
@@ -406,7 +409,6 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Animazione specifica migliorata per la Quote "Amana nasce da..." */
     .animate-quote {
       opacity: 0;
       transform: translateY(30px) scale(0.96);
@@ -696,7 +698,7 @@
       </div>
     </section>
 
-    <!-- Contatti (Ripristinata la parte tagliata in fondo) -->
+    <!-- Contatti -->
     <section id="contatti" class="page-section">
       <div class="container content-card" style="max-width: 1000px;">
         <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Inizia il Tuo Percorso</span>
@@ -710,22 +712,17 @@
               <h5 style="font-family: var(--font-serif); font-size: 1.4rem;">Contatto Diretto</h5>
               <p style="font-size: 1.05rem; margin-bottom: 0;">Francesca Schiralli</p>
               <p style="font-size: 1.05rem; color: var(--primary-gold);">info@amana-soleinteriore.it</p>
-              <br>
-              <h5 style="font-family: var(--font-serif); font-size: 1.4rem;">Studio</h5>
-              <p style="font-size: 1.05rem;">Ricevo su appuntamento a [Città].</p>
+              <p style="font-size: 1.05rem; margin-top: 1rem;">San Giuliano Milanese, MI</p>
             </div>
           </div>
           
-          <!-- Box contatti che si era interrotto -->
-          <div style="background-color: var(--bg-main); padding: 3rem; border: 1px solid var(--border-color);">
-            <form action="#" method="POST">
-              <input type="text" class="form-control" placeholder="Il tuo Nome" required>
-              <input type="email" class="form-control" placeholder="La tua Email" required>
-              <textarea class="form-control" rows="4" placeholder="Come posso aiutarti?" style="resize: none;" required></textarea>
-              <button type="submit" class="btn-submit">Invia Messaggio</button>
-            </form>
-          </div>
-
+          <form style="background-color: var(--bg-main); padding: 3rem;">
+            <input type="text" class="form-control" placeholder="Il tuo nome">
+            <input type="email" class="form-control" placeholder="Indirizzo e-mail">
+            <textarea class="form-control" rows="4" placeholder="Come posso aiutarti?"></textarea>
+            <button type="submit" class="btn-submit">Invia Messaggio</button>
+          </form>
+          
         </div>
       </div>
     </section>
@@ -738,19 +735,125 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <h3>AMANA</h3>
-          <p class="footer-subtitle">Il tuo sole interiore</p>
+          <span class="footer-subtitle">Il tuo sole interiore</span>
+          <p class="footer-signature">Francesca Schiralli</p>
         </div>
         <div class="footer-info">
-          <p>Francesca Schiralli</p>
-          <p>info@amana-soleinteriore.it</p>
-          <p class="footer-signature">Francesca</p>
+          <p>San Giuliano Milanese, Lombardia, Italia</p>
+          <p>Tel: +39 347 123 4567</p>
+          <p>Email: info@amana-soleinteriore.it</p>
+          <p>P.IVA 12345678901</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Amana - Francesca Schiralli. Tutti i diritti riservati.</p>
+        &copy; 2026 AMANA - Francesca Schiralli. Tutti i diritti riservati.
       </div>
     </div>
   </footer>
 
+  <script>
+    // GESTIONE SEZIONI COME SINGOLE PAGINE
+    const navTriggers = document.querySelectorAll('.nav-trigger');
+    const pageSections = document.querySelectorAll('.page-section');
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    const header = document.getElementById('header');
+    const body = document.body;
+
+    function showSection(sectionId) {
+      if(!sectionId) return;
+      const targetId = sectionId.replace('#', '');
+      let found = false;
+
+      pageSections.forEach(section => {
+        section.classList.remove('active');
+        if (section.id === targetId || section.querySelector(`#${targetId}`)) {
+          section.classList.add('active');
+          found = true;
+          setTimeout(() => {
+            if (section.id !== targetId) {
+              const subElement = document.getElementById(targetId);
+              if (subElement) subElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }, 50);
+        }
+      });
+
+      if(!found && targetId === 'home') {
+        document.getElementById('home').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      navTriggers.forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.querySelector(`.nav-links a[href="#${targetId}"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+      else {
+        navTriggers.forEach(btn => {
+           if(btn.classList.contains('dropdown-toggle') && btn.nextElementSibling) {
+             const subLinks = btn.nextElementSibling.querySelectorAll('a');
+             subLinks.forEach(sub => {
+               if(sub.getAttribute('href') === `#${targetId}`) btn.classList.add('active');
+             });
+           }
+        });
+      }
+    }
+
+    navTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        const href = trigger.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          
+          if(window.innerWidth <= 768 && trigger.classList.contains('dropdown-toggle')) {
+            trigger.parentElement.classList.toggle('mobile-open');
+            return; 
+          }
+
+          history.pushState(null, null, href);
+          showSection(href);
+          
+          if (navLinks.classList.contains('open') && !trigger.classList.contains('dropdown-toggle')) {
+            navLinks.classList.remove('open');
+            body.style.overflow = 'auto';
+          }
+        }
+      });
+    });
+
+    window.addEventListener('popstate', () => {
+      const hash = window.location.hash || '#home';
+      showSection(hash);
+    });
+
+    window.addEventListener('load', () => {
+      const hash = window.location.hash || '#home';
+      showSection(hash);
+    });
+
+    // HAMBURGER MENU
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      if (navLinks.classList.contains('open')) {
+        body.style.overflow = 'hidden';
+      } else {
+        body.style.overflow = 'auto';
+        document.querySelectorAll('.has-dropdown').forEach(d => d.classList.remove('mobile-open'));
+      }
+    });
+
+    // HEADER SCROLL EFFECT
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
+        header.style.backgroundColor = 'rgba(250, 248, 245, 0.98)';
+      } else {
+        header.style.boxShadow = 'none';
+        header.style.backgroundColor = 'rgba(250, 248, 245, 0.92)';
+      }
+    });
+  </script>
 </body>
 </html>
