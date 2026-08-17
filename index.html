@@ -407,7 +407,7 @@
 
 
     /* ==========================================
-       STILI PER SEZIONE MASSAGGI A SCHEDE (TABS)
+       STILI PER SEZIONE MASSAGGI A SCHEDE (TABS) & ANTEPRIMA/ESPANSIONE
        ========================================== */
     .tabs-nav {
       display: flex;
@@ -446,6 +446,141 @@
       display: block;
       animation: fadeIn 0.6s ease forwards;
     }
+    
+    /* Nuovo stile flat per tab pane - Rimuove la card e uniforma allo sfondo */
+    .tab-flat {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: transparent;
+      padding: 1rem 0;
+      box-shadow: none;
+      border: none;
+    }
+
+    .treatment-price {
+      display: inline-block;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 1.4rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--primary-gold);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .treatment-summary {
+      font-size: 1.15rem;
+      line-height: 1.85;
+      color: var(--text-main);
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-toggle-details {
+      display: inline-block;
+      background-color: var(--text-main);
+      color: #FFFFFF;
+      border: none;
+      padding: 1rem 2.8rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 1rem;
+    }
+
+    .btn-toggle-details:hover {
+      background-color: var(--primary-gold);
+    }
+
+    /* Grafica migliorata per la sezione Dettagli Massaggi Espansi */
+    .treatment-full-details {
+      margin-top: 3.5rem;
+      padding: 3.5rem 3rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+      text-align: left;
+      animation: fadeIn 0.6s ease forwards;
+      border-radius: 4px;
+    }
+
+    .treatment-full-details h3 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--text-main);
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .treatment-full-details h3::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-gold);
+    }
+
+    .treatment-full-details p {
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .treatment-full-details ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      list-style: none !important;
+      padding-left: 0 !important;
+      margin: 2rem 0 !important;
+    }
+
+    .treatment-full-details ul li {
+      background-color: var(--bg-main);
+      padding: 1.2rem 1.5rem;
+      border-left: 3px solid var(--primary-gold);
+      border-radius: 0 4px 4px 0;
+      font-size: 0.98rem;
+      color: var(--text-main);
+      margin-bottom: 0 !important;
+      display: flex;
+      align-items: center;
+    }
+
+    .editorial-quote-small {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--primary-gold);
+      font-style: italic;
+      background-color: var(--bg-main);
+      padding: 2rem 2.5rem;
+      border-left: 3px solid var(--primary-gold);
+      margin: 2.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    @media (max-width: 768px) {
+      .treatment-full-details {
+        padding: 2.5rem 1.5rem;
+      }
+      .treatment-full-details ul {
+        grid-template-columns: 1fr;
+      }
+    }
 
 
     /* ==========================================
@@ -453,7 +588,7 @@
        ========================================== */
     .animate-up { opacity: 0; transform: translateY(40px); }
 
-    #home.active .animate-up {
+    .page-section.active .animate-up {
       animation: revealUp 1.2s var(--ease-human) forwards;
     }
 
@@ -518,7 +653,7 @@
 </head>
 <body>
 
-  <!-- HEADER & NAVIGATION (Intatto) -->
+  <!-- HEADER & NAVIGATION -->
   <header id="header">
     <div class="container nav-container">
       <a href="#home" class="logo nav-trigger">
@@ -550,19 +685,11 @@
           </ul>
         </li>
         <li class="has-dropdown">
-          <a href="#percorsi" class="dropdown-toggle nav-trigger">PERCORSI</a>
-          <ul class="dropdown-menu">
-            <li><a href="#percorsi-individuali" class="nav-trigger">Percorsi individuali</a></li>
-            <li><a href="#percorsi-energia" class="nav-trigger">Percorsi sull'energia</a></li>
-            <li><a href="#corsi-energia" class="nav-trigger">Corsi sull'energia</a></li>
-          </ul>
-        </li>
-        <li class="has-dropdown">
           <a href="#movimento-respiro" class="dropdown-toggle nav-trigger">ATTIVITÀ</a>
           <ul class="dropdown-menu">
+            <li><a href="#energia" class="nav-trigger">Energia</a></li>
             <li><a href="#movimento-respiro-sub" class="nav-trigger">Movimento e Respiro</a></li>
-            <li><a href="#meditazioni" class="nav-trigger">Meditazioni</a></li>
-            <li><a href="#incontri-workshop" class="nav-trigger">Incontri e Workshop</a></li>
+            <li><a href="#meditazione" class="nav-trigger">Meditazione</a></li>
           </ul>
         </li>
         <li><a href="#contatti" class="nav-trigger">CONTATTI</a></li>
@@ -573,7 +700,7 @@
   <main>
     <section id="home" class="page-section active" style="padding-top: 0;">
       
-      <!-- 1. HERO SECTION (Con Immagine in HTML) -->
+      <!-- 1. HERO SECTION -->
       <div class="hero-premium">
         <div class="hero-image-bg">
           <img src="hero.jpg" alt="Amana Hero Image">
@@ -650,12 +777,12 @@
           </div>
 
           <div class="triptych-footer-quote animate-up" style="animation-delay: 0.6s;">
-            <p>"Non existe un unico modo di stare bene. Esiste il modo che, in quel momento, può essere più adatto a te."</p>
+            <p>"Non esiste un unico modo di stare bene. Esiste il modo che, in quel momento, può essere più adatto a te."</p>
           </div>
         </div>
       </div>
 
-      <!-- 4. AREE DI LAVORO (Con Immagine in HTML) -->
+      <!-- 4. AREE DI LAVORO -->
       <div class="parallax-sanctuary">
         <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Sanctuary Parallax Image" class="parallax-bg-img">
         <div class="container parallax-content-wrapper">
@@ -673,19 +800,13 @@
             <div class="btn-sanctuary">Scopri di più</div>
           </a>
 
-          <!-- Card 2 -->
-          <a href="#percorsi" class="sanctuary-card nav-trigger animate-up" style="animation-delay: 0.3s;">
-            <span class="sanctuary-card-kicker">La ricerca interiore</span>
-            <h3>I <em>Percorsi</em></h3>
-            <p>Percorsi individuali e percorsi dedicati alla conoscenza e all'esperienza dell'energia. Un cammino che nasce dalla mia ricerca e dal desiderio di condividere.</p>
-            <div class="btn-sanctuary">Esplora i percorsi</div>
-          </a>
+          <!-- Card 2 (ex percorsi rimossa per evitare link rotti) -->
 
-          <!-- Card 3 -->
+          <!-- Card 3 (ora 2) -->
           <a href="#movimento-respiro" class="sanctuary-card nav-trigger animate-up" style="animation-delay: 0.4s;">
             <span class="sanctuary-card-kicker">Lo spazio condiviso</span>
             <h3>Le <em>Attività</em></h3>
-            <p>Movimento e Respiro, Meditazioni, Incontri, Workshop ed Esperienze di gruppo. Spazi da vivere insieme, attraverso il movimento e l'ascolto.</p>
+            <p>Energia, Movimento e Respiro e Meditazione. Spazi da vivere insieme e percorsi di esplorazione, attraverso il movimento e l'ascolto.</p>
             <div class="btn-sanctuary">Partecipa ora</div>
           </a>
 
@@ -695,45 +816,135 @@
     </section>
 
     <!-- ==========================================
-         SEZIONE: IL MIO CAMMINO (Totalmente Invariata)
+         SEZIONE: IL MIO CAMMINO
          ========================================== -->
     <section id="il-mio-cammino" class="page-section">
-      <div class="container" style="text-align: center; margin-bottom: 3rem;">
-        <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.4rem;">Scopri chi sono</span>
-        <h2>Il Mio Cammino</h2>
-      </div>
-      <div id="storia" class="sub-section container content-card">
-        <h2>La mia Storia</h2>
-        <p>Il mio percorso personale e professionale si intreccia con una ricerca costante di armonia e autenticità. Attraverso l'esperienza diretta ho compreso quanto ogni evento della vita contenga un prezioso potenziale di trasformazione.</p>
-        <blockquote style="border-left: 2px solid var(--primary-gold); padding-left: 2rem; font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: var(--text-main); margin: 2.5rem 0;">
-          "Amo profondamente la vita non perché sia stata sempre semplice, ma perché passo dopo passo ho imparato a riconoscerne la bellezza."
-        </blockquote>
-        <p>Imparare a leggere il senso delle nostre esperienze ci dona la libertà di ripartire con nuova consapevolezza. Il cammino che propongo nasce da questo vissuto: un'attitudine calorosa e misurata verso la vita e le sue infinite sfumature.</p>
-      </div>
-      <div id="visione" class="sub-section container content-card">
-        <h2>Visione</h2>
-        <p>L'essere umano è un'armonia integrata: il benessere nasce quando permettiamo a tutte le nostre dimensioni di esprimersi in uno spazio sicuro.</p>
-        <h3 style="margin-top: 2.5rem;">L'Ascolto Globale</h3>
-        <p>Osservare e accogliere la persona significa posare lo sguardo sull'interezza della sua esperienza. Il corpo parla una lingua ricca e profonda che merita di essere compresa con cura.</p>
-        <h3 style="margin-top: 2.5rem;">I Tuoi Tempi, i Tuoi Bisogni</h3>
-        <p>Ogni persona cammina con il proprio passo. Il mio ruolo non è mai quello di indicare una direzione prestabilita o di forzare i tempi, bensì di spalancare una finestra di calma in cui tu possa riprendere il contatto con te stesso/a.</p>
-      </div>
-      <div id="missione" class="sub-section container content-card" style="text-align: center;">
-        <h2>Missione</h2>
-        <div style="background-color: var(--bg-main); padding: 4rem 3rem; margin-top: 2rem; border: 1px solid var(--border-color);">
-          <p style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); line-height: 1.5; margin: 0; font-style: italic;">
-            "Amo la vita e desidero trasmettere amore, serenità e coraggio alle persone affinché possano proseguire il proprio cammino, ritrovare la propria strada e tornare a casa."
+      
+      <style>
+        #il-mio-cammino.active .animate-up { animation: revealUp 1.2s var(--ease-human) forwards; }
+        .editorial-intro { text-align: center; max-width: 850px; margin: 0 auto 7rem auto; }
+        
+        .editorial-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-bottom: 8rem; align-items: center; }
+        .editorial-grid-reverse { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-bottom: 8rem; align-items: center; }
+        
+        .editorial-img-wrapper { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; }
+        .editorial-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .editorial-text-col p { font-size: 1.15rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 1.8rem; }
+        .editorial-text-col h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 2rem; }
+        .editorial-kicker { display: block; font-family: var(--font-serif); font-style: italic; color: var(--primary-gold); font-size: 1.4rem; margin-bottom: 0.5rem; }
+        
+        .drop-cap { float: left; font-size: 5.5rem; line-height: 0.8; padding-top: 8px; padding-right: 15px; color: var(--primary-gold); font-family: var(--font-serif); }
+        .large-pull-quote { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.35; color: var(--text-main); font-style: italic; margin: 4rem 0; padding-left: 2.5rem; border-left: 2px solid var(--primary-gold); }
+        .center-text-block { max-width: 850px; margin: 0 auto 8rem auto; }
+        .center-text-block p { font-size: 1.15rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 1.8rem; }
+        
+        .sub-heading-gold { font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); margin-top: 3rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; }
+        .sub-heading-gold::after { content: ''; position: absolute; left: 0; bottom: 0; width: 40px; height: 1px; background-color: var(--primary-gold); }
+
+        @media(min-width: 992px) {
+            .editorial-grid { grid-template-columns: 5fr 7fr; gap: 7rem; }
+            .editorial-grid-reverse { grid-template-columns: 7fr 5fr; gap: 7rem; direction: rtl; }
+            .editorial-grid-reverse > * { direction: ltr; } 
+        }
+      </style>
+      
+      <div class="container">
+        
+        <div class="editorial-intro">
+          <span class="editorial-kicker animate-up" style="animation-delay: 0.1s;">La strada che mi ha portata fin qui</span>
+          <h2 class="animate-up" style="font-size: clamp(3rem, 6vw, 4.5rem); margin-bottom: 2rem; animation-delay: 0.2s;">Il Mio Cammino</h2>
+          <p class="animate-up" style="animation-delay: 0.3s; font-size: 1.3rem; line-height: 1.9; color: var(--text-muted);">
+            Ci sono percorsi che non si scelgono tutti in una volta. Si incontrano persone, si attraversano esperienze, si fanno scoperte, si cambiano direzioni. E, passo dopo passo, ci si avvicina sempre di più a ciò che ci appartiene.
+          </p>
+          <p class="animate-up" style="animation-delay: 0.4s; font-size: 1.15rem; line-height: 1.9; color: var(--text-muted);">
+            Per molto tempo ho cercato fuori di me risposte, significati e direzioni. Poi ho iniziato a comprendere che molte delle risposte che cercavo erano già dentro di me. È iniziato così il mio incontro con il corpo, il respiro e l'energia.
           </p>
         </div>
-      </div>
-      <div id="formazione" class="sub-section container content-card">
-        <h2>Formazione e Ricerca</h2>
-        <p><em>In questa sezione potrai inserire i dettagli del tuo percorso di studi, i diplomi acquisiti, i maestri che ti hanno guidata e le aree di ricerca personale e professionale che continui ad approfondire.</em></p>
+
+        <div id="storia" class="editorial-grid sub-section animate-up" style="animation-delay: 0.2s;">
+          <div class="editorial-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="La mia storia e il mio percorso">
+          </div>
+          <div class="editorial-text-col">
+            <span class="editorial-kicker">La Mia Storia</span>
+            <h2>Ogni esperienza ha lasciato qualcosa</h2>
+            <p><span class="drop-cap">I</span>l mio percorso personale e professionale è fatto di esperienze, incontri, cambiamenti e anche momenti che hanno avuto bisogno di tempo per essere compresi.</p>
+            <p>Nel tempo ho imparato ad ascoltare maggiormente ciò che accade dentro di me e, proprio attraverso questo ascolto, ho iniziato a guardare le persone in modo diverso. Quando incontro qualcuno, la mia attenzione non si ferma a ciò che mostra. Mi incuriosisce ciò che c'è oltre.</p>
+            <p>Un movimento, un respiro, uno sguardo, una tensione, una pausa, una parola, un silenzio. Mi chiedo cosa stia vivendo quella persona, cosa stia chiedendo il suo corpo, cosa sia pronta a riconoscere. È questa curiosità, unita al rispetto, che ancora oggi accompagna il mio lavoro.</p>
+          </div>
+        </div>
+
+        <div id="visione" class="center-text-block sub-section animate-up">
+          <div style="text-align: center; margin-bottom: 3rem;">
+            <span class="editorial-kicker">La Mia Visione</span>
+            <h2>Vedere la persona nella sua interezza</h2>
+          </div>
+          <p>Credo che ogni persona custodisca dentro di sé una luce. A volte è evidente, altre volte rimane più nascosta. Ma io credo che ci sia. Forse è proprio per questo che sono sempre stata affascinata dalle persone: mi piace osservare, ascoltare e cercare quella bellezza che magari in quel momento la persona stessa fa fatica a vedere.</p>
+          
+          <blockquote class="large-pull-quote">
+            "Ho imparato anche su di me quanto possa cambiare il modo in cui ci guardiamo. Per molto tempo ho fatto fatica a riconoscere la mia bellezza, dentro e fuori. Oggi mi amo e mi accetto molto di più e so che questo amore può continuare a crescere."
+          </blockquote>
+          
+          <p>Da questa esperienza nasce anche il mio modo di incontrare gli altri. Non cerco una perfezione da raggiungere. <strong>Cerco la persona.</strong> La sua unicità, le sue caratteristiche, le sue risorse, ciò che sta vivendo in quel momento.</p>
+          <p>L'ascolto viene prima di tutto. E ascoltare, per me, significa molto più che ascoltare le parole. È un ascolto che comprende il linguaggio verbale e quello non verbale, il corpo, il respiro, i movimenti, le sensazioni e ciò che emerge anche nel silenzio.</p>
+          <p>Durante un trattamento mi metto in ascolto senza decidere in anticipo cosa cercare. Se emerge una tensione, la osservo. Se emerge un'emozione, la accolgo. Se emerge leggerezza, la seguo. Se emerge una parte più fragile, le do spazio. Resto aperta a ciò che la persona mi mostra in quel momento.</p>
+          <p style="margin-top: 3rem; text-align: center; font-family: var(--font-serif); font-size: 1.6rem; color: var(--primary-gold); font-style: italic;">
+            "Sono qui per te. Aiutami ad aiutarti."
+          </p>
+        </div>
+
+        <div id="missione" class="editorial-grid-reverse sub-section animate-up">
+          <div class="editorial-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1528319725582-ddc096101511?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Creare uno spazio di accoglienza">
+          </div>
+          <div class="editorial-text-col">
+            <span class="editorial-kicker">La Mia Missione</span>
+            <h2>Creare uno spazio in cui sentirsi accolti</h2>
+            <p>Il mio lavoro nasce dal desiderio di accompagnare le persone verso un maggiore benessere, attraverso l'ascolto, la presenza e il contatto.</p>
+            <p>Non credo in un percorso uguale per tutti. Ogni persona arriva con la propria storia, il proprio corpo, il proprio momento e le proprie risorse. Per questo il mio compito è prima di tutto ascoltare e creare uno spazio.</p>
+            <p>Uno spazio nel quale la persona possa fermarsi, respirare, percepirsi e incontrare ciò che è pronta ad ascoltare. A volte il corpo chiede movimento. A volte contatto. A volte silenzio. A volte respiro. A volte semplicemente uno spazio nel quale sentirsi accolti.</p>
+            <p>Io sono lì per accompagnare questo incontro. Con ascolto, presenza e rispetto. Perché il mio desiderio è che ogni persona possa uscire da quell'incontro portando con sé qualcosa: più leggerezza, maggiore consapevolezza, una nuova sensazione o semplicemente un po' più di spazio dentro di sé.</p>
+          </div>
+        </div>
+
+        <div id="formazione" class="center-text-block sub-section animate-up">
+          <div style="text-align: center; margin-bottom: 4rem;">
+            <span class="editorial-kicker">Formazione e Ricerca</span>
+            <h2>Continuare a imparare fa parte del mio cammino</h2>
+          </div>
+          <p>La mia formazione non è mai stata un punto di arrivo. È una ricerca che continua. Nel tempo ho incontrato discipline diverse, ho studiato il corpo, il respiro, il rilassamento, il mondo delle energie e diverse modalità di ascolto e di contatto.</p>
+          
+          <div style="padding: 1rem 0 2rem 0;">
+            <h3 class="sub-heading-gold">Il Reiki e l'Energia</h3>
+            <p>Il Reiki è stato uno dei primi incontri importanti con l'energia. Sono diventata Master Reiki, ma la mia ricerca non si è fermata lì. Ho continuato a studiare e ad approfondire, perché l'energia continua ad affascinarmi e sento che ci sono ancora moltissimi aspetti da conoscere.</p>
+            
+            <h3 class="sub-heading-gold">Il Craniosacrale</h3>
+            <p>Anche il craniosacrale occupa un posto speciale nel mio percorso. La formazione e la pratica mi hanno insegnato ad affinare sempre di più la capacità di ascoltare il corpo attraverso il contatto e la percezione profonda dei suoi ritmi.</p>
+          </div>
+
+          <p>Continuo a formarmi perché ogni nuova conoscenza modifica anche il mio modo di osservare. Più imparo, più mi accorgo di quanto ci sia ancora da scoprire. Ed è proprio questo che amo della ricerca. Non arrivare a una risposta definitiva, ma continuare a fare domande, ascoltare, sperimentare e crescere.</p>
+        </div>
+
+        <div id="oggi" class="center-text-block sub-section animate-up" style="margin-bottom: 0;">
+          <div style="text-align: center;">
+            <span class="editorial-kicker">Oggi</span>
+            <h2>Il cammino confluisce in Amana</h2>
+          </div>
+          <p>Oggi tutto questo confluisce in Amana. Un luogo nato dalla mia storia, dalla mia ricerca e dal desiderio di condividere ciò che ho incontrato lungo il cammino.</p>
+          <p>Corpo, respiro ed energia sono tre fili che attraversano il mio lavoro. Attraverso i trattamenti, i percorsi e le attività, cerco ogni volta di incontrare la persona che ho davanti, lasciando che sia quell'incontro a indicare la direzione. Perché ogni persona è diversa. E ogni incontro può rivelare qualcosa di nuovo.</p>
+          <p style="margin-bottom: 4rem;">Il mio cammino continua. E forse è proprio questo il senso più bello del camminare:</p>
+          
+          <h3 style="text-align: center; font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-style: italic; color: var(--primary-gold); line-height: 1.3; font-weight: 300;">
+            "Continuare a scoprire chi siamo, mentre impariamo ad ascoltarci."
+          </h3>
+        </div>
+
       </div>
     </section>
 
     <!-- ==========================================
-         SEZIONE: MASSAGGI / TRATTAMENTI (A Schede - Tabs)
+         SEZIONE: MASSAGGI / TRATTAMENTI
          ========================================== -->
     <section id="massaggi-section" class="page-section">
       <div class="container" style="text-align: center; margin-bottom: 2rem;">
@@ -751,104 +962,369 @@
           <button class="tab-btn" onclick="switchTab('trattamenti-distanza')">A Distanza</button>
         </div>
 
-        <!-- Contenuto Schede -->
-        <div id="craniosacrale" class="tab-pane active content-card">
-          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
-          <h2>Trattamento Craniosacrale</h2>
-          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Craniosacrale" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
-          <p>Ispirato all'approccio del Dr. John E. Upledger, il trattamento craniosacrale lavora delicatamente sui ritmi profondi del corpo e sul rilascio emozionale, favorendo un profondo riequilibrio dell'intero sistema nervoso.</p>
+        <!-- 1. CRANIOSACRALE -->
+        <div id="craniosacrale" class="tab-pane active tab-flat" style="text-align: center;">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem; display: block; margin-bottom: 0.3rem;">Trattamento</span>
+          <h2>Trattamento Craniosacrale e Rilascio Emozionale</h2>
+          
+          <div class="treatment-price">Durata: 60 min | Prezzo: 70 €</div>
+          
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Craniosacrale" style="margin: 0 auto 2rem auto; width: 100%; max-height: 400px; object-fit: cover;">
+          
+          <p class="treatment-summary">
+            Un ascolto profondo del corpo, attraverso il contatto, la presenza e il rispetto dei suoi tempi. Il Trattamento Craniosacrale è una metodica manuale delicata che ascolta i ritmi profondi dell'organismo e del sistema fasciale, favorendo il rilascio delle tensioni e la riconnessione interiore.
+          </p>
+
+          <button class="btn-toggle-details" onclick="toggleDetails('craniosacrale-details', this)">Scopri tutto</button>
+
+          <!-- Testo completo espandibile -->
+          <div id="craniosacrale-details" class="treatment-full-details" style="display: none;">
+            <p>Il Trattamento Craniosacrale è stato il punto di partenza del mio percorso professionale e ancora oggi rappresenta una parte importante del mio modo di accompagnare le persone. È attraverso questo trattamento che ho imparato ad ascoltare il corpo in una modalità che va oltre le parole e che continua, nel tempo, ad affascinarmi.</p>
+
+            <h3>Che cos'è il Trattamento Craniosacrale?</h3>
+            <p>Il Trattamento Craniosacrale è una metodica manuale delicata, sviluppata negli Stati Uniti dal Dr. John E. Upledger a partire dagli anni Settanta. Si svolge con la persona comodamente distesa sul lettino e vestita, attraverso un contatto manuale leggero e non invasivo.</p>
+            <p>Uno degli elementi caratteristici del trattamento è l'ascolto del ritmo craniosacrale, un movimento fisiologico molto sottile che può essere percepito attraverso il contatto delle mani in diverse zone del corpo. L'ascolto prende in considerazione anche il sistema fasciale, la rete di tessuto connettivo che avvolge, sostiene e mette in relazione le diverse strutture dell'organismo.</p>
+            <p>Attraverso il contatto posso percepire differenze di movimento, tensioni e zone che sembrano richiedere una particolare attenzione. Da ciò che emerge prende forma il trattamento. Non esiste una sequenza uguale per tutti. Ogni persona viene ascoltata nel momento che sta vivendo e il lavoro si sviluppa in base a ciò che il corpo esprime.</p>
+
+            <h3>Il primo contatto</h3>
+            <p>I primi istanti del trattamento hanno per me un significato particolare. Quando appoggio le mani sul corpo è come dare un nuovo saluto alla persona, al suo corpo e a quella parte più profonda che spesso comunica attraverso linguaggi diversi dalle parole. È un modo silenzioso per dire:</p>
+            <blockquote class="editorial-quote-small">“Ci sono. Possiamo iniziare.”</blockquote>
+            <p>Da quel momento comincia l'ascolto. Le mani possono rimanere ferme a lungo in una zona oppure accompagnare delicatamente un movimento che emerge spontaneamente. Anche quando apparentemente non accade nulla, dentro il corpo possono manifestarsi sensazioni, movimenti e cambiamenti molto diversi. La persona può perceptione calore, freddo, pulsazioni, leggerezza, tensione, movimento oppure emozioni. A volte può emergere anche una sensazione che fino a quel momento era rimasta in secondo piano.</p>
+
+            <h3>Il rilascio emozionale</h3>
+            <p>Il corpo può custodire tracce delle esperienze che abbiamo attraversato. Durante un trattamento può quindi accadere che, insieme alle sensazioni fisiche, emergano emozioni o vissuti che chiedono semplicemente di essere ascoltati. Per questo parlo di rilascio emozionale.</p>
+            <p>Non significa cercare a tutti i costi un'emozione o andare alla ricerca di un ricordo. Significa lasciare spazio a ciò che emerge spontaneamente, quando la persona è pronta a incontrarlo. A volte questo processo porta a una sensazione di leggerezza o di profondo rilassamento. Altre volte può essere più intenso e può manifestarsi attraverso una tensione, un'emozione, un dolore momentaneo o una sensazione nuova.</p>
+            <p>Il rilassamento può essere una conseguenza del trattamento, ma non è l'obiettivo da raggiungere. L'obiettivo è accompagnare la persona nell'ascolto di ciò che il corpo è pronto a esprimere in quel momento.</p>
+
+            <h3>Il mio modo di lavorare</h3>
+            <p>Non arrivo al trattamento con l'idea di sapere in anticipo ciò che la persona dovrebbe cambiare. Mi metto in ascolto. Osservo ciò che emerge attraverso il corpo, il contatto, il ritmo craniosacrale e anche attraverso la comunicazione verbale e non verbale.</p>
+            <p>A volte lavoro in silenzio. A volte il dialogo con la persona diventa parte del trattamento. In ogni momento cerco di rispettare ciò che sta accadendo e, soprattutto, i tempi e le risorse della persona. Il mio lavoro consiste nel creare le condizioni affinché il corpo possa esprimere le proprie risorse e accompagnare ciò che è pronto a manifestarsi. La persona rimane sempre parte attiva del proprio percorso.</p>
+
+            <h3>Quando può essere un accompagnamento</h3>
+            <p>Il Trattamento Craniosacrale può accompagnare la persona in diversi momenti della vita. Può essere uno spazio dedicato a chi attraversa:</p>
+            <ul>
+              <li>• periodi di stress e sovraccarico;</li>
+              <li>• tensioni fisiche persistenti;</li>
+              <li>• momenti di cambiamento;</li>
+              <li>• periodi di particolare affaticamento;</li>
+              <li>• situazioni in cui sente il bisogno di ascoltarsi più profondamente;</li>
+              <li>• percorsi personali nei quali desidera entrare maggiormente in contatto con il proprio corpo e con ciò che sta vivendo.</li>
+            </ul>
+            <p>Può inoltre affiancare, in modo complementare e mai sostitutivo, percorsi medici, fisioterapici, psicologici o altre forme di cura e accompagnamento. Non si pone quindi in alternativa alla medicina, ma può integrarsi con i percorsi che la persona sta già seguendo.</p>
+
+            <h3>Anche quando stai bene</h3>
+            <p>Prendersi cura di sé può iniziare anche prima che il corpo manifesti un disagio. Il nostro organismo possiede straordinarie capacità di adattamento e ogni giorno risponde a ciò che viviamo, ai ritmi della nostra vita, allo stress e alle esperienze che attraversiamo.</p>
+            <p>Concedersi periodicamente uno spazio di ascolto può diventare quindi anche un gesto di prevenzione e cura di sé. Non serve aspettare che qualcosa non funzioni per iniziare ad ascoltare il proprio corpo.</p>
+
+            <h3>Ciò che più amo del Craniosacrale</h3>
+            <p>La prima volta che ho incontrato il Craniosacrale non riuscivo a comprendere come potesse accadere qualcosa attraverso mani apparentemente immobili. Ricordo ancora le parole della fisioterapista che trattava mio figlio:</p>
+            <blockquote class="editorial-quote-small">“Sembra che non stia facendo niente, ma in realtà si muove tanto.”</blockquote>
+            <p>Quella frase mi è rimasta dentro. È proprio questo che continua ad affascinarmi. Le mani possono essere ferme, il contatto può essere delicatissimo e, allo stesso tempo, dentro la persona può aprirsi un mondo di sensazioni e di movimento. Io posso ascoltare, percepire, accompagnare. Il corpo, invece, possiede le proprie risorse e i propri tempi. E ogni volta che incontro questo processo mi ricordo quanto sia straordinaria la capacità dell'essere umano di ascoltarsi e trasformarsi.</p>
+
+            <h3>Un incontro, ogni volta diverso</h3>
+            <p>Non so prima di incontrarti cosa emergerà. Ed è proprio questo che amo. Ogni persona porta con sé una storia diversa, un corpo diverso, tempi diversi e risorse diverse. Per questo ogni trattamento nasce nell'incontro. Ti accolgo con ascolto, presenza e rispetto. E insieme daremo spazio a ciò che il tuo corpo è pronto a raccontare.</p>
+          </div>
         </div>
 
-        <div id="massaggio-rilassante" class="tab-pane content-card">
-          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
+        <!-- 2. MASSAGGIO RILASSANTE -->
+        <div id="massaggio-rilassante" class="tab-pane tab-flat" style="text-align: center;">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem; display: block; margin-bottom: 0.3rem;">Un tempo per te</span>
           <h2>Massaggio Rilassante</h2>
-          <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Massaggio Rilassante" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
-          <p>Un'esperienza dedicata al rilassamento muscolare e mentale. Attraverso sfioramenti caldi e avvolgenti, aiuta a sciogliere le tensioni accumulate nella vita quotidiana.</p>
+          
+          <div class="treatment-price">Durata: 60 min | Prezzo: 60 €</div>
+          
+          <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Massaggio Rilassante" style="margin: 0 auto 2rem auto; width: 100%; max-height: 400px; object-fit: cover;">
+          
+          <p class="treatment-summary">
+            Un contatto amorevole con il corpo, per rallentare, respirare e lasciare andare. Un massaggio con olio su tutto il corpo, eseguito con movimenti fluidi e continui, personalizzato senza schemi rigidi per adattarsi a te e a ciò che il tuo corpo comunica in quel momento.
+          </p>
+
+          <button class="btn-toggle-details" onclick="toggleDetails('massaggio-rilassante-details', this)">Scopri tutto</button>
+
+          <!-- Testo completo espandibile -->
+          <div id="massaggio-rilassante-details" class="treatment-full-details" style="display: none;">
+            <p class="italic-serif" style="font-size: 1.3rem; color: var(--primary-gold); text-align: center; margin-bottom: 2rem;">
+              Un tempo per te. Per respirare, rallentare e ritrovare il piacere di abitare il tuo corpo.
+            </p>
+
+            <p>Ci sono momenti in cui il corpo chiede semplicemente di fermarsi.<br>
+            Lasciare per un po' fuori dalla porta gli impegni, i pensieri, le preoccupazioni.<br>
+            Respirare.<br>
+            E concedersi il piacere di essere accolti.</p>
+
+            <p>Il Massaggio Rilassante nasce proprio da questo: creare uno spazio dedicato al corpo, al piacere del contatto e al rilassamento.<br>
+            È un massaggio con olio, eseguito su tutto il corpo, attraverso movimenti fluidi e continui che accompagnano gradualmente a rallentare.<br>
+            Le mani si muovono senza seguire uno schema rigido.<br>
+            Ogni persona è diversa e anche ogni giornata è diversa: per questo il massaggio si adatta alla persona che ho davanti, alle sue esigenze e a ciò che il corpo comunica in quel momento.</p>
+
+            <h3>Un massaggio che diventa una danza</h3>
+            <p>Nel tempo il mio modo di massaggiare si è trasformato.<br>
+            La formazione mi ha dato tecniche e strumenti, ma l'esperienza mi ha portata a creare un modo personale di lavorare.<br>
+            Non amo un massaggio aggressivo o profondamente decontratturante.<br>
+            Quando necessario posso lavorare anche sulle tensioni muscolari, ma lo faccio con gradualità e ascolto, senza forzare il corpo.<br>
+            Per me il massaggio è soprattutto movimento, presenza e contatto.<br>
+            Le mani diventano quasi una danza che attraversa il corpo, seguendo un ritmo continuo e armonioso.</p>
+
+            <h3>Lasciare andare</h3>
+            <p>Durante il massaggio puoi semplicemente lasciarti accompagnare.<br>
+            Il calore dell'olio, il movimento delle mani, il respiro e un ambiente pensato per favorire il rilassamento possono aiutarti a staccare, almeno per un po', da ciò che accade fuori.<br>
+            Non devi fare nulla.<br>
+            Non devi raggiungere un risultato.<br>
+            Puoi semplicemente concederti il tempo di ricevere.<br>
+            A volte il corpo, quando finalmente trova uno spazio in cui rallentare, lascia andare naturalmente alcune delle tensioni accumulate.<br>
+            E insieme alle tensioni possono alleggerirsi anche i pensieri.</p>
+
+            <h3>Il piacere di prendersi cura di sé</h3>
+            <p>Per me il massaggio è anche questo:<br>
+            una coccola, un gesto di cura, un modo per tornare a sentire il proprio corpo con piacere.<br>
+            Attraverso il contatto amorevole puoi concederti un momento in cui non devi occuparti di niente e di nessuno.<br>
+            Solo respirare.<br>
+            Sentire.<br>
+            Ricevere.<br>
+            Essere presente a te stesso.</p>
+
+            <h3>Per chi desidera...</h3>
+            <p>Il Massaggio Rilassante può essere il tuo spazio quando senti il desiderio di:</p>
+            <ul>
+              <li>• rallentare dopo un periodo intenso;</li>
+              <li>• lasciare andare tensioni e stress;</li>
+              <li>• staccare per un po' dai pensieri;</li>
+              <li>• ritrovare il piacere del contatto con il tuo corpo;</li>
+              <li>• concederti una pausa e un momento tutto per te;</li>
+              <li>• semplicemente ricevere e lasciarti coccolare.</li>
+            </ul>
+            <p>Non è necessario arrivare con un problema.<br>
+            Puoi scegliere un massaggio anche semplicemente perché desideri stare bene.</p>
+
+            <h3>Un'esperienza diversa per ogni persona</h3>
+            <p>Come in ogni trattamento che propongo, non esiste un modo giusto uguale per tutti.<br>
+            C'è chi ha bisogno di un contatto più avvolgente, chi preferisce maggiore delicatezza, chi desidera sentire maggiormente il lavoro sui muscoli e chi invece ha bisogno soprattutto di lasciarsi andare.<br>
+            Io ascolto.<br>
+            E attraverso questo ascolto lascio che il massaggio trovi il suo ritmo.<br>
+            Perché anche il modo in cui abbiamo bisogno di essere toccati può cambiare nel tempo.</p>
+          </div>
         </div>
 
-        <div id="massaggio-coppia" class="tab-pane content-card">
-          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
+        <!-- 3. MASSAGGIO DI COPPIA -->
+        <div id="massaggio-coppia" class="tab-pane tab-flat" style="text-align: center;">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem; display: block; margin-bottom: 0.3rem;">Un tempo da vivere insieme</span>
           <h2>Massaggio di Coppia</h2>
-          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Massaggio di Coppia" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
-          <p>Un momento condiviso di armonia e benessere per due persone. Uno spazio calmo e accogliente per rigenerarsi insieme, sintonizzando respiro e presenza.</p>
+          
+          <div class="treatment-price">Durata: 60 min | Prezzo: 120 €</div>
+          
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Massaggio di Coppia" style="margin: 0 auto 2rem auto; width: 100%; max-height: 400px; object-fit: cover;">
+          
+          <p class="treatment-summary">
+            Un tempo da vivere insieme per rallentare, respirare e ritrovarsi. Nella vita di tutti i giorni è facile prendersi cura di tutto… tranne che della relazione. Un'occasione per fermarsi, condividere benessere e ritrovare la vicinanza.
+          </p>
+
+          <button class="btn-toggle-details" onclick="toggleDetails('massaggio-coppia-details', this)">Scopri tutto</button>
+
+          <!-- Testo completo espandibile -->
+          <div id="massaggio-coppia-details" class="treatment-full-details" style="display: none;">
+            <p class="italic-serif" style="font-size: 1.3rem; color: var(--primary-gold); text-align: center; margin-bottom: 2rem;">
+              Un tempo da vivere insieme. Per rallentare, respirare e ritrovarsi.
+            </p>
+
+            <p>Nella vita di tutti i giorni è facile prendersi cura di tutto… tranne che della relazione.<br>
+            Il Massaggio di Coppia nasce dal desiderio di offrire uno spazio in cui due persone possano semplicemente fermarsi, respirare e condividere un'esperienza di benessere.<br>
+            Non è solo un massaggio.<br>
+            È un tempo dedicato alla presenza reciproca.<br>
+            Un'occasione per lasciare fuori dalla porta gli impegni, lo stress e il rumore quotidiano, ritrovando il piacere di stare insieme attraverso il contatto.</p>
+
+            <h3>Un'esperienza condivisa</h3>
+            <p>Il trattamento viene eseguito contemporaneamente su entrambi, in un ambiente caldo, accogliente e rilassante.<br>
+            Mentre il corpo si distende e il respiro rallenta, anche la relazione trova uno spazio nuovo: uno spazio in cui non è necessario parlare, risolvere o fare.<br>
+            È sufficiente esserci.</p>
+
+            <h3>Per chi è pensato</h3>
+            <p>Il Massaggio di Coppia è dedicato a partner, amici, familiari o a chiunque desideri condividere un momento di benessere con una persona speciale.<br>
+            Può essere scelto per celebrare un'occasione, come regalo, oppure semplicemente perché sentite il desiderio di dedicarvi del tempo insieme.</p>
+
+            <h3>Cosa desidero offrirvi</h3>
+            <p>Credo che anche una relazione abbia bisogno di essere nutrita.<br>
+            A volte basta un'ora di presenza autentica per ricordarsi quanto sia prezioso rallentare insieme.<br>
+            Il mio desiderio è offrirvi uno spazio in cui il benessere del corpo possa diventare anche un gesto di cura, ascolto e vicinanza reciproca.</p>
+          </div>
         </div>
 
-        <div id="fram" class="tab-pane content-card">
-          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
-          <h2>FRAM (Corpo, Respiro, Energia)</h2>
-          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="FRAM" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
-          <p>Un percorso sintetico e integrato che unisce lavoro corporeo, consapevolezza del respiro e armonizzazione energetica per ritrovare equilibrio interiore.</p>
+        <!-- 4. FRAM -->
+        <div id="fram" class="tab-pane tab-flat" style="text-align: center;">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem; display: block; margin-bottom: 0.3rem;">Corpo · Respiro · Energia</span>
+          <h2>FRAM</h2>
+          
+          <div class="treatment-price">Durata: 75 min | Prezzo: 75 €</div>
+          
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="FRAM" style="margin: 0 auto 2rem auto; width: 100%; max-height: 400px; object-fit: cover;">
+          
+          <p class="treatment-summary">
+            Un trattamento diverso dal solito, pensato per chi sente il desiderio di partecipare attivamente al proprio percorso. FRAM nasce dall'incontro tra corpo, respiro ed energia, guidando gradualmente dalla fase dinamica verso uno spazio profondo di ascolto e quiete.
+          </p>
+
+          <button class="btn-toggle-details" onclick="toggleDetails('fram-details', this)">Scopri tutto</button>
+
+          <!-- Testo completo espandibile -->
+          <div id="fram-details" class="treatment-full-details" style="display: none;">
+            <p class="italic-serif" style="font-size: 1.3rem; color: var(--primary-gold); text-align: center; margin-bottom: 2rem;">
+              Corpo · Respiro · Energia
+            </p>
+
+            <p>Un trattamento diverso dal solito, pensato per chi sente il desiderio di partecipare attivamente al proprio percorso e di prendersi uno spazio per sé attraverso il movimento, il respiro, l'ascolto e il rilassamento.</p>
+            
+            <p>FRAM nasce dall'incontro tra corpo, respiro ed energia e da una modalità di accompagnamento nella quale la persona non riceve semplicemente un trattamento, ma diventa parte attiva della propria esperienza.<br>
+            Il percorso si sviluppa attraverso diverse fasi, che accompagnano gradualmente il corpo da uno stato di attivazione verso uno spazio sempre più profondo di ascolto e quiete.</p>
+
+            <h3>Si comincia dal movimento</h3>
+            <p>La prima parte è dinamica.<br>
+            Attraverso il movimento del corpo e una respirazione specifica, la persona viene invitata ad attivare e percepire la propria energia, entrando progressivamente in un contatto più intenso con il corpo e con le proprie sensazioni.<br>
+            È una fase nella quale si partecipa, si respira, ci si muove e si lascia che il corpo possa esprimersi.</p>
+
+            <h3>Gradualmente, il ritmo cambia</h3>
+            <p>Dal movimento più intenso si passa a una dimensione più lenta e raccolta, nella quale il corpo può continuare a elaborare ciò che è emerso, mentre l'ascolto diventa sempre più presente.<br>
+            Il contatto, il respiro e la presenza accompagnano questa trasformazione verso una fase di maggiore abbandono e rilassamento.</p>
+            
+            <p style="font-style: italic; color: var(--primary-gold); font-family: var(--font-serif); font-size: 1.3rem; text-align: center; margin: 2rem 0;">
+              Dall'attivazione alla quiete.<br>
+              Dal fare al sentire.<br>
+              Dal movimento all'ascolto.
+            </p>
+
+            <p>È proprio questo passaggio a rendere FRAM un'esperienza diversa: la persona partecipa, attraversa e poi si concede di lasciare andare.<br>
+            Ogni esperienza è diversa, perché diversa è ogni persona e diverso è ciò che, in quel momento, è pronta a vivere.</p>
+          </div>
         </div>
 
-        <div id="trattamenti-distanza" class="tab-pane content-card">
-          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem;">Trattamento</span>
+        <!-- 5. TRATTAMENTI A DISTANZA -->
+        <div id="trattamenti-distanza" class="tab-pane tab-flat" style="text-align: center;">
+          <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.2rem; display: block; margin-bottom: 0.3rem;">Oltre lo spazio</span>
           <h2>Trattamenti a Distanza</h2>
-          <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Trattamenti a Distanza" style="margin-bottom: 2rem; width: 100%; max-height: 400px; object-fit: cover;">
-          <p>Sessioni dedicate all'ascolto energetico anche a distanza, pensate per chi desidera ricevere un riequilibrio interiore ovunque si trovi.</p>
+          
+          <div class="treatment-price">Durata: 50 min | Prezzo: 50 €</div>
+          
+          <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Trattamenti a Distanza" style="margin: 0 auto 2rem auto; width: 100%; max-height: 400px; object-fit: cover;">
+          
+          <p class="treatment-summary">
+            La presenza può andare oltre la distanza fisica. Un'esperienza di sintonizzazione e riequilibrio energetico basata su ascolto, intenzione e presenza, vissuta comodamente nel proprio spazio.
+          </p>
+
+          <button class="btn-toggle-details" onclick="toggleDetails('trattamenti-distanza-details', this)">Scopri tutto</button>
+
+          <!-- Testo completo espandibile -->
+          <div id="trattamenti-distanza-details" class="treatment-full-details" style="display: none;">
+            <p class="italic-serif" style="font-size: 1.3rem; color: var(--primary-gold); text-align: center; margin-bottom: 2rem;">
+              La presenza può andare oltre la distanza fisica.
+            </p>
+
+            <p>Nel tempo, la mia ricerca sul corpo e sull'energia mi ha portata a sperimentare e approfondire anche la possibilità di accompagnare una persona a distanza.<br>
+            Quando parliamo di energia, infatti, la presenza fisica non rappresenta necessariamente l'unica possibilità di incontro.</p>
+
+            <p>Il trattamento a distanza nasce dalla stessa attenzione che porto nel lavoro in presenza: ascolto, intenzione, presenza e rispetto per ciò che la persona sta vivendo.<br>
+            Attraverso una modalità di ascolto diversa da quella del contatto fisico, mi sintonizzo con la persona e accompagno il suo spazio energetico, lasciando che il trattamento si sviluppi secondo ciò che emerge.<br>
+            È un'esperienza che può essere vissuta comodamente nel proprio spazio, creando un momento di ascolto e raccoglimento anche quando non è possibile incontrarsi fisicamente.</p>
+
+            <h3>Oltre lo spazio</h3>
+            <p>La mia esperienza mi ha portata anche a interessarmi a quei fenomeni studiati nella fisica quantistica che hanno aperto nuove domande sul rapporto tra distanza, connessione e informazione.<br>
+            Tra questi, l'entanglement quantistico descrive una particolare correlazione tra sistemi fisici che continua a suscitare grande interesse nella ricerca scientifica.<br>
+            Non utilizzo questo concetto come spiegazione o garanzia del trattamento.<br>
+            È piuttosto uno degli aspetti che alimentano la mia curiosità e la mia ricerca personale sul tema della connessione e dell'energia.<br>
+            Per me rimane importante soprattutto l'esperienza: creare uno spazio di presenza, ascolto e intenzione nel quale la persona possa dedicarsi a sé.</p>
+
+            <h3>Come si svolge</h3>
+            <p>Il trattamento viene concordato insieme e può essere preceduto da un momento di ascolto e di condivisione.<br>
+            Successivamente la persona si trova in uno spazio tranquillo, nel quale può semplicemente mettersi comoda, chiudere gli occhi e lasciarsi accompagnare.<br>
+            Io entro nel mio spazio di ascolto e lavoro attraverso le modalità energetiche che fanno parte della mia esperienza e della mia formazione.<br>
+            Anche a distanza, la persona rimane parte attiva del proprio percorso: può ascoltare ciò che accade, percepire sensazioni, emozioni, immagini o semplicemente concedersi un momento di quiete.<br>
+            Non è necessario aspettarsi una sensazione precisa.<br>
+            Ogni esperienza è personale e può manifestarsi in modo diverso.</p>
+
+            <h3>Per chi</h3>
+            <p>Il trattamento a distanza può essere scelto da chi desidera dedicarsi uno spazio di ascolto e di benessere anche quando non è possibile raggiungere fisicamente lo studio.<br>
+            La distanza cambia il modo dell'incontro, ma non cambia la presenza con cui scelgo di accompagnarti.</p>
+          </div>
         </div>
 
       </div>
     </section>
     
     <!-- ==========================================
-         SEZIONE: PERCORSI (Uno Sotto l'Altro)
-         ========================================== -->
-    <section id="percorsi" class="page-section">
-      <div class="container" style="text-align: center; margin-bottom: 3rem;">
-        <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.4rem;">Cammini di Crescita</span>
-        <h2>I Percorsi</h2>
-      </div>
-
-      <div class="container">
-        
-        <div id="percorsi-individuali" class="sub-section content-card">
-          <h2>Percorsi Individuali</h2>
-          <p>Sezione provvisoria per i percorsi individuali. Un cammino personalizzato creato su misura per accompagnare la persona verso la propria consapevolezza.</p>
-          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Percorsi Individuali" style="margin-top: 1.5rem;">
-        </div>
-
-        <div id="percorsi-energia" class="sub-section content-card">
-          <h2>Percorsi sull'Energia</h2>
-          <p>Sezione provvisoria per i percorsi sull'energia. Esperienze mirate alla sensibilità, alla gestione e all'ascolto delle frequenze vitali.</p>
-          <img src="https://images.unsplash.com/photo-1507120410856-1f35574c3b45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Percorsi sull'Energia" style="margin-top: 1.5rem;">
-        </div>
-
-        <div id="corsi-energia" class="sub-section content-card">
-          <h2>Corsi sull'Energia</h2>
-          <p>Sezione provvisoria per i corsi sull'energia. Incontri formativi ed esperienziali per imparare a conoscere le dinamiche energetiche.</p>
-          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corsi sull'Energia" style="margin-top: 1.5rem;">
-        </div>
-
-      </div>
-    </section>
-    
-    <!-- ==========================================
-         SEZIONE: ATTIVITÀ (Uno Sotto l'Altro)
+         SEZIONE: ATTIVITÀ (Energia, Movimento, Meditazioni)
          ========================================== -->
     <section id="movimento-respiro" class="page-section">
-      <div class="container" style="text-align: center; margin-bottom: 3rem;">
+      <div class="container" style="text-align: center; margin-bottom: 5rem;">
         <span class="italic-serif" style="color: var(--primary-gold); font-size: 1.4rem;">Spazio Condiviso</span>
         <h2>Le Attività</h2>
       </div>
 
       <div class="container">
         
-        <div id="movimento-respiro-sub" class="sub-section content-card">
-          <h2>Movimento e Respiro</h2>
-          <p>Sezione provvisoria per Movimento e Respiro. Pratiche corporee per sciogliere le rigidità e ritrovare il naturale ritmo respiratorio.</p>
-          <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Movimento e Respiro" style="margin-top: 1.5rem;">
+        <!-- 1. ENERGIA -->
+        <div id="energia" class="editorial-grid sub-section animate-up">
+          <div class="editorial-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1507120410856-1f35574c3b45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Energia - Conoscerla e Viverla">
+          </div>
+          <div class="editorial-text-col">
+            <span class="editorial-kicker">Conoscerla, sentirla, imparare a viverla</span>
+            <h2>Energia</h2>
+            <p><span class="drop-cap">L'</span>energia fa già parte della nostra vita. La utilizziamo ogni giorno. Possiamo iniziare imparando a riconoscere e sentire la nostra.</p>
+            
+            <h3 class="sub-heading-gold">La mia ricerca</h3>
+            <p>L'energia mi affascina da sempre. È una ricerca che continua ad accompagnarmi e che ancora oggi sento profondamente viva dentro di me. Più studio, più sperimento e più mi rendo conto di quanto ci sia ancora da conoscere.</p>
+            <p>Il mio percorso è iniziato con il Reiki, incontrando per la prima volta l'energia in modo consapevole. Sono diventata Master Reiki, ma la mia ricerca si è allargata, lasciandomi guidare dalla curiosità e dal desiderio di comprendere sempre più profondamente ciò che non sempre possiamo vedere, ma che possiamo imparare a percepire.</p>
+            
+            <h3 class="sub-heading-gold">L'energia fa già parte di noi</h3>
+            <p>Non è qualcosa che appartiene a pochi. Tutti noi viviamo, utilizziamo e scambiamo energia ogni giorno, nel modo in cui respiriamo, ci muoviamo e viviamo le relazioni.</p>
+            
+            <blockquote class="editorial-quote-small" style="margin: 2rem 0;">Prima di imparare a utilizzarla, possiamo imparare a sentirla. Riconoscere le nostre sensazioni è già un primo modo per entrarci in relazione.</blockquote>
+            
+            <h3 class="sub-heading-gold">Un percorso che continua</h3>
+            <p>Non sento di essere arrivata a una risposta definitiva. Più conosco, più aumenta la mia curiosità. Per questo continuo a esplorare: l'energia per me è uno spazio di possibilità e ricerca continua.</p>
+            
+            <h3 class="sub-heading-gold">Percorsi Individuali e di Gruppo</h3>
+            <p>Questa ricerca può essere vissuta attraverso percorsi personalizzati:</p>
+            <ul style="list-style-type: none; padding-left: 0; margin-bottom: 1.5rem;">
+              <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Individuale:</strong> Uno spazio dedicato esclusivamente a te, costruito in modo personalizzato sulle tue esigenze.</li>
+              <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong>Di gruppo:</strong> Un'esperienza condivisa in cui ascolto, pratica e confronto arricchiscono il cammino.</li>
+            </ul>
+          </div>
         </div>
 
-        <div id="meditazioni" class="sub-section content-card">
-          <h2>Meditazioni</h2>
-          <p>Sezione provvisoria per le Meditazioni. Spazi guidati di ascolto interiore, calma mentale e presenza radicata.</p>
-          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Meditazioni" style="margin-top: 1.5rem;">
+        <!-- 2. MOVIMENTO E RESPIRO -->
+        <div id="movimento-respiro-sub" class="editorial-grid-reverse sub-section animate-up">
+          <div class="editorial-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Movimento e Respiro">
+          </div>
+          <div class="editorial-text-col">
+            <span class="editorial-kicker">Tornare al corpo e allo spazio di quiete</span>
+            <h2>Movimento e Respiro</h2>
+            <p>Ci sono momenti in cui fermarsi e meditare sembra difficile. La mente corre, il corpo è contratto e trovare uno spazio di calma può sembrare lontano. Per questo Movimento e Respiro nasce dal corpo.</p>
+            <p>È un incontro settimanale nel quale iniziamo con il movimento, per sciogliere, ascoltare e ritrovare gradualmente una maggiore presenza. Non è necessario saper fare stretching e non ci sono movimenti perfetti. Partiamo dall'ascolto.</p>
+            
+            <blockquote class="large-pull-quote" style="font-size: 1.8rem; margin: 3rem 0; padding-left: 2rem;">
+              Il movimento prepara.<br>
+              Il respiro accompagna.<br>
+              La visualizzazione porta dentro.
+            </blockquote>
+            
+            <p>Poi rallentiamo. Il movimento lascia spazio al respiro, fino ad arrivare alla parte di visualizzazione guidata. Ogni volta propongo una visualizzazione diversa, spesso ispirata alla natura, alle stagioni o a ciò che percepisco nel gruppo.</p>
+            <p>Attraverso il respiro e l'immaginazione possiamo creare uno spazio interiore nuovo, nel quale sperimentare sensazioni di calma e sicurezza. Un'ora per rallentare, ascoltarti e concederti uno spazio tutto tuo. Un incontro semplice e accessibile, una volta a settimana, per tornare a te.</p>
+          </div>
         </div>
 
-        <div id="incontri-workshop" class="sub-section content-card">
-          <h2>Incontri e Workshop</h2>
-          <p>Sezione provvisoria per Incontri e Workshop. Esperienze di gruppo a tema per esplorare la relazione con se stessi e gli altri.</p>
-          <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Incontri e Workshop" style="margin-top: 1.5rem;">
+        <!-- 3. MEDITAZIONE -->
+        <div id="meditazione" class="center-text-block sub-section animate-up">
+          <div style="text-align: center; margin-bottom: 3rem;">
+            <span class="editorial-kicker">Fermarsi. Respirare. Lasciare spazio.</span>
+            <h2>Meditazione</h2>
+          </div>
+          <p>Meditare, per me, significa prima di tutto rallentare. Fermarsi per qualche momento dal ritmo quotidiano, lasciare che i pensieri si facciano più silenziosi e tornare ad ascoltare ciò che accade dentro di noi.</p>
+          <p>Per noi occidentali, però, fermare la mente e rimanere semplicemente presenti non è sempre così naturale. Per questo amo esplorare la meditazione attraverso modalità diverse: dalla meditazione dinamica alla meditazione silenziosa, dalla visualizzazione guidata alla meditazione attraverso la candela.</p>
+          
+          <blockquote class="large-pull-quote" style="text-align: left; font-size: clamp(1.6rem, 3vw, 2.2rem);">
+            "La meditazione non è un modo per diventare qualcun altro. È uno spazio per tornare, anche solo per qualche momento, a sentire se stessi."
+          </blockquote>
+          
+          <p>Perché non existe una meditazione uguale per tutti. C'è chi trova il proprio spazio nel silenzio, chi ha bisogno prima di muovere il corpo, chi si lascia accompagnare dalle immagini, dal respiro, da una musica o semplicemente dalla presenza. L'obiettivo è offrire possibilità diverse, affinché ognuno possa incontrare la modalità che sente più vicina a sé.</p>
+          <p>E quando meditiamo insieme accade qualcosa di speciale. Il gruppo crea una presenza condivisa. Ci si siede, si respira, si rallenta insieme e, per un tempo, si lascia fuori il rumore del quotidiano. Gli incontri vengono proposti periodicamente e possono assumere forme diverse, sempre con la libertà di sperimentare e trovare ciò che più ti appartiene.</p>
         </div>
 
       </div>
@@ -930,116 +1406,121 @@
       });
     }
 
-    // GESTIONE SEZIONI COME SINGOLE PAGINE
-    const navTriggers = document.querySelectorAll('.nav-trigger');
-    const pageSections = document.querySelectorAll('.page-section');
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    const header = document.getElementById('header');
-    const body = document.body;
-
-    function showSection(sectionId) {
-      if(!sectionId) return;
-      const targetId = sectionId.replace('#', '');
-      let found = false;
-
-      // Se il link punta a una specifica scheda massaggio
-      const isTab = document.querySelector(`.tab-pane#${targetId}`);
-      if (isTab) {
-        switchTab(targetId);
-        showSection('#massaggi-section');
-        return;
-      }
-
-      pageSections.forEach(section => {
-        section.classList.remove('active');
-        if (section.id === targetId || section.querySelector(`#${targetId}`)) {
-          section.classList.add('active');
-          found = true;
-          setTimeout(() => {
-            if (section.id !== targetId) {
-              const subElement = document.getElementById(targetId);
-              if (subElement) subElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-          }, 50);
-        }
-      });
-
-      if(!found && targetId === 'home') {
-        document.getElementById('home').classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      navTriggers.forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.querySelector(`.nav-links a[href="#${targetId}"]`);
-      if (activeBtn) activeBtn.classList.add('active');
-      else {
-        navTriggers.forEach(btn => {
-           if(btn.classList.contains('dropdown-toggle') && btn.nextElementSibling) {
-             const subLinks = btn.nextElementSibling.querySelectorAll('a');
-             subLinks.forEach(sub => {
-               if(sub.getAttribute('href') === `#${targetId}`) btn.classList.add('active');
-             });
-           }
-        });
+    // FUNZIONE MOSTRA/NASCONDI DETTAGLI MASSAGGI
+    function toggleDetails(detailsId, btn) {
+      const detailsEl = document.getElementById(detailsId);
+      if (!detailsEl) return;
+      
+      if (detailsEl.style.display === 'none' || detailsEl.style.display === '') {
+        detailsEl.style.display = 'block';
+        btn.textContent = 'MOSTRA MENO';
+      } else {
+        detailsEl.style.display = 'none';
+        btn.textContent = 'SCOPRI TUTTO';
       }
     }
 
-    navTriggers.forEach(trigger => {
-      trigger.addEventListener('click', (e) => {
-        const href = trigger.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          e.preventDefault();
-          
-          if(window.innerWidth <= 768 && trigger.classList.contains('dropdown-toggle')) {
-            trigger.parentElement.classList.toggle('mobile-open');
-            return; 
-          }
+    // GESTIONE SEZIONI COME SINGOLE PAGINE
+    const navTriggers = document.querySelectorAll('.nav-trigger');
+    const sections = document.querySelectorAll('.page-section');
+    const header = document.getElementById('header');
+    const navLinksList = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburger');
+    
+    // Funzione navigazione
+    function navigateTo(hash) {
+      if (!hash || hash === '#') hash = '#home';
+      
+      const targetId = hash.replace('#', '');
+      let sectionFound = false;
 
-          history.pushState(null, null, href);
-          showSection(href);
-          
-          if (navLinks.classList.contains('open') && !trigger.classList.contains('dropdown-toggle')) {
-            navLinks.classList.remove('open');
-            body.style.overflow = 'auto';
+      // Trova la sezione principale (o la sezione genitore del tab/sottosezione)
+      sections.forEach(sec => {
+        if (sec.id === targetId) {
+          sectionFound = true;
+          sec.classList.add('active');
+        } else {
+          sec.classList.remove('active');
+        }
+      });
+
+      // Se non è una sezione principale, cerca se è una sottosezione o tab
+      if (!sectionFound) {
+        // Cerca nei tabs
+        const tabPane = document.getElementById(targetId);
+        if (tabPane && tabPane.classList.contains('tab-pane')) {
+          const parentSection = tabPane.closest('.page-section');
+          if (parentSection) {
+            sections.forEach(s => s.classList.remove('active'));
+            parentSection.classList.add('active');
+            switchTab(targetId);
+            window.scrollTo(0, 0);
+          }
+        } 
+        // Cerca nelle ancore interne (sottosezioni editoriali)
+        else {
+          const innerElement = document.getElementById(targetId);
+          if (innerElement) {
+            const parentSection = innerElement.closest('.page-section');
+            if (parentSection) {
+              sections.forEach(s => s.classList.remove('active'));
+              parentSection.classList.add('active');
+              // Scorri all'elemento specifico
+              setTimeout(() => {
+                const y = innerElement.getBoundingClientRect().top + window.scrollY - 120;
+                window.scrollTo({top: y, behavior: 'smooth'});
+              }, 100);
+            }
           }
         }
+      } else {
+        window.scrollTo(0, 0);
+      }
+
+      // Aggiorna link attivi
+      navTriggers.forEach(t => t.classList.remove('active'));
+      const activeLinks = document.querySelectorAll(`.nav-trigger[href="${hash}"]`);
+      activeLinks.forEach(link => link.classList.add('active'));
+
+      // Chiudi menu mobile
+      navLinksList.classList.remove('open');
+      document.querySelectorAll('.has-dropdown').forEach(li => li.classList.remove('mobile-open'));
+    }
+
+    // Event listeners
+    navTriggers.forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const hash = trigger.getAttribute('href');
+        history.pushState(null, null, hash);
+        navigateTo(hash);
       });
     });
 
     window.addEventListener('popstate', () => {
-      const hash = window.location.hash || '#home';
-      showSection(hash);
+      navigateTo(window.location.hash);
     });
 
-    window.addEventListener('load', () => {
-      const hash = window.location.hash || '#home';
-      showSection(hash);
+    // Inizializzazione
+    window.addEventListener('DOMContentLoaded', () => {
+      navigateTo(window.location.hash);
     });
 
-    // HAMBURGER MENU
+    // Mobile Menu Toggle
     hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      if (navLinks.classList.contains('open')) {
-        body.style.overflow = 'hidden';
-      } else {
-        body.style.overflow = 'auto';
-        document.querySelectorAll('.has-dropdown').forEach(d => d.classList.remove('mobile-open'));
-      }
+      navLinksList.classList.toggle('open');
     });
 
-    // HEADER SCROLL EFFECT
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
-        header.style.backgroundColor = 'rgba(250, 248, 245, 0.98)';
-      } else {
-        header.style.boxShadow = 'none';
-        header.style.backgroundColor = 'rgba(250, 248, 245, 0.92)';
-      }
+    // Gestione Dropdown Mobile
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          const parent = toggle.closest('.has-dropdown');
+          parent.classList.toggle('mobile-open');
+        }
+      });
     });
+
   </script>
 </body>
 </html>
