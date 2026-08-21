@@ -62,7 +62,7 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     /* ==========================================
-       HEADER & NAVIGATION (Intatto)
+       HEADER & NAVIGATION
        ========================================== */
     header {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
@@ -96,9 +96,8 @@
     .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: none; border: none; padding: 5px; z-index: 1001; }
     .hamburger span { width: 30px; height: 1px; background-color: var(--text-main); transition: var(--transition); }
 
-
     /* ==========================================
-       1. HERO SECTION (Immagine in HTML)
+       1. HERO SECTION
        ========================================== */
     .hero-premium {
       position: relative;
@@ -189,12 +188,11 @@
       .hero-text-box { padding: 2.5rem 3.5rem; margin-left: 0; margin-top: 0; } 
     }
 
-
     /* ==========================================
        2. EDITORIAL VISION
        ========================================== */
     .vision-premium { 
-      padding: 9rem 0; 
+      padding: 6rem 0 8rem 0; 
       background-color: var(--bg-main); 
       position: relative;
     }
@@ -204,7 +202,6 @@
       padding: 0 2rem;
       border-left: 2px solid var(--primary-gold);
       border-right: 2px solid var(--primary-gold);
-      margin-bottom: 5rem;
     }
 
     .editorial-quote {
@@ -215,199 +212,126 @@
       font-style: italic;
       font-weight: 400;
     }
-    
-    .vision-columns { 
-      display: grid; grid-template-columns: 1fr; gap: 3rem; text-align: left; 
-      padding-top: 3rem;
-      position: relative;
-    }
-    
-    .vision-columns::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 1px;
-      background-color: var(--primary-gold);
-    }
-
-    .vision-columns p { font-size: 1.15rem; line-height: 1.9; color: var(--text-muted); }
-    @media (min-width: 768px) { .vision-columns { grid-template-columns: 1fr 1fr; gap: 5rem; } }
-
 
     /* ==========================================
-       3. LE TRE DIMENSIONI
+       IL MIO CAMMINO - DESIGN EDITORIALE & MOBILE
        ========================================== */
-    .dimensions-premium { padding: 8rem 0; background-color: var(--bg-main); }
-    .dimensions-header { text-align: center; margin-bottom: 6rem; }
-    .dimensions-header h2 { font-size: clamp(2.2rem, 4vw, 3.8rem); margin-bottom: 0.5rem; }
-    .dimensions-header p { font-family: var(--font-serif); font-style: italic; font-size: 1.6rem; color: var(--primary-gold); }
-
-    .triptych-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+    .editorial-intro { text-align: center; max-width: 850px; margin: 0 auto 5rem auto; padding: 0 1rem; }
     
-    .triptych-card { 
-      display: flex; flex-direction: column; background-color: transparent; 
-      padding: 1rem; transition: var(--transition); cursor: pointer; 
-      border-radius: 160px 160px 20px 20px;
-    }
-    .triptych-card:hover {
-      background-color: var(--bg-surface);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.03);
-      transform: translateY(-8px);
+    .editorial-grid, .editorial-grid-reverse { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 3rem; 
+      margin-bottom: 6rem; 
+      align-items: center; 
     }
     
-    .triptych-img { 
-      aspect-ratio: 3 / 4; 
-      margin-bottom: 2.5rem; overflow: hidden; 
-      border-radius: 160px 160px 0 0; 
-      position: relative;
+    .editorial-img-wrapper { 
+      position: relative; 
+      width: 100%; 
+      aspect-ratio: 4/5; 
+      overflow: hidden; 
+      border-radius: 4px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
     }
-    .triptych-img::after { content: ''; position: absolute; inset: 0; background: rgba(30,28,26,0.06); transition: opacity 0.8s var(--ease-human); }
-    .triptych-card:hover .triptych-img::after { opacity: 0; }
-    .triptych-img img { width: 100%; height: 100%; transition: transform 1.5s var(--ease-human); }
-    .triptych-card:hover .triptych-img img { transform: scale(1.04); } 
-
-    .triptych-card h3 { font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 1.2rem; color: var(--text-main); text-align: center; position: relative; }
-    .triptych-card h3::after { content: ''; display: block; width: 30px; height: 1px; background: var(--primary-gold); margin: 1rem auto 0; transition: width 0.6s var(--ease-human); }
-    .triptych-card:hover h3::after { width: 60px; }
-    .triptych-card p { font-size: 1.1rem; line-height: 1.7; color: var(--text-muted); margin: 0; text-align: center; padding: 0 0.5rem; }
-
-    @media (min-width: 992px) {
-      .triptych-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
-    }
-
-    .triptych-footer-quote { text-align: center; margin-top: 6rem; padding-top: 5rem; border-top: 1px solid var(--border-color); }
-    .triptych-footer-quote p { font-family: var(--font-serif); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-style: italic; color: var(--text-main); max-width: 850px; margin: 0 auto; line-height: 1.4; }
-
-
-    /* ==========================================
-       4. AREE DI LAVORO (Immagine in HTML)
-       ========================================== */
-    .parallax-sanctuary {
-      position: relative;
-      padding: 12rem 0;
-      background-color: #333; 
-      overflow: hidden;
-    }
-
-    .parallax-bg-img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      z-index: 0;
-    }
-
-    .parallax-sanctuary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: rgba(20, 18, 16, 0.45); 
-      z-index: 1;
-    }
-
-    .parallax-content-wrapper {
-      position: relative;
-      z-index: 2;
-      max-width: 850px;
-      margin: 0 auto;
-    }
-
-    .parallax-header {
-      text-align: center;
-      margin-bottom: 5rem;
-    }
+    .editorial-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-human); }
+    .editorial-img-wrapper:hover img { transform: scale(1.03); }
     
-    .parallax-header h2 {
-      color: #FFFFFF;
-      font-size: clamp(2.8rem, 4vw, 4.5rem);
+    .editorial-text-col { width: 100%; }
+    .editorial-text-col p { 
+      font-size: 1.15rem; 
+      line-height: 1.85; 
+      color: var(--text-muted); 
+      margin-bottom: 1.6rem; 
     }
-
-    .parallax-header p {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.4rem;
-      font-style: italic;
-      font-family: var(--font-serif);
-    }
-
-    .sanctuary-card {
-      background-color: var(--bg-surface);
-      padding: 5rem 4rem;
-      margin-bottom: 3.5rem;
-      text-align: center;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.15);
-      text-decoration: none;
-      display: block;
-      transition: transform 0.6s var(--ease-human), box-shadow 0.6s var(--ease-human);
-    }
-
-    .sanctuary-card:last-child {
-      margin-bottom: 0;
-    }
-
-    .sanctuary-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 50px 100px rgba(0,0,0,0.25);
-    }
-
-    .sanctuary-card-kicker {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      color: var(--text-muted);
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-
-    .sanctuary-card h3 {
-      font-size: clamp(2.5rem, 3.5vw, 3.5rem);
+    /* Differenziazione del primo paragrafo per un look editoriale */
+    .editorial-text-col p:first-of-type {
+      font-size: 1.25rem;
       color: var(--text-main);
-      margin-bottom: 1.5rem;
+    }
+    .editorial-text-col h2 { font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: 1.5rem; line-height: 1.2; }
+    .editorial-kicker { display: block; font-family: var(--font-serif); font-style: italic; color: var(--primary-gold); font-size: 1.35rem; margin-bottom: 0.5rem; }
+    
+    .drop-cap { float: left; font-size: 5rem; line-height: 0.75; padding-top: 6px; padding-right: 12px; color: var(--primary-gold); font-family: var(--font-serif); }
+    
+    .large-pull-quote { 
+      font-family: var(--font-serif); 
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); 
+      line-height: 1.4; 
+      color: var(--text-main); 
+      font-style: italic; 
+      margin: 3.5rem 0; 
+      padding: 1.5rem 0 1.5rem 2rem; 
+      border-left: 2px solid var(--primary-gold); 
+      background: linear-gradient(90deg, rgba(184,142,88,0.05) 0%, transparent 100%);
     }
     
-    .sanctuary-card h3 em {
-      color: var(--primary-gold);
-      font-style: italic;
+    .center-text-block { 
+      max-width: 850px; 
+      margin: 0 auto 6rem auto; 
+      padding: 0 1rem;
     }
-
-    .sanctuary-card p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      max-width: 600px;
-      margin: 0 auto 3rem;
+    .center-text-block p { font-size: 1.15rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 1.6rem; }
+    
+    .sub-heading-gold { 
+      font-family: var(--font-serif); 
+      font-size: 1.75rem; 
+      color: var(--text-main); 
+      margin-top: 2.5rem; 
+      margin-bottom: 1rem; 
+      position: relative; 
+      padding-bottom: 0.5rem; 
     }
+    .sub-heading-gold::after { content: ''; position: absolute; left: 0; bottom: 0; width: 40px; height: 1px; background-color: var(--primary-gold); }
 
-    .btn-sanctuary {
-      display: inline-block;
-      background-color: var(--bg-dark);
-      color: #FFFFFF;
-      padding: 1.2rem 3rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: background-color 0.4s ease;
+    /* Griglia Attività - Nuova proporzione per dare più respiro alle immagini */
+    .activity-grid, .activity-grid-reverse {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin-bottom: 6rem;
+      align-items: center;
     }
+    .activity-img-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3; 
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    }
+    .activity-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-human); }
+    .activity-img-wrapper:hover img { transform: scale(1.03); }
 
-    .sanctuary-card:hover .btn-sanctuary {
-      background-color: var(--primary-gold);
+    @media(min-width: 992px) {
+        .editorial-grid { grid-template-columns: 4.5fr 7.5fr; gap: 5rem; }
+        .editorial-grid-reverse { grid-template-columns: 7.5fr 4.5fr; gap: 5rem; direction: rtl; }
+        .editorial-grid-reverse > * { direction: ltr; } 
+
+        .activity-grid { grid-template-columns: 1fr 1fr; gap: 5rem; }
+        .activity-grid-reverse { grid-template-columns: 1fr 1fr; gap: 5rem; direction: rtl; }
+        .activity-grid-reverse > * { direction: ltr; }
     }
 
     @media (max-width: 768px) {
-      .sanctuary-card {
-        padding: 4rem 2rem;
+      /* Immagini Full Bleed su mobile per look magazine editoriale */
+      .editorial-img-wrapper, .activity-img-wrapper {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        border-radius: 0;
+        aspect-ratio: 1/1;
+      }
+      .editorial-grid, .editorial-grid-reverse, .activity-grid, .activity-grid-reverse {
+        gap: 2rem;
+        margin-bottom: 5rem;
+      }
+      .large-pull-quote { 
+        padding: 1.5rem 1rem 1.5rem 1.5rem; 
       }
     }
 
-
     /* ==========================================
-       STILI PER SEZIONE MASSAGGI A SCHEDE (TABS) & ANTEPRIMA/ESPANSIONE
+       STILI PER SEZIONE MASSAGGI & TRATTAMENTI
        ========================================== */
     .tabs-nav {
       display: flex;
@@ -447,7 +371,6 @@
       animation: fadeIn 0.6s ease forwards;
     }
     
-    /* Nuovo stile flat per tab pane - Rimuove la card e uniforma allo sfondo */
     .tab-flat {
       max-width: 900px;
       margin: 0 auto;
@@ -500,23 +423,36 @@
       background-color: var(--primary-gold);
     }
 
-    /* Grafica migliorata per la sezione Dettagli Massaggi Espansi */
+    /* Grafica Editoriale per la sezione Dettagli Massaggi Espansi (Niente più effetto card artificiale) */
     .treatment-full-details {
       margin-top: 3.5rem;
-      padding: 3.5rem 3rem;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+      padding: 3.5rem 0 0 0;
+      background-color: transparent; /* Tolto il background chiuso */
+      border: none;
+      border-top: 1px solid var(--primary-gold); /* Semplice linea elegante per separare */
+      box-shadow: none; /* Tolta l'ombra stile card */
       text-align: left;
       animation: fadeIn 0.6s ease forwards;
-      border-radius: 4px;
+      position: relative;
+      /* Impaginazione a due colonne su desktop per evitare muri di testo */
+      column-count: 2;
+      column-gap: 4rem;
+    }
+
+    /* Evitiamo che titoli e blocchi si spezzino tra le colonne */
+    .treatment-full-details h3, 
+    .treatment-full-details .editorial-quote-small,
+    .treatment-full-details ul,
+    .treatment-full-details p.italic-serif {
+      column-span: all;
+      break-inside: avoid;
     }
 
     .treatment-full-details h3 {
       font-family: var(--font-serif);
       font-size: 1.8rem;
       color: var(--text-main);
-      margin-top: 3rem;
+      margin-top: 2.5rem; /* Margine rivisto per il layout a colonne */
       margin-bottom: 1.2rem;
       padding-bottom: 0.6rem;
       border-bottom: 1px solid var(--border-color);
@@ -534,10 +470,11 @@
     }
 
     .treatment-full-details p {
-      font-size: 1.08rem;
+      font-size: 1.1rem;
       line-height: 1.85;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
+      break-inside: avoid;
     }
 
     .treatment-full-details ul {
@@ -550,10 +487,9 @@
     }
 
     .treatment-full-details ul li {
-      background-color: var(--bg-main);
+      background-color: var(--bg-surface);
       padding: 1.2rem 1.5rem;
       border-left: 3px solid var(--primary-gold);
-      border-radius: 0 4px 4px 0;
       font-size: 0.98rem;
       color: var(--text-main);
       margin-bottom: 0 !important;
@@ -566,22 +502,25 @@
       font-size: 1.35rem;
       color: var(--primary-gold);
       font-style: italic;
-      background-color: var(--bg-main);
-      padding: 2rem 2.5rem;
+      background-color: transparent;
+      padding: 1.5rem 0 1.5rem 2rem;
       border-left: 3px solid var(--primary-gold);
       margin: 2.5rem 0;
-      border-radius: 0 4px 4px 0;
+      box-shadow: none;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       .treatment-full-details {
-        padding: 2.5rem 1.5rem;
+        column-count: 1; /* Colonna singola per schermi piccoli */
+        padding: 3rem 0 0 0;
       }
+    }
+    
+    @media (max-width: 768px) {
       .treatment-full-details ul {
         grid-template-columns: 1fr;
       }
     }
-
 
     /* ==========================================
        ANIMAZIONI DI INGRESSO (SCROLL)
@@ -610,7 +549,6 @@
     @keyframes revealQuote {
       100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
     }
-
 
     /* ==========================================
        SEZIONI INTERNE E CONTATTI
@@ -725,91 +663,12 @@
       <div class="vision-premium">
         <div class="container">
           <div class="vision-inner">
-            
             <div class="editorial-quote-wrapper animate-quote" style="animation-delay: 0.2s;">
               <blockquote class="editorial-quote">
                 "Amana nasce da questa visione. Uno spazio in cui fermarsi, ascoltarsi e concedersi il tempo di incontrare ciò che vive dentro di noi."
               </blockquote>
             </div>
-
-            <div class="vision-columns animate-up" style="animation-delay: 0.4s;">
-              <p>Ogni percorso nasce dall'ascolto. Non da ciò che penso sia giusto, ma da ciò che la persona è pronta a riconoscere di sé. L'ascolto, per me, va oltre le parole. È attenzione al corpo, al respiro, al movimento, al linguaggio non verbale e a tutto ciò che può emergere nel momento presente.</p>
-              <p>Ogni persona è diversa. Per questo anche ogni incontro è diverso. Ti accolgo con ascolto, presenza e rispetto, lasciando spazio a ciò che, dentro di te, chiede di essere visto, sentito e riconosciuto.</p>
-            </div>
           </div>
-        </div>
-      </div>
-
-      <!-- 3. LE TRE DIMENSIONI -->
-      <div class="dimensions-premium">
-        <div class="container">
-          <div class="dimensions-header animate-up" style="animation-delay: 0.1s;">
-            <h2>Le tre dimensioni del cammino</h2>
-            <p>Corpo · Respiro · Energia</p>
-          </div>
-
-          <div class="triptych-grid">
-            
-            <div class="triptych-card animate-up" style="animation-delay: 0.2s;">
-              <div class="triptych-img">
-                <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corpo">
-              </div>
-              <h3>Corpo</h3>
-              <p>Attraverso i trattamenti, il movimento, il respiro e la ricerca energetica creo esperienze diverse, calibrate con cura sulla persona e sul momento specifico che sta vivendo.</p>
-            </div>
-
-            <div class="triptych-card animate-up" style="animation-delay: 0.35s;">
-              <div class="triptych-img">
-                <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Respiro">
-              </div>
-              <h3>Respiro</h3>
-              <p>A volte può esserci bisogno di rilassare il corpo. A volte di ascoltarlo più profondamente. A volte di muoversi, respirare, lasciare andare. A volte semplicemente di concedersi uno spazio interiore.</p>
-            </div>
-
-            <div class="triptych-card animate-up" style="animation-delay: 0.5s;">
-              <div class="triptych-img">
-                <img src="https://images.unsplash.com/photo-1507120410856-1f35574c3b45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Energia">
-              </div>
-              <h3>Energia</h3>
-              <p>Impariamo a percepire l'energia vitale, riequilibrando le frequenze interiori e riconnettendoci con la nostra vera essenza in un ambiente sicuro, accogliente e protetto.</p>
-            </div>
-
-          </div>
-
-          <div class="triptych-footer-quote animate-up" style="animation-delay: 0.6s;">
-            <p>"Non esiste un unico modo di stare bene. Esiste il modo che, in quel momento, può essere più adatto a te."</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. AREE DI LAVORO -->
-      <div class="parallax-sanctuary">
-        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Sanctuary Parallax Image" class="parallax-bg-img">
-        <div class="container parallax-content-wrapper">
-          
-          <div class="parallax-header animate-up" style="animation-delay: 0.1s;">
-            <h2>Come possiamo lavorare insieme</h2>
-            <p>Esplora i diversi percorsi pensati per il tuo benessere.</p>
-          </div>
-
-          <!-- Card 1 -->
-          <a href="#craniosacrale" class="sanctuary-card nav-trigger animate-up" style="animation-delay: 0.2s;">
-            <span class="sanctuary-card-kicker">Il corpo in ascolto</span>
-            <h3>I <em>Trattamenti</em></h3>
-            <p>Craniosacrale con rilascio emozionale, massaggio rilassante, massaggio di coppia, FRAM (Corpo, Respiro, Energia) e trattamenti a distanza.</p>
-            <div class="btn-sanctuary">Scopri di più</div>
-          </a>
-
-          <!-- Card 2 (ex percorsi rimossa per evitare link rotti) -->
-
-          <!-- Card 3 (ora 2) -->
-          <a href="#movimento-respiro" class="sanctuary-card nav-trigger animate-up" style="animation-delay: 0.4s;">
-            <span class="sanctuary-card-kicker">Lo spazio condiviso</span>
-            <h3>Le <em>Attività</em></h3>
-            <p>Energia, Movimento e Respiro e Meditazione. Spazi da vivere insieme e percorsi di esplorazione, attraverso il movimento e l'ascolto.</p>
-            <div class="btn-sanctuary">Partecipa ora</div>
-          </a>
-
         </div>
       </div>
 
@@ -819,36 +678,6 @@
          SEZIONE: IL MIO CAMMINO
          ========================================== -->
     <section id="il-mio-cammino" class="page-section">
-      
-      <style>
-        #il-mio-cammino.active .animate-up { animation: revealUp 1.2s var(--ease-human) forwards; }
-        .editorial-intro { text-align: center; max-width: 850px; margin: 0 auto 7rem auto; }
-        
-        .editorial-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-bottom: 8rem; align-items: center; }
-        .editorial-grid-reverse { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-bottom: 8rem; align-items: center; }
-        
-        .editorial-img-wrapper { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; }
-        .editorial-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .editorial-text-col p { font-size: 1.15rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 1.8rem; }
-        .editorial-text-col h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 2rem; }
-        .editorial-kicker { display: block; font-family: var(--font-serif); font-style: italic; color: var(--primary-gold); font-size: 1.4rem; margin-bottom: 0.5rem; }
-        
-        .drop-cap { float: left; font-size: 5.5rem; line-height: 0.8; padding-top: 8px; padding-right: 15px; color: var(--primary-gold); font-family: var(--font-serif); }
-        .large-pull-quote { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.35; color: var(--text-main); font-style: italic; margin: 4rem 0; padding-left: 2.5rem; border-left: 2px solid var(--primary-gold); }
-        .center-text-block { max-width: 850px; margin: 0 auto 8rem auto; }
-        .center-text-block p { font-size: 1.15rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 1.8rem; }
-        
-        .sub-heading-gold { font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-main); margin-top: 3rem; margin-bottom: 1rem; position: relative; padding-bottom: 0.5rem; }
-        .sub-heading-gold::after { content: ''; position: absolute; left: 0; bottom: 0; width: 40px; height: 1px; background-color: var(--primary-gold); }
-
-        @media(min-width: 992px) {
-            .editorial-grid { grid-template-columns: 5fr 7fr; gap: 7rem; }
-            .editorial-grid-reverse { grid-template-columns: 7fr 5fr; gap: 7rem; direction: rtl; }
-            .editorial-grid-reverse > * { direction: ltr; } 
-        }
-      </style>
-      
       <div class="container">
         
         <div class="editorial-intro">
@@ -1257,9 +1086,9 @@
 
       <div class="container">
         
-        <!-- 1. ENERGIA -->
-        <div id="energia" class="editorial-grid sub-section animate-up">
-          <div class="editorial-img-wrapper">
+        <!-- 1. ENERGIA (Utilizza il nuovo activity-grid per immagini più ampie) -->
+        <div id="energia" class="activity-grid sub-section animate-up">
+          <div class="activity-img-wrapper">
              <img src="https://images.unsplash.com/photo-1507120410856-1f35574c3b45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Energia - Conoscerla e Viverla">
           </div>
           <div class="editorial-text-col">
@@ -1274,7 +1103,7 @@
             <h3 class="sub-heading-gold">L'energia fa già parte di noi</h3>
             <p>Non è qualcosa che appartiene a pochi. Tutti noi viviamo, utilizziamo e scambiamo energia ogni giorno, nel modo in cui respiriamo, ci muoviamo e viviamo le relazioni.</p>
             
-            <blockquote class="editorial-quote-small" style="margin: 2rem 0;">Prima di imparare a utilizzarla, possiamo imparare a sentirla. Riconoscere le nostre sensazioni è già un primo modo per entrarci in relazione.</blockquote>
+            <blockquote class="editorial-quote-small" style="margin: 2rem 0; padding-left: 1.5rem; border-left: 2px solid var(--primary-gold);">Prima di imparare a utilizzarla, possiamo imparare a sentirla. Riconoscere le nostre sensazioni è già un primo modo per entrarci in relazione.</blockquote>
             
             <h3 class="sub-heading-gold">Un percorso che continua</h3>
             <p>Non sento di essere arrivata a una risposta definitiva. Più conosco, più aumenta la mia curiosità. Per questo continuo a esplorare: l'energia per me è uno spazio di possibilità e ricerca continua.</p>
@@ -1289,8 +1118,8 @@
         </div>
 
         <!-- 2. MOVIMENTO E RESPIRO -->
-        <div id="movimento-respiro-sub" class="editorial-grid-reverse sub-section animate-up">
-          <div class="editorial-img-wrapper">
+        <div id="movimento-respiro-sub" class="activity-grid-reverse sub-section animate-up">
+          <div class="activity-img-wrapper">
              <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Movimento e Respiro">
           </div>
           <div class="editorial-text-col">
@@ -1323,7 +1152,7 @@
             "La meditazione non è un modo per diventare qualcun altro. È uno spazio per tornare, anche solo per qualche momento, a sentire se stessi."
           </blockquote>
           
-          <p>Perché non existe una meditazione uguale per tutti. C'è chi trova il proprio spazio nel silenzio, chi ha bisogno prima di muovere il corpo, chi si lascia accompagnare dalle immagini, dal respiro, da una musica o semplicemente dalla presenza. L'obiettivo è offrire possibilità diverse, affinché ognuno possa incontrare la modalità che sente più vicina a sé.</p>
+          <p>Perché non esiste una meditazione uguale per tutti. C'è chi trova il proprio spazio nel silenzio, chi ha bisogno prima di muovere il corpo, chi si lascia accompagnare dalle immagini, dal respiro, da una musica o semplicemente dalla presenza. L'obiettivo è offrire possibilità diverse, affinché ognuno possa incontrare la modalità che sente più vicina a sé.</p>
           <p>E quando meditiamo insieme accade qualcosa di speciale. Il gruppo crea una presenza condivisa. Ci si siede, si respira, si rallenta insieme e, per un tempo, si lascia fuori il rumore del quotidiano. Gli incontri vengono proposti periodicamente e possono assumere forme diverse, sempre con la libertà di sperimentare e trovare ciò che più ti appartiene.</p>
         </div>
 
